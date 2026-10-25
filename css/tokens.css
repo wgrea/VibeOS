@@ -1,0 +1,28 @@
+/* css/tokens.css */
+
+/* ==========================================================================
+   1. SYSTEM DESIGN TOKENS (CSS VARIABLES)
+   ========================================================================== */
+:root {
+  --bg-dark: #0e0d18;
+  --bg-card: #181628;
+  --border-outer: #2d284d;
+  
+  --neon-pink: #ff007f;
+  --neon-green: #00ff66;
+  --neon-cyan: #00f0ff;
+  --neon-orange: #ff7700;
+  --neon-purple: #9d00ff;
+  --text-main: #ffffff;
+  --text-muted: #8e8aab;
+
+  --radius-pill: 50px;
+  --radius-box: 16px;
+  --spacing-xs: 8px;
+  --spacing-sm: 12px;
+  --spacing-md: 20px;
+  --spacing-lg: 32px;
+
+  --font-arcade: 'Press Start 2P', monospace;
+  --font-ui: 'Rajdhani', sans-serif;
+}

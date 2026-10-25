@@ -1,0 +1,42 @@
+/* ==========================================================================
+   2. GLOBAL & BASE STYLES
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  font-family: var(--font-ui);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-md);
+  background-image: 
+    radial-gradient(circle at 50% 30%, #291a40 0%, transparent 70%),
+    linear-gradient(0deg, rgba(0,0,0,0.2) 50%, rgba(255,255,255,0.02) 50%);
+  background-size: 100% 100%, 100% 4px;
+}
+
+.vibe-os-body {
+  background-color: #0b0b0e;
+  color: #f0f0f5;
+  font-family: system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 2rem 1rem;
+}
+
+.genre-section h2 {
+  color: var(--color-neon-orange);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.5rem;
+  margin-top: 2.5rem;
+  font-size: 1.4rem;
+}

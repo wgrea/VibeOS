@@ -1,0 +1,28 @@
+/* css/components/cards.css */
+
+.card {
+  border: 1px solid var(--border-outer);
+  padding: var(--spacing-md);
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: var(--radius-box);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+.card h3 { color: var(--neon-cyan); font-size: 1.25rem; letter-spacing: 0.5px; }
+.card p, .card li { color: var(--text-muted); font-size: 1rem; line-height: 1.5; }
+.card ul { padding-left: 20px; }
+
+.dynamic-display-area {
+  min-height: 80px;
+  border: 2px dashed var(--border-outer);
+  border-radius: var(--radius-box);
+  padding: var(--spacing-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--text-muted);
+  font-weight: 600;
+  background: rgba(0,0,0,0.2);
+}

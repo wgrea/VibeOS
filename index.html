@@ -1,0 +1,88 @@
+<!-- index.html -->
+<!-- To show file directory tree: tree /f -->
+
+<!-- learned that HTMX is a lightweight library for adding interactivity to HTML, and makes SPA act like multi-page apps -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VibeOS</title>
+  
+  <!-- HTMX CDN -->
+  <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+  
+  <!-- Arcade/Chunky Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rajdhani:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Centralized Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <main class="os-container">
+    
+    <!-- HEADER TITLE -->
+    <header class="os-header">
+      <h1 class="os-title">Vibe OS</h1>
+    </header>
+
+    <!-- MAIN INTERACTIVE DESKTOP AREA -->
+    <section class="os-workspace">
+      
+      <!-- Primary Feature Trigger: View Aesthetics -->
+      <button 
+        class="vibe-btn btn-green"
+        hx-get="aesthetics/index.html"
+        hx-target="#display-output"
+        hx-swap="innerHTML">
+        View Aesthetics
+      </button>
+
+      <!-- Primary Feature Trigger: Spiritual Skills -->
+      <button 
+        class="vibe-btn btn-cyan"
+        hx-get="spiritual-skills.html"
+        hx-target="#display-output"
+        hx-swap="innerHTML">
+        Spiritual Skills
+      </button>
+
+      <button 
+        class="vibe-btn btn-orange"
+        hx-get="genres.html"
+        hx-target="#display-output"
+        hx-swap="innerHTML">
+        Genres
+      </button>
+
+      <button 
+        class="vibe-btn btn-purple"
+        hx-get="uxpriority.html"
+        hx-target="#display-output"
+        hx-swap="innerHTML">
+        UX/DX Priority
+      </button>
+
+      <!-- ADD THIS DISPLAY CONTAINER -->
+      <div id="display-output" class="workspace-output-container"></div>
+
+    </div>
+
+    <!-- DOCUMENT LINK FOOTER -->
+    <footer class="os-footer-nav">
+      <div class="nav-row-bottom">
+        <button 
+          class="vibe-btn btn-doc"
+          hx-get="design-process.html"
+          hx-target="#display-output"
+          hx-swap="innerHTML">
+          📁 View Design Process Document
+        </button>
+      </div>
+    </footer>
+
+  </main>
+
+</body>
+</html>

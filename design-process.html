@@ -1,0 +1,116 @@
+<!-- design-process.html -->
+<div class="vibeos-window-content design-process-container">
+
+  <!-- Header Section -->
+  <header class="process-header" style="border-bottom: 2px dashed var(--neon-pink); padding-bottom: var(--spacing-md); margin-bottom: var(--spacing-lg);">
+    <div style="display: inline-flex; align-items: center; gap: var(--spacing-xs); background: rgba(255, 0, 127, 0.15); border: 1px solid var(--neon-pink); padding: 4px 10px; border-radius: var(--radius-pill); margin-bottom: var(--spacing-xs);">
+      <span style="width: 8px; height: 8px; background-color: var(--neon-cyan); border-radius: 50%; box-shadow: 0 0 8px var(--neon-cyan);"></span>
+      <span style="font-size: 0.8rem; font-weight: bold; color: var(--text-main);">SYSTEM PROCESS LOG</span>
+    </div>
+    <h2 style="color: var(--neon-pink); font-size: 1.6rem; margin: var(--spacing-xs) 0; letter-spacing: 1px;">✏️ Design Process</h2>
+    <div style="color: var(--text-muted); font-size: 1.1rem; font-weight: 700;">
+      <code>Sketch</code> ➔ <code>Wireframe</code> ➔ <code>CSS Tokens</code> ➔ <code>Live HTMX Prototype</code>
+    </div>
+  </header>
+
+  <!-- Interactive Pipeline Navigation -->
+  <nav class="pipeline-nav" style="display: flex; gap: var(--spacing-sm); margin-bottom: var(--spacing-lg); flex-wrap: wrap;">
+    <button 
+      class="btn-retro active"
+      hx-get="design-process.html"
+      hx-target="#process-stage-viewport"
+      hx-swap="innerHTML"
+    >
+      🖥️ Architecture
+    </button>
+    <button 
+      class="btn-retro"
+      hx-get="uxpriority.html"
+      hx-target="#process-stage-viewport"
+      hx-swap="innerHTML"
+    >
+      ⚡ UX Priorities
+    </button>
+    <button 
+      class="btn-retro"
+      hx-get="aesthetics/index.html"
+      hx-target="#process-stage-viewport"
+      hx-swap="innerHTML"
+    >
+      🎨 Aesthetics & Vibe
+    </button>
+  </nav>
+
+  <!-- Dynamic Content Viewport -->
+  <div id="process-stage-viewport" class="dynamic-display-area" style="flex-direction: column; align-items: stretch; text-align: left; background: transparent; padding: 0; border: none;">
+
+    <!-- Section 1: Architecture Metaphor -->
+    <article class="card">
+      <h3>🖥️ Architecture: The Browser-as-OS Metaphor</h3>
+      
+      <div class="concept-block">
+        <h4 style="color: var(--neon-pink); margin-bottom: var(--spacing-xs);">1. The Design Token "Kernel"</h4>
+        <p>
+          Just as a low-level OS kernel manages hardware states, <code>css/tokens.css</code> acts as VibeOS's central configuration registry. Typography scales, neon accents, window borders, and surface materials derive directly from global variables.
+        </p>
+        <pre style="background: var(--bg-dark); border: 1px solid var(--border-outer); padding: var(--spacing-sm); color: var(--neon-green); font-size: 0.9rem; border-radius: var(--radius-box); overflow-x: auto;"><code>/* css/tokens.css */
+:root {
+  --neon-pink: #ff007f;
+  --neon-cyan: #00f0ff;
+  --bg-card: #181628;
+  --border-outer: #2d284d;
+  --radius-box: 16px;
+}</code></pre>
+      </div>
+
+      <div class="concept-block">
+        <h4 style="color: var(--neon-pink); margin-bottom: var(--spacing-xs);">2. Component Micro-Architecture (Layout Scalability)</h4>
+        <p>
+          Window shells, taskbar components, and application views remain decoupled. Triggering app views via HTMX unmounts and mounts partials on demand without resetting top-level system state.
+        </p>
+      </div>
+    </article>
+
+    <!-- Section 2: Core OS Systems -->
+    <article class="card" style="margin-top: var(--spacing-md);">
+      <h3>⚙️ Core OS Systems & UI Translation</h3>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--spacing-md);">
+        
+        <div class="card" style="background: var(--bg-card);">
+          <h4 style="color: var(--neon-pink);">1. Window Lifecycle 🔄</h4>
+          <ul>
+            <li><strong>Running (Focused):</strong> Active z-index layer, full bloom state.</li>
+            <li><strong>Minimized (Waiting):</strong> Docked in taskbar with stashed coordinates.</li>
+            <li><strong>Terminated (Closed):</strong> Unmounted from the DOM cleanly.</li>
+          </ul>
+        </div>
+
+        <div class="card" style="background: var(--bg-card);">
+          <h4 style="color: var(--neon-pink);">2. Inter-Process Communication (IPC) 📡</h4>
+          <p>
+            Modules communicate via custom DOM events and HTMX trigger pipelines, sending state focus updates between desktop widgets and taskbar indicators.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="card" style="background: var(--bg-card); margin-top: var(--spacing-sm);">
+        <h4 style="color: var(--neon-pink);">3. Directory Tree & Path Resolution 💾</h4>
+        <p>
+          Structured hierarchy using relative paths (e.g. <code>aesthetics/vaporwave-timeline.html</code> or <code>spiritual-skills.html</code>) to dynamically resolve sub-views.
+        </p>
+      </div>
+    </article>
+
+    <!-- Section 3: Input & Safeguards -->
+    <article class="card" style="margin-top: var(--spacing-md);">
+      <h3>🚦 Concurrency & Input Debouncing</h3>
+      <p>
+        To prevent UI race conditions during rapid user clicks or window dragging, interactive elements utilize HTMX throttling (<code>hx-trigger="click throttle:300ms"</code>) to guarantee deterministic state flow.
+      </p>
+    </article>
+
+  </div>
+
+</div>

@@ -1,0 +1,41 @@
+.vibe-btn {
+  width: 100%;
+  padding: 16px 24px;
+  border-radius: var(--radius-pill);
+  border: 3px solid #ffffff;
+  font-family: var(--font-ui);
+  font-size: 1.3rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease, filter 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.vibe-btn:hover { transform: translateY(-2px) scale(1.01); filter: brightness(1.15); }
+.vibe-btn:active { transform: translateY(2px) scale(0.99); }
+
+.btn-green { background: linear-gradient(180deg, #5eff9b 0%, #00bb43 100%); color: #00330d; border-color: #a2ffc6; box-shadow: 0 6px 0px #006625, 0 8px 15px rgba(0, 255, 102, 0.4); }
+.btn-cyan { background: linear-gradient(180deg, #66f5ff 0%, #0099b8 100%); color: #00303b; border-color: #b3faff; box-shadow: 0 6px 0px #005668, 0 8px 15px rgba(0, 240, 255, 0.4); }
+.btn-orange { background: linear-gradient(180deg, #ffb366 100%, #e65c00 0%); color: #3b1b00; border-color: #ffe0b3; box-shadow: 0 6px 0px #993d00, 0 8px 15px rgba(255, 119, 0, 0.4); }
+.btn-purple { background: linear-gradient(180deg, #d180ff 0%, #7000cc 100%); color: #26003b; border-color: #f0c2ff; box-shadow: 0 6px 0px #420077, 0 8px 15px rgba(157, 0, 255, 0.4); }
+
+.btn-doc {
+  background: rgba(0, 0, 0, 0.25);
+  border: 2px dashed var(--border-outer);
+  border-radius: var(--radius-box);
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 12px 20px;
+  box-shadow: none;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+.btn-doc:hover { background: rgba(255, 0, 127, 0.08); border-color: var(--neon-pink); color: var(--neon-pink); transform: none; box-shadow: 0 0 12px rgba(255, 0, 127, 0.15); filter: none; }

@@ -1,0 +1,13 @@
+.skill-matrix-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+}
+.skill-matrix-table th, .skill-matrix-table td {
+  border: 1px solid var(--border-outer);
+  padding: 10px;
+  text-align: left;
+  font-size: 0.95rem;
+}
+.skill-matrix-table th { background: rgba(157, 0, 255, 0.15); color: var(--neon-cyan); }
+.skill-matrix-table td { color: var(--text-muted); }

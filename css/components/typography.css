@@ -1,0 +1,25 @@
+/* Neon Sign Title */
+.os-title {
+  font-family: 'Sacramento', cursive;
+  font-size: 3.5rem;
+  font-weight: normal;
+  color: #fff0f5;
+  text-transform: none;
+  letter-spacing: 2px;
+  text-shadow: 
+    0 0 2px #fff, 0 0 6px #fff, 
+    0 0 15px var(--neon-pink), 0 0 30px var(--neon-pink), 
+    0 0 60px var(--neon-pink), 0 0 100px var(--neon-pink);
+  animation: neon-pulse 3s infinite alternate;
+}
+
+@keyframes neon-pulse {
+  0% {
+    opacity: 0.92;
+    text-shadow: 0 0 2px #fff, 0 0 6px #fff, 0 0 15px var(--neon-pink), 0 0 30px var(--neon-pink), 0 0 60px var(--neon-pink);
+  }
+  100% {
+    opacity: 1;
+    text-shadow: 0 0 4px #fff, 0 0 8px #fff, 0 0 18px var(--neon-pink), 0 0 35px var(--neon-pink), 0 0 70px var(--neon-pink), 0 0 120px var(--neon-pink);
+  }
+}
