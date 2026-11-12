@@ -1,65 +1,79 @@
 <!-- aesthetics/index.html -->
-
 <div class="aesthetics-container">
+  <link rel="stylesheet" href="aesthetics/index.css">
 
-  <div
-    hx-get="aesthetics/hero.html"
-    hx-trigger="load"
-    hx-swap="outerHTML">
-  </div>
+  <header class="aesthetic-section">
+    <h1>Select an aesthetic to explore its sub-aesthetics.</h1>
+  </header>
 
-  <div
-    hx-get="aesthetics/mega.html"
-    hx-trigger="load"
-    hx-swap="outerHTML">
-  </div>
+  <div class="families-grid">
+    <!-- 1. Pre-Computer / Old UI -->
+    <div class="family-item">
+      <button type="button" class="family-card" data-family="pre-computer"
+              hx-get="aesthetics/coming-soon.html"
+              hx-target="next .family-drawer"
+              hx-swap="innerHTML">
+        <h3>💻 Pre-Computer / Old UI</h3>
+      </button>
+      <div class="family-drawer"></div>
+    </div>
 
-  <div
-    hx-get="aesthetics/families.html"
-    hx-trigger="load"
-    hx-swap="outerHTML">
-  </div>
+    <!-- 2. Frutiger Aero -->
+    <div class="family-item">
+      <button type="button" class="family-card" data-family="frutiger-aero"
+              hx-get="aesthetics/frutiger-aero/index.html"
+              hx-target="next .family-drawer"
+              hx-swap="innerHTML">
+        <h3>🌐 Frutiger Aero</h3>
+     </button>
+      <div class="family-drawer"></div>
+    </div>
 
-<div
-    hx-get="aesthetics/atmosphere-layers.html"
-    hx-trigger="load"
-    hx-swap="outerHTML">
-  </div>
+    <!-- 3. Vaporwave -->
+    <div class="family-item">
+      <button type="button" class="family-card" data-family="vaporwave"
+              hx-get="aesthetics/vaporwave/index.html"
+              hx-target="next .family-drawer"
+              hx-swap="innerHTML">
+        <h3>🔮 Vaporwave</h3>
+      </button>
+      <div class="family-drawer"></div>
+    </div>
 
-  <div
-    hx-get="aesthetics/anti-hustle.html"
-    hx-trigger="load"
-    hx-swap="outerHTML">
-  </div>
+    <!-- 4. Kid-Core -->
+    <div class="family-item">
+      <button type="button" class="family-card" data-family="kid-core"
+              hx-get="aesthetics/coming-soon.html"
+              hx-target="next .family-drawer"
+              hx-swap="innerHTML">
+        <h3>🧸 Kid-Core</h3>
+      </button>
+      <div class="family-drawer"></div>
+    </div>
 
-  <div
-    hx-get="aesthetics/punk-genres.html"
-    hx-trigger="load"
-    hx-swap="outerHTML">
-  </div>
+    <!-- 7. Anti-Hustle Culture -->
+    <div class="family-item">
+      <button type="button" class="family-card" data-family="anti-hustle"
+              hx-get="aesthetics/coming-soon.html"
+              hx-target="next .family-drawer"
+              hx-swap="innerHTML">
+        <h3>🌿 Anti-Hustle Culture</h3>
+      </button>
+      <div class="family-drawer"></div>
+    </div>
 
-  <div
-    hx-get="aesthetics/vaporwave-timeline.html"
-    hx-trigger="load"
-    hx-swap="outerHTML">
-  </div>
-
-  <div
-    hx-get="aesthetics/frutiger-timeline.html"
-    hx-trigger="load"
-    hx-swap="outerHTML">
-  </div>
-
-  <div
-    hx-get="aesthetics/directives.html"
-    hx-trigger="load"
-    hx-swap="outerHTML">
-  </div>
-
-    <div
-    hx-get="aesthetics/immersion-directive.html"
-    hx-trigger="load"
-    hx-swap="outerHTML">
-  </div>
-
+    <!-- 8. Uncategorized / Idea Backlog -->
+<div class="family-item">
+  <button type="button" class="family-card" data-family="staging"
+          hx-get="aesthetics/staging.html"
+          hx-target="next .family-drawer"
+          hx-swap="innerHTML">
+    <h3>🧪 Uncategorized & Future Backlog</h3>
+  </button>
+  <div class="family-drawer"></div>
 </div>
+
+  </div>
+</div>
+
+

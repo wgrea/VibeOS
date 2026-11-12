@@ -32,58 +32,107 @@
       <h1 class="os-title">Vibe OS</h1>
     </header>
 
-    <section class="os-workspace">
-      <button 
-        class="vibe-btn btn-green"
-        hx-get="aesthetics/index.html"
-        hx-target="#display-output"
-        hx-swap="innerHTML">
-        View Aesthetics
-      </button>
+<section class="os-workspace">
+  <!-- 1. View Aesthetics -->
+  <div class="nav-item">
+    <button 
+      class="vibe-btn btn-green"
+      hx-get="aesthetics/index.html"
+      hx-target="next .drawer-output"
+      hx-swap="innerHTML">
+      View Aesthetics
+    </button>
+    <div class="drawer-output"></div>
+  </div>
 
-      <button 
-        class="vibe-btn btn-cyan"
-        hx-get="spiritual-skills.html"
-        hx-target="#display-output"
-        hx-swap="innerHTML">
-        Spiritual Skills
-      </button>
+  <!-- 2. Spiritual Skills -->
+  <div class="nav-item">
+    <button 
+      class="vibe-btn btn-cyan"
+      hx-get="spiritual-skills.html"
+      hx-target="next .drawer-output"
+      hx-swap="innerHTML">
+      Spiritual Skills
+    </button>
+    <div class="drawer-output"></div>
+  </div>
 
-      <button 
-        class="vibe-btn btn-orange"
-        hx-get="genres.html"
-        hx-target="#display-output"
-        hx-swap="innerHTML">
-        Genres
-      </button>
+  <!-- 3. Genres -->
+  <div class="nav-item">
+    <button 
+      class="vibe-btn btn-orange"
+      hx-get="genres.html"
+      hx-target="next .drawer-output"
+      hx-swap="innerHTML">
+      Genres
+    </button>
+    <div class="drawer-output"></div>
+  </div>
 
-      <button 
-        class="vibe-btn btn-purple"
-        hx-get="uxpriority.html"
-        hx-target="#display-output"
-        hx-swap="innerHTML">
-        UX/DX Priority
-      </button>
+  <!-- 4. UX/DX Priority -->
+  <div class="nav-item">
+    <button 
+      class="vibe-btn btn-purple"
+      hx-get="uxpriority.html"
+      hx-target="next .drawer-output"
+      hx-swap="innerHTML">
+      UX/DX Priority
+    </button>
+    <div class="drawer-output"></div>
+  </div>
+</section>
 
-      <div id="display-output" class="workspace-output-container"></div>
-    </section>
+<footer class="os-footer-nav">
+  <div class="nav-row-bottom">
+    <button 
+      class="vibe-btn btn-doc"
+      hx-get="design-process.html"
+      hx-target="next .drawer-output"
+      hx-swap="innerHTML">
+      📁 View Design Process Document
+    </button>
+    <div class="drawer-output"></div>
+  </div>
+</footer>
 
-    <footer class="os-footer-nav">
-      <div class="nav-row-bottom">
-        <button 
-          class="vibe-btn btn-doc"
-          hx-get="design-process.html"
-          hx-target="#display-output"
-          hx-swap="innerHTML">
-          📁 View Design Process Document
-        </button>
-      </div>
-    </footer>
   </main>
 
-    <!-- 2. Load Three.js Controllers from Root -->
+    <!-- 2. Load Three.js Controllers from Root. This might need to be a separate file eventually -->
   <script type="module" src="js/aero-canvas.js"></script>
   <script type="module" src="js/vaporwave-canvas.js"></script>
+<script>
+document.body.addEventListener('htmx:beforeRequest', (evt) => {
+  const triggerEl = evt.detail.elt;
+  if (!triggerEl) return;
+
+  // 1. Top-level OS navigation buttons (.vibe-btn)
+  if (triggerEl.classList.contains('vibe-btn')) {
+    const targetDrawer = triggerEl.nextElementSibling;
+    document.querySelectorAll('.drawer-output').forEach((drawer) => {
+      if (drawer !== targetDrawer) drawer.innerHTML = '';
+    });
+    if (targetDrawer && targetDrawer.innerHTML.trim() !== '') {
+      evt.preventDefault();
+      targetDrawer.innerHTML = '';
+    }
+  }
+
+  // 2. Aesthetic family buttons (.family-card)
+  if (triggerEl.classList.contains('family-card')) {
+    const targetFamilyDrawer = triggerEl.nextElementSibling;
+    document.querySelectorAll('.family-drawer').forEach((drawer) => {
+      if (drawer !== targetFamilyDrawer) drawer.innerHTML = '';
+    });
+    if (targetFamilyDrawer && targetFamilyDrawer.innerHTML.trim() !== '') {
+      evt.preventDefault();
+      targetFamilyDrawer.innerHTML = '';
+    }
+  }
+});
+
+</script>
+
+
 </body>
 </html>
 

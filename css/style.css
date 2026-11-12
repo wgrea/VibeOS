@@ -1,7 +1,5 @@
 /* css/style.css */
 
-/* How do I want the design tokens to be on the code? Inline, separate files, easy to find? I don't want too much clutter but I don't want the app to be cluttered. */ 
-
 @import "tokens.css";
 @import "base.css";
 @import "layout.css";

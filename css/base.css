@@ -1,6 +1,5 @@
-/* ==========================================================================
-   2. GLOBAL & BASE STYLES
-   ========================================================================== */
+
+/* css/base.css */
 @import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
 
 * {
@@ -39,4 +38,17 @@ body {
   padding-bottom: 0.5rem;
   margin-top: 2.5rem;
   font-size: 1.4rem;
+}
+
+/* Hide scrollbars globally while preserving scroll behavior */
+html, body, .os-container, .drawer-output {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+.os-container::-webkit-scrollbar,
+.drawer-output::-webkit-scrollbar {
+  display: none;             /* Chrome, Safari, Opera */
 }
