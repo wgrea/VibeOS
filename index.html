@@ -23,7 +23,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rajdhani:wght@600;700;800&display=swap" rel="stylesheet">
   
   <!-- Centralized Stylesheet -->
-  <link rel="stylesheet" href="css/style.css">
+  <!-- Inside <head> of root index.html -->
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="aesthetics/ui-history/index.css">
+
 </head>
 <body>
 
@@ -97,9 +100,11 @@
 
   </main>
 
-    <!-- 2. Load Three.js Controllers from Root. This might need to be a separate file eventually -->
+  <!-- 2. Load Three.js Controllers from Root. -->
   <script type="module" src="js/aero-canvas.js"></script>
   <script type="module" src="js/vaporwave-canvas.js"></script>
+  <script type="module" src="aesthetics/ui-history/index.js"></script>
+
 <script>
 document.body.addEventListener('htmx:beforeRequest', (evt) => {
   const triggerEl = evt.detail.elt;
