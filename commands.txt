@@ -1,0 +1,10 @@
+To run: npx serve
+To show file directory tree: tree /f
+
+
+• Step 1: Create the Object File (js/aesthetics/[family]/[object].js)
+Build the isolated 3D shapes, materials, background gradient, and update() animation inside its own small module.
+• Step 2: Register It in the Controller (js/[family]-canvas.js)
+Import the new object function and add its key to the eras (or objects) dictionary inside your main canvas controller.
+• Step 3: Add the Trigger Button on the HTML Page (aesthetics/[page].html)
+Add a <button type="button" class="era-pill" data-era="[key]"> to your HTML partial so clicking it swaps the active 3D group on screen. (And if you ever create a brand-new canvas controller like vaporwave-canvas.js, link its <script type="module"> tag once at the bottom of your root index.html.)

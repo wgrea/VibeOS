@@ -1,7 +1,4 @@
 <!-- index.html -->
-<!-- To show file directory tree: tree /f -->
-
-<!-- learned that HTMX is a lightweight library for adding interactivity to HTML, and makes SPA act like multi-page apps -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,6 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VibeOS</title>
   
+<script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+    }
+  }
+</script>
+
+
   <!-- HTMX CDN -->
   <script src="https://unpkg.com/htmx.org@1.9.10"></script>
   
@@ -21,16 +28,11 @@
 <body>
 
   <main class="os-container">
-    
-    <!-- HEADER TITLE -->
     <header class="os-header">
       <h1 class="os-title">Vibe OS</h1>
     </header>
 
-    <!-- MAIN INTERACTIVE DESKTOP AREA -->
     <section class="os-workspace">
-      
-      <!-- Primary Feature Trigger: View Aesthetics -->
       <button 
         class="vibe-btn btn-green"
         hx-get="aesthetics/index.html"
@@ -39,7 +41,6 @@
         View Aesthetics
       </button>
 
-      <!-- Primary Feature Trigger: Spiritual Skills -->
       <button 
         class="vibe-btn btn-cyan"
         hx-get="spiritual-skills.html"
@@ -64,12 +65,9 @@
         UX/DX Priority
       </button>
 
-      <!-- ADD THIS DISPLAY CONTAINER -->
       <div id="display-output" class="workspace-output-container"></div>
+    </section>
 
-    </div>
-
-    <!-- DOCUMENT LINK FOOTER -->
     <footer class="os-footer-nav">
       <div class="nav-row-bottom">
         <button 
@@ -81,8 +79,11 @@
         </button>
       </div>
     </footer>
-
   </main>
 
+    <!-- 2. Load Three.js Controllers from Root -->
+  <script type="module" src="js/aero-canvas.js"></script>
+  <script type="module" src="js/vaporwave-canvas.js"></script>
 </body>
 </html>
+
