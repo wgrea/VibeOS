@@ -1,3 +1,5 @@
+// js/aesthetics/frutiger-aero/vista-glass.js
+
 import * as THREE from 'three';
 
 export function createVistaGlass() {

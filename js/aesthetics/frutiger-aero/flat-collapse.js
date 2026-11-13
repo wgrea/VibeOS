@@ -1,3 +1,4 @@
+// js/aesthetics/frutiger-aero/flat-collapse.js
 import * as THREE from 'three';
 
 export function createFlatCollapse() {

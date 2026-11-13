@@ -1,3 +1,5 @@
+// js/aesthetics/frutiger-aero/web2-gloss.js
+
 import * as THREE from 'three';
 
 export function createWeb2Gloss() {

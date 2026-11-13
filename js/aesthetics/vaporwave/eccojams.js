@@ -1,3 +1,5 @@
+// js/aesthetics/vaporwave/eccojams.js
+
 import * as THREE from 'three';
 
 export function createEccojams() {

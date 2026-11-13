@@ -1,3 +1,5 @@
+// js/aesthetics/vaporwave/floral-shoppe.js
+
 import * as THREE from 'three';
 
 export function createFloralShoppe() {

@@ -1,3 +1,5 @@
+// js/aesthetics/vaporwave/slushwave.js
+
 import * as THREE from 'three';
 
 export function createSlushwave() {

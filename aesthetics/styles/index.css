@@ -1,0 +1,66 @@
+/* aesthetics/styles/index.css */
+
+@import "families.css";
+@import "palettes.css";
+@import "three-viewports.css";
+@import "eras.css";
+@import "tags.css";
+
+@import "../ui-history/index.css";
+
+
+.aesthetics-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-md) 0;
+  width: 100%;
+  animation: aestheticsFadeIn 220ms ease-out;
+}
+
+@keyframes aestheticsFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 1. Section Wrappers */
+.aesthetics-container section,
+.aesthetics-container .aesthetic-section {
+  background-color: rgba(14, 13, 24, 0.65);
+  border: 2px solid var(--border-outer);
+  border-radius: var(--radius-box);
+  padding: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.aesthetics-container h2 {
+  font-family: var(--font-arcade);
+  font-size: 0.95rem;
+  color: var(--neon-green);
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid var(--border-outer);
+  padding-bottom: var(--spacing-xs);
+  margin-bottom: var(--spacing-xs);
+}
+
+.aesthetics-container h3 {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--text-main);
+}
+
+.aesthetics-container p {
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+

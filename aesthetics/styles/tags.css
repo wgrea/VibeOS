@@ -1,0 +1,13 @@
+/* 6. Pill Tags / Vibe Badges */
+.aesthetics-container .vibe-tag {
+  display: inline-block;
+  padding: 4px var(--spacing-sm);
+  border-radius: var(--radius-pill);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background-color: var(--bg-dark);
+  border: 1px solid var(--border-outer);
+  color: var(--neon-cyan);
+}

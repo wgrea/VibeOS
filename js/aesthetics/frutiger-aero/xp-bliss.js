@@ -1,3 +1,5 @@
+// js/aesthetics/frutiger-aero/xp-bliss.js
+
 import * as THREE from 'three';
 
 export function createXpBliss() {

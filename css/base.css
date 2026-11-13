@@ -32,14 +32,6 @@ body {
   padding: 2rem 1rem;
 }
 
-.genre-section h2 {
-  color: var(--color-neon-orange);
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 0.5rem;
-  margin-top: 2.5rem;
-  font-size: 1.4rem;
-}
-
 /* Hide scrollbars globally while preserving scroll behavior */
 html, body, .os-container, .drawer-output {
   -ms-overflow-style: none;  /* IE and Edge */

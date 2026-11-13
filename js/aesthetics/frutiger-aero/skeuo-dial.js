@@ -1,3 +1,5 @@
+// js/aesthetics/frutiger-aero/skeuo-dial.js
+
 import * as THREE from 'three';
 
 export function createSkeuoDial() {

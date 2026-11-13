@@ -1,3 +1,5 @@
+// js/aesthetics/vaporwave/mallsoft.js
+
 import * as THREE from 'three';
 
 export function createMallsoft() {

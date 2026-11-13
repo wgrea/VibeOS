@@ -1,3 +1,5 @@
+// js/aesthetics/vaporwave/future-funk.js
+
 import * as THREE from 'three';
 
 export function createFutureFunk() {

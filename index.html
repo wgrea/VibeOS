@@ -24,9 +24,9 @@
   
   <!-- Centralized Stylesheet -->
   <!-- Inside <head> of root index.html -->
+    <!-- Keeps the style of the page -->
 <link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="aesthetics/ui-history/index.css">
-
+<link rel="stylesheet" href="aesthetics/styles/index.css">
 </head>
 <body>
 
@@ -101,10 +101,7 @@
   </main>
 
   <!-- 2. Load Three.js Controllers from Root. -->
-  <script type="module" src="js/aero-canvas.js"></script>
-  <script type="module" src="js/vaporwave-canvas.js"></script>
-  <script type="module" src="aesthetics/ui-history/index.js"></script>
-
+<script type="module" src="aesthetics/scripts/index.js"></script>
 <script>
 document.body.addEventListener('htmx:beforeRequest', (evt) => {
   const triggerEl = evt.detail.elt;

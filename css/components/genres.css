@@ -1,6 +1,7 @@
+/* css/components/genres.css */ 
 .genre-taxonomy-card {
-  background: var(--card-bg);
-  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  border: 1px solid var(--border-outer);
   border-radius: var(--radius-md);
   padding: 1.5rem;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
@@ -29,15 +30,15 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: transform 0.15s ease, border-color 0.15s ease;
 }
-.genre-pill:hover, .chip:hover { border-color: var(--color-neon-orange); color: #fff; transform: translateY(-1px); }
+.genre-pill:hover, .chip:hover { border-color: var(--neon-orange); color: #fff; transform: translateY(-1px); }
 .studio-card, .audio-column {
   background: var(--card-bg);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-box);
   padding: 1.25rem;
 }
 .studio-card h3 { margin: 0 0 0.25rem 0; color: #fff; }
-.studio-tag { display: inline-block; color: var(--color-neon-orange); font-family: var(--font-mono); font-size: 0.8rem; margin-bottom: 0.75rem; }
+.studio-tag { display: inline-block; color: var(--neon-orange); font-family: var(--font-mono); font-size: 0.8rem; margin-bottom: 0.75rem; }
 .taxonomy-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; }
 .audio-column ul { padding-left: 1.25rem; color: var(--text-muted); font-size: 0.9rem; }
 .audio-column li { margin-bottom: 0.5rem; }
