@@ -36,7 +36,51 @@ import { createDolphin }
 
 import { createSimpsonswave }
   from './aesthetics/vaporwave/simpsonswave.js';
+import { createFauxUtopian }
+  from './aesthetics/vaporwave/faux-utopian.js';
 
+import { createHardvapour }
+  from './aesthetics/vaporwave/hardvapour.js';
+
+import { createVhsPop }
+  from './aesthetics/vaporwave/vhs-pop.js';
+
+import { createOceanGrunge }
+  from './aesthetics/vaporwave/ocean-grunge.js';
+import { createBarberBeats }
+  from './aesthetics/vaporwave/barber-beats.js';
+
+import { createHypnagogicDrift }
+  from './aesthetics/vaporwave/hypnagogic-drift.js';
+
+import { createVaporTwitch }
+  from './aesthetics/vaporwave/vapor-twitch.js';
+
+import { createWebcoreCyberia }
+  from './aesthetics/vaporwave/webcore-cyberia.js';
+import { createPhonk }
+  from './aesthetics/vaporwave/phonk.js';
+
+import { createVoidgaze }
+  from './aesthetics/vaporwave/voidgaze.js';
+
+import { createDariacore }
+  from './aesthetics/vaporwave/dariacore.js';
+
+import { createHexd }
+  from './aesthetics/vaporwave/hexd.js';
+
+import { createKrushclub }
+  from './aesthetics/vaporwave/krushclub.js';
+
+import { createPluggnb }
+  from './aesthetics/vaporwave/pluggnb.js';
+
+import { createPromptCore }
+  from './aesthetics/vaporwave/prompt-core.js';
+
+import { createGhostPop }
+  from './aesthetics/vaporwave/ghost-pop.js';
 
 
 createExperienceViewer({
@@ -60,6 +104,25 @@ dreampunk: createDreampunk,
     dolphin: createDolphin,
         vaportrap: createVaportrap,
     simpsonswave: createSimpsonswave,
+        fauxutopian: createFauxUtopian,
+    hardvapour: createHardvapour,
+    vhspop: createVhsPop,
+    oceangrunge: createOceanGrunge,
+        barberbeats: createBarberBeats,
+    hypnagogic: createHypnagogicDrift,
+    vaportwitch: createVaporTwitch,
+    webcore: createWebcoreCyberia,
+        phonk: createPhonk,
+    voidgaze: createVoidgaze,
+    dariacore: createDariacore,
+    hexd: createHexd,
+        krushclub: createKrushclub,
+    pluggnb: createPluggnb,
+    promptcore: createPromptCore,
+    ghostpop: createGhostPop,
+
+
+
 
 
   }
