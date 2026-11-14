@@ -17,6 +17,12 @@ import { createSkeuoDial }
 import { createFlatCollapse }
   from './aesthetics/frutiger-aero/flat-collapse.js';
 
+import { createNeoAero }
+  from './aesthetics/frutiger-aero/neo-aero.js';
+
+import { createDarkAero }
+  from './aesthetics/frutiger-aero/dark-aero.js';
+
 createExperienceViewer({
   containerId: 'aero-canvas-container',
 
@@ -27,6 +33,8 @@ createExperienceViewer({
     web2: createWeb2Gloss,
     vista: createVistaGlass,
     skeuo: createSkeuoDial,
-    flat: createFlatCollapse
+    flat: createFlatCollapse,
+    neo: createNeoAero,
+    dark: createDarkAero
   }
 });

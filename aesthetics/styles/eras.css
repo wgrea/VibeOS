@@ -1,0 +1,31 @@
+.aesthetics-container .era-pill-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+  margin-top: var(--spacing-xs);
+}
+
+.aesthetics-container .era-pill {
+  background-color: var(--bg-card);
+  color: var(--text-main);
+  border: 1px solid var(--border-outer);
+  border-radius: var(--radius-pill);
+  padding: 6px var(--spacing-sm);
+  font-family: var(--font-ui);
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 150ms ease, background-color 150ms ease;
+}
+
+.aesthetics-container .era-pill:hover,
+.aesthetics-container .era-pill.active {
+  border-color: var(--neon-cyan);
+  background-color: rgba(0, 240, 255, 0.12);
+}
+
+.aesthetics-container .era-display-card {
+  margin-top: var(--spacing-xs);
+  padding: var(--spacing-sm);
+  border-radius: var(--spacing-xs);
+  background-color: rgba(24, 22, 40, 0.6);
+}

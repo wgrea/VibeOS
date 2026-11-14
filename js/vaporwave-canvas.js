@@ -17,6 +17,12 @@ import { createFutureFunk }
 import { createSlushwave }
   from './aesthetics/vaporwave/slushwave.js';
 
+import { createUtopianVirtual }
+  from './aesthetics/vaporwave/utopian-virtual.js';
+
+import { createLiminalPoolcore }
+  from './aesthetics/vaporwave/liminal-poolcore.js';
+
 createExperienceViewer({
   containerId: 'vaporwave-canvas-container',
 
@@ -29,6 +35,8 @@ createExperienceViewer({
     floral: createFloralShoppe,
     mallsoft: createMallsoft,
     futurefunk: createFutureFunk,
-    slushwave: createSlushwave
+    slushwave: createSlushwave,
+    utopian: createUtopianVirtual,
+    poolcore: createLiminalPoolcore
   }
 });

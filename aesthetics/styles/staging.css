@@ -1,0 +1,84 @@
+/* aesthetics/styles/staging.css */
+
+/* 1. Pastoral SNES Puzzle Backdrop (Sky, Rolling Hills & Grass) */
+.aesthetic-section[data-family="staging"] {
+  background-color: #6cc454;
+  background-image:
+    radial-gradient(ellipse 90% 45% at 20% 100%, #4ca838 0%, #4ca838 68%, transparent 69%),
+    radial-gradient(ellipse 85% 50% at 80% 100%, #61bd48 0%, #61bd48 72%, transparent 73%),
+    radial-gradient(circle 48px at 12% 72%, #2f7d24 0%, #2f7d24 98%, transparent 100%),
+    radial-gradient(circle 60px at 88% 70%, #2f7d24 0%, #2f7d24 98%, transparent 100%),
+    linear-gradient(180deg, #5cc2f2 0%, #a8e4ff 65%, #7ad65c 65%, #4ca838 100%);
+  border: 6px solid #592b0c;
+  border-radius: 0;
+  padding: var(--spacing-md);
+  color: #2e1404;
+  box-shadow:
+    inset 4px 4px 0px #a86432,
+    inset -4px -4px 0px #361704,
+    6px 6px 0px rgba(0, 0, 0, 0.45);
+}
+
+/* 2. Dark Wooden Headers with Light Cream Text */
+.aesthetic-section[data-family="staging"] h2 {
+  background: linear-gradient(180deg, #b86f39 0%, #8a4b1f 100%);
+  border: 4px solid #3d1b05;
+  padding: var(--spacing-sm) var(--spacing-md);
+  color: #fff8d6 !important;
+  text-shadow: 2px 2px 0px #3d1b05;
+  box-shadow:
+    inset 3px 3px 0px #e09b63,
+    inset -3px -3px 0px #592b0c,
+    4px 4px 0px rgba(0, 0, 0, 0.4);
+  margin-top: 0;
+}
+
+.aesthetic-section[data-family="staging"] h3 {
+  background: #7a3e16;
+  border: 3px solid #3d1b05;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  color: #fff5c0 !important;
+  text-shadow: 2px 2px 0px #3d1b05;
+  box-shadow:
+    inset 2px 2px 0px #ba703c,
+    inset -2px -2px 0px #4a2107;
+}
+
+/* 3. Subtitle Plaque (Dark Brown Text) */
+.aesthetic-section[data-family="staging"] > p {
+  background: rgba(255, 248, 224, 0.92);
+  border: 2px solid #6e3814;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  color: #2e1404 !important;
+  opacity: 1 !important;
+}
+
+/* 4. Wooden Frame around Each Category Grid */
+.aesthetic-section[data-family="staging"] .families-grid {
+  background: rgba(34, 64, 24, 0.85);
+  border: 6px solid #783b12;
+  padding: var(--spacing-md);
+  gap: var(--spacing-sm);
+  box-shadow:
+    inset 4px 4px 0px #3d1b05,
+    inset -4px -4px 0px #b56c38,
+    0 0 0 3px #3d1b05,
+    5px 5px 0px rgba(0, 0, 0, 0.45);
+}
+
+/* 5. Static Parchment Plaques with Dark Brown Text */
+.aesthetic-section[data-family="staging"] .family-card {
+  background: #f5e6c4 !important;
+  color: #2e1404 !important;
+  border: 2px solid #5c2d0c !important;
+  border-radius: 0;
+  font-weight: 700;
+  text-shadow: 1px 1px 0px #fff9eb;
+  cursor: default;
+  pointer-events: none;
+  box-shadow:
+    inset 2px 2px 0px #fff9eb,
+    inset -2px -2px 0px #c7ad7f,
+    2px 2px 0px rgba(0, 0, 0, 0.4);
+  transition: none;
+}

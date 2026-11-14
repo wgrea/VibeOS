@@ -1,0 +1,307 @@
+/* aesthetics/ui-history/index.css */
+.ui-history-sandbox {
+  --era-bg: #231912;
+  --era-surface: #36261b;
+  --era-text: #f5deb3;
+  --era-accent: #d4af37;
+  --era-btn-text: #ffffff;
+  --era-border: 4px double #c59b27;
+  --era-radius: 12px;
+  --era-font: 'Georgia', 'Times New Roman', serif;
+  --era-shadow: inset 0 0 24px rgba(0, 0, 0, 0.85);
+
+  background: var(--era-bg);
+  color: var(--era-text);
+  font-family: var(--era-font);
+  border: var(--era-border);
+  border-radius: var(--era-radius);
+  box-shadow: var(--era-shadow);
+  padding: 1.25rem;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+  text-align: left;
+}
+
+/* --- ERA THEMES --- */
+
+/* 1920s: Mechanical / Art Deco Radio & Switchboard */
+.ui-history-sandbox[data-era="1920s"] {
+  --era-bg: #231912;
+  --era-surface: #36261b;
+  --era-text: #f5deb3;
+  --era-accent: #d4af37;
+  --era-btn-text: #1a110a;
+  --era-border: 4px double #c59b27;
+  --era-radius: 12px;
+  --era-font: 'Georgia', 'Times New Roman', serif;
+  --era-shadow: inset 0 0 24px rgba(0, 0, 0, 0.85);
+}
+
+/* 1950s: Analog Control Room / Oscilloscope & Nixie */
+.ui-history-sandbox[data-era="1950s"] {
+  --era-bg: #1e2421;
+  --era-surface: #2c3531;
+  --era-text: #ff9e44;
+  --era-accent: #4ade80;
+  --era-btn-text: #0f1713;
+  --era-border: 3px solid #5c6b64;
+  --era-radius: 4px;
+  --era-font: 'Courier New', monospace;
+  --era-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+/* 1970s: Green Phosphor CRT Terminal */
+.ui-history-sandbox[data-era="1970s"] {
+  --era-bg: #051405;
+  --era-surface: #0a240a;
+  --era-text: #33ff33;
+  --era-accent: #33ff33;
+  --era-btn-text: #051405;
+  --era-border: 2px solid #33ff33;
+  --era-radius: 0px;
+  --era-font: 'Courier New', Courier, monospace;
+  --era-shadow: 0 0 12px rgba(51, 255, 51, 0.25), inset 0 0 20px rgba(0, 20, 0, 0.9);
+}
+
+/* 1980s: Early 1-Bit GUI (Macintosh / Xerox Star) */
+.ui-history-sandbox[data-era="1980s"] {
+  --era-bg: #d0d0d0;
+  --era-surface: #ffffff;
+  --era-text: #000000;
+  --era-accent: #000000;
+  --era-btn-text: #ffffff;
+  --era-border: 2px solid #000000;
+  --era-radius: 0px;
+  --era-font: 'Geneva', 'Verdana', sans-serif;
+  --era-shadow: 4px 4px 0px #000000;
+}
+
+/* 1990s: Classic 3D Bevel OS (Windows 95 / Classic Mac) */
+.ui-history-sandbox[data-era="1990s"] {
+  --era-bg: #008080;
+  --era-surface: #c0c0c0;
+  --era-text: #000000;
+  --era-accent: #000080;
+  --era-btn-text: #ffffff;
+  --era-border: 3px outset #ffffff;
+  --era-radius: 0px;
+  --era-font: 'Tahoma', 'Arial', sans-serif;
+  --era-shadow: 2px 2px 0px #404040;
+}
+
+/* 2000s: Skeuomorphic & Glossy Bridge (Leads to Frutiger Aero) */
+.ui-history-sandbox[data-era="2000s"] {
+  --era-bg: linear-gradient(180deg, #b8e1fc 0%, #6ba8e5 100%);
+  --era-surface: rgba(255, 255, 255, 0.85);
+  --era-text: #102a43;
+  --era-accent: #0066cc;
+  --era-btn-text: #ffffff;
+  --era-border: 2px solid #ffffff;
+  --era-radius: 10px;
+  --era-font: 'Trebuchet MS', 'Segoe UI', sans-serif;
+  --era-shadow: 0 6px 16px rgba(0, 51, 102, 0.35);
+}
+
+/* 2020s: Modern Flat & Spatial Glass */
+.ui-history-sandbox[data-era="2020s"] {
+  --era-bg: #111827;
+  --era-surface: rgba(31, 41, 55, 0.85);
+  --era-text: #f9fafb;
+  --era-accent: #38bdf8;
+  --era-btn-text: #0f172a;
+  --era-border: 1px solid rgba(255, 255, 255, 0.15);
+  --era-radius: 16px;
+  --era-font: system-ui, -apple-system, sans-serif;
+  --era-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+/* --- LAYOUT & CONTROLS --- */
+.ui-history-sandbox .history-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid currentColor;
+}
+
+.ui-history-sandbox .history-title {
+  margin: 0;
+  font-size: 1.15rem;
+  letter-spacing: 0.04em;
+}
+
+.ui-history-sandbox .history-badge {
+  font-size: 0.75rem;
+  padding: 0.2rem 0.5rem;
+  border: 1px solid currentColor;
+  border-radius: var(--era-radius);
+  opacity: 0.85;
+}
+
+.ui-history-sandbox .era-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+.ui-history-sandbox .era-tab {
+  background: var(--era-surface);
+  color: var(--era-text);
+  border: 1px solid currentColor;
+  border-radius: var(--era-radius);
+  padding: 0.35rem 0.65rem;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+.ui-history-sandbox .era-tab:hover {
+  transform: translateY(-1px);
+}
+
+.ui-history-sandbox .era-tab[aria-selected="true"] {
+  background: var(--era-accent);
+  color: var(--era-btn-text);
+}
+
+.ui-history-sandbox .era-stage {
+  background: var(--era-surface);
+  border: var(--era-border);
+  border-radius: var(--era-radius);
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .ui-history-sandbox .era-stage {
+    grid-template-columns: 1.35fr 1fr;
+    align-items: center;
+  }
+}
+
+.ui-history-sandbox .era-heading {
+  margin: 0 0 0.4rem 0;
+  font-size: 1.05rem;
+}
+
+.ui-history-sandbox .era-description {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.ui-history-sandbox .morph-widget {
+  border: 1px dashed currentColor;
+  border-radius: var(--era-radius);
+  padding: 0.85rem;
+  text-align: center;
+}
+
+.ui-history-sandbox .widget-label {
+  font-size: 0.8rem;
+  opacity: 0.85;
+}
+
+.ui-history-sandbox .morph-btn {
+  background: var(--era-accent);
+  color: var(--era-btn-text);
+  border: var(--era-border);
+  border-radius: var(--era-radius);
+  padding: 0.45rem 0.9rem;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.ui-history-sandbox .bridge-links {
+  margin-top: 0.85rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.ui-history-sandbox .hidden-note,
+.ui-history-sandbox [hidden] {
+  display: none !important;
+}
+
+.ui-history-sandbox .three-stage {
+  width: 100%;
+  height: 280px;
+  border: 1px dashed currentColor;
+  border-radius: var(--era-radius);
+  overflow: hidden;
+  cursor: grab;
+}
+
+.ui-history-sandbox .three-stage:active {
+  cursor: grabbing;
+}
+
+/* --- DECORATED BRIDGE BUTTONS (Matched to .family-card Tokens) --- */
+
+/* 1980s & 1990s Nostalgia Contrast Button (Matches [data-family="vaporwave"]) */
+.ui-history-sandbox #vaporwaveBridge {
+  background: linear-gradient(135deg, rgba(24, 12, 42, 0.94) 0%, rgba(59, 18, 96, 0.94) 100%);
+  color: #c084fc;
+  border: 2px solid #a855f7;
+  border-radius: 6px;
+  box-shadow:
+    inset 0 0 16px rgba(168, 85, 247, 0.28),
+    0 3px 10px rgba(168, 85, 247, 0.3);
+  text-shadow: 0 0 8px rgba(192, 132, 252, 0.45);
+  letter-spacing: 0.02em;
+  padding: 0.5rem 1rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.ui-history-sandbox #vaporwaveBridge:hover {
+  transform: translateY(-2px);
+  border-color: #c084fc;
+  color: #e9d5ff;
+  box-shadow:
+    inset 0 0 22px rgba(168, 85, 247, 0.45),
+    0 5px 16px rgba(168, 85, 247, 0.45);
+}
+
+/* 2000s Timeline Bridge Button (Matches [data-family="frutiger-aero"]) */
+.ui-history-sandbox #aeroBridge {
+  background: linear-gradient(
+    180deg,
+    rgba(14, 116, 144, 0.92) 0%,
+    rgba(8, 47, 73, 0.95) 55%,
+    rgba(3, 105, 161, 0.92) 100%
+  );
+  color: #38bdf8;
+  border: 2px solid #38bdf8;
+  border-radius: 999px;
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.55),
+    inset 0 0 16px rgba(56, 189, 248, 0.25),
+    0 4px 12px rgba(56, 189, 248, 0.35);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.65);
+  padding: 0.5rem 1.15rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, color 0.15s ease;
+}
+
+.ui-history-sandbox #aeroBridge:hover {
+  transform: translateY(-2px);
+  color: #e0f2fe;
+  box-shadow:
+    inset 0 1px 2px rgba(255, 255, 255, 0.75),
+    inset 0 0 22px rgba(56, 189, 248, 0.45),
+    0 6px 18px rgba(56, 189, 248, 0.5);
+}

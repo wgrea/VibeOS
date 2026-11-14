@@ -1,0 +1,66 @@
+/* aesthetics/palettes.css */
+
+.aesthetics-container [data-family="pre-computer"] {
+  border-color: #cbd5e1;
+  background: rgba(203, 213, 225, 0.08);
+}
+.aesthetics-container [data-family="pre-computer"] h3 { color: #f1f5f9; }
+
+.aesthetics-container [data-family="frutiger-aero"] {
+  border-color: #38bdf8;
+  background: rgba(56, 189, 248, 0.08);
+  box-shadow: inset 0 0 16px rgba(56, 189, 248, 0.12);
+}
+.aesthetics-container [data-family="frutiger-aero"] h3 { color: #38bdf8; }
+
+.aesthetics-container [data-family="vaporwave"] {
+  border-color: #a855f7;
+  background: rgba(168, 85, 247, 0.08);
+  box-shadow: inset 0 0 16px rgba(168, 85, 247, 0.15);
+}
+.aesthetics-container [data-family="vaporwave"] h3 { color: #c084fc; }
+
+.aesthetics-container [data-family="kid-core"] {
+  border-color: #facc15;
+  background: rgba(250, 204, 21, 0.08);
+}
+.aesthetics-container [data-family="kid-core"] h3 { color: #facc15; }
+
+.aesthetics-container [data-family="comic-book"] {
+  border-color: #ff4500;
+  background: rgba(255, 69, 0, 0.08);
+}
+.aesthetics-container [data-family="comic-book"] h3 { color: #ff6347; }
+
+.aesthetics-container [data-family="grungecore"] {
+  border-color: #8b5cf6;
+  background: rgba(139, 92, 246, 0.08);
+}
+.aesthetics-container [data-family="grungecore"] h3 { color: #a78bfa; }
+
+.aesthetics-container [data-family="anti-hustle"] {
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.08);
+  box-shadow: inset 0 0 16px rgba(16, 185, 129, 0.12);
+}
+.aesthetics-container [data-family="anti-hustle"] h3 { color: #34d399; }
+
+/* Ensure all text elements inside staging are crisp and visible */
+.aesthetics-container [data-family="staging"],
+.aesthetics-container [data-family="staging"] p,
+.aesthetics-container [data-family="staging"] span,
+.aesthetics-container [data-family="staging"] small {
+  color: #ffffff !important;
+}
+
+.aesthetics-container [data-family="staging"] h2,
+.aesthetics-container [data-family="staging"] h3 {
+  color: var(--neon-cyan) !important;
+}
+
+/* Ensure staging family buttons have visible white text and dark background */
+.aesthetics-container [data-family="staging"] .family-card,
+.aesthetics-container [data-family="staging"] button {
+  color: #ffffff !important;
+  background-color: var(--bg-card);
+}
