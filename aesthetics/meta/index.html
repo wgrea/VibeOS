@@ -1,0 +1,58 @@
+<!-- aesthetics/meta/index.html -->
+<section class="aesthetic-section" data-family="meta">
+
+  <header class="era-display-card" style="margin-bottom: 1rem;">
+    <h3>🧠 Meta, CS Architecture &amp; Portfolio Differentiation</h3>
+    <p>
+      Design research notes explaining the information architecture behind <strong>VibeOS</strong>, how operating system concepts map to design systems, and why certain aesthetics are prioritized or held in the backlog.
+    </p>
+  </header>
+
+  <div class="families-grid">
+    <!-- Note 1: OS & Computer Org/Design as Design Systems -->
+    <article class="era-display-card">
+      <h4>⚙️ Operating Systems &amp; Computer Org/Design Aesthetics</h4>
+      <ul>
+        <li>
+          <strong>Design Systems as a Mockup OS:</strong> Rather than treating aesthetics as a flat list of themes, VibeOS treats each visual family like a runtime environment with shared interaction primitives, state transitions, and token rules.
+        </li>
+        <li>
+          <strong>Pre-Paging vs. Demand Paging:</strong> Core UI shells and tokens load upfront (pre-paging), while heavy Three.js scene factories and era assets hydrate only when a user selects a specific aesthetic pill (demand paging).
+        </li>
+        <li>
+          <strong>Interaction Kernel:</strong> A shared viewport controller (<code>experience-viewer.js</code>) manages input, spring physics, and camera state across every aesthetic without duplicating boilerplate.
+        </li>
+      </ul>
+    </article>
+
+    <!-- Note 2: Pop vs. Non-Pop & Public Backlog Transparency -->
+    <article class="era-display-card">
+      <h4>📊 Pop vs. Non-Pop Aesthetics &amp; Public Backlog</h4>
+      <ul>
+        <li>
+          <strong>Aesthetic Cohesion vs. Subgenre Noise:</strong> A true aesthetic delivers a distinct sensory mood, color grammar, and tactile feel—whereas broad genres alone lack enough visual specificity to create an unmistakable "vibe."
+        </li>
+        <li>
+          <strong>Why the Backlog is Visible:</strong> Keeping the staging tracker open lets visitors and recruiters see the curation filter in action—how raw ideas are evaluated, grouped by schema, and graduated into interactive prototypes.
+        </li>
+      </ul>
+    </article>
+
+    <!-- Note 3: Differentiation from Guidebook Gallery -->
+    <article class="era-display-card">
+      <h4>🚀 How VibeOS Stands Out from Guidebook Gallery</h4>
+      <ul>
+        <li>
+          <strong>Interactive 3D Primitives over Static Moodboards:</strong> Instead of passive image galleries, every sub-aesthetic is expressed through live, draggable WebGL geometry, lighting, and spring physics.
+        </li>
+        <li>
+          <strong>Real-Time Parameterization:</strong> Studios like the <em>Material &amp; Garment Lab</em> let users manipulate PBR roughness, clearcoat, silhouettes, and colors directly in the browser.
+        </li>
+        <li>
+          <strong>Systems-First Information Architecture:</strong> Built with static, zero-database HTML fragments (HTMX) and modular ES factories, proving clean frontend architecture alongside visual exploration.
+        </li>
+      </ul>
+    </article>
+  </div>
+
+</section>

@@ -3,3 +3,8 @@ import "../ui-history/index.js";
 import "../../js/aero-canvas.js";
 import "../../js/vaporwave-canvas.js";
 import "../../js/comfort-canvas.js";
+import "../../js/kidcore-canvas.js";
+import "../../js/gaming-canvas.js";
+import "../../js/world-canvas.js";
+import "../../js/dark-canvas.js";
+import "../../js/lab-canvas.js";
