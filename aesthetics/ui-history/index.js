@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { createStage } from '../../js/stage.js';
+import { createStage } from '../../js/canvas/stage.js';
 import { createScene as create1920s } from '../../js/aesthetics/ui-history/era-1920s.js';
 import { createScene as create1950s } from '../../js/aesthetics/ui-history/era-1950s.js';
 import { createScene as create1970s } from '../../js/aesthetics/ui-history/era-1970s.js';
