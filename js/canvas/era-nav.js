@@ -130,7 +130,6 @@ export function setupEraNav(section, { stageId = null, onSelect }) {
 
     if (stageBox) {
       stageBox.innerHTML = `
-        <span class="era-display-label">About This Aesthetic</span>
         <p>${descriptionText}</p>
       `;
     }
