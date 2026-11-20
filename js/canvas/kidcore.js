@@ -1,4 +1,4 @@
-// js/kidcore-canvas.js
+// js/canvas/kidcore-canvas.js
 import { createExperienceViewer } from './experience-viewer.js';
 
 import { createKidCandy } from '../aesthetics/kidcore/kid-candy.js';
