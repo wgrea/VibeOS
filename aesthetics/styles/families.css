@@ -1,4 +1,4 @@
-/* aesthetics/families.css */
+/* aesthetics/styles/families.css */
 
 .aesthetics-container .families-grid,
 .aesthetics-container .layers-grid {
@@ -22,7 +22,7 @@
   flex-direction: column;
   justify-content: space-between;
   gap: var(--spacing-sm);
-  transition: border-color 180ms ease, transform 180ms ease;
+  transition: border-color 180ms ease, background-color 180ms ease, transform 180ms ease;
 }
 
 .aesthetics-container .family-card:hover,
@@ -36,11 +36,36 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-sm);
+  min-width: 0;
+  scroll-margin-top: 16px;
 }
 
-/* Make an active item span full width when its 3D viewport is open */
+/* Make an active item span full width when its drawer is open */
 .aesthetics-container .family-item:has(.family-drawer:not(:empty)) {
   grid-column: 1 / -1;
+}
+
+/* Visual indicator that clicking the open header closes/exits the drawer */
+.aesthetics-container .family-item:has(.family-drawer:not(:empty)) .family-card {
+  flex-direction: row;
+  align-items: center;
+  border-color: var(--neon-cyan);
+  background-color: rgba(0, 240, 255, 0.12);
+}
+
+.aesthetics-container .family-item:has(.family-drawer:not(:empty)) .family-card::after {
+  content: "✕ Close";
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--neon-cyan);
+  padding: 4px 10px;
+  border: 1px solid var(--neon-cyan);
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+}
+
+.aesthetics-container .family-drawer {
+  min-width: 0;
 }
 
 .aesthetics-container .family-drawer:empty {

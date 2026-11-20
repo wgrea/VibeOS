@@ -1,3 +1,4 @@
+// aesthetics/ui-history/index.js
 import * as THREE from 'three';
 import { createStage } from '../../js/canvas/stage.js';
 import { createScene as create1920s } from '../../js/aesthetics/ui-history/era-1920s.js';

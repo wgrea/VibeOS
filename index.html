@@ -60,19 +60,8 @@
     <div class="drawer-output"></div>
   </div>
 
-  <!-- 3. Genres -->
-  <div class="nav-item">
-    <button 
-      class="vibe-btn btn-orange"
-      hx-get="genres.html"
-      hx-target="next .drawer-output"
-      hx-swap="innerHTML">
-      Genres
-    </button>
-    <div class="drawer-output"></div>
-  </div>
-
-  <!-- 4. UX/DX Priority -->
+<!-- Inside index.html <section class="os-workspace"> -->
+  <!-- 3. UX/DX Priority -->
   <div class="nav-item">
     <button 
       class="vibe-btn btn-purple"
@@ -83,26 +72,38 @@
     </button>
     <div class="drawer-output"></div>
   </div>
-</section>
 
-<footer class="os-footer-nav">
-  <div class="nav-row-bottom">
+  <!-- 5. Design Process (Placed right after UX/DX Priority, not persistent) -->
+  <div class="nav-item">
     <button 
       class="vibe-btn btn-doc"
       hx-get="design-process.html"
       hx-target="next .drawer-output"
       hx-swap="innerHTML">
-      📁 View Design Process Document
+      📁 Design Process
     </button>
     <div class="drawer-output"></div>
   </div>
-</footer>
+</section>
+<!-- Remove the old <footer class="os-footer-nav"> block -->
+
 
   </main>
 
-  <!-- 2. Load Three.js Controllers from Root. -->
-<script type="module" src="aesthetics/scripts/index.js"></script>
+<!-- 2. Load Three.js Controllers from Root. -->
+<script type="module" src="js/aesthetics/controller.js"></script>
 <script>
+const footerNav = document.querySelector('.os-footer-nav');
+
+function syncFooterVisibility() {
+  if (!footerNav) return;
+  const anyWorkspaceOpen = Array.from(
+    document.querySelectorAll('.os-workspace .drawer-output')
+  ).some((drawer) => drawer.innerHTML.trim() !== '');
+
+  footerNav.style.display = anyWorkspaceOpen ? 'none' : '';
+}
+
 document.body.addEventListener('htmx:beforeRequest', (evt) => {
   const triggerEl = evt.detail.elt;
   if (!triggerEl) return;
@@ -110,30 +111,82 @@ document.body.addEventListener('htmx:beforeRequest', (evt) => {
   // 1. Top-level OS navigation buttons (.vibe-btn)
   if (triggerEl.classList.contains('vibe-btn')) {
     const targetDrawer = triggerEl.nextElementSibling;
+    const route = triggerEl.getAttribute('hx-get') || triggerEl.getAttribute('data-hx-get');
+
     document.querySelectorAll('.drawer-output').forEach((drawer) => {
       if (drawer !== targetDrawer) drawer.innerHTML = '';
     });
+
     if (targetDrawer && targetDrawer.innerHTML.trim() !== '') {
       evt.preventDefault();
       targetDrawer.innerHTML = '';
+      sessionStorage.removeItem('vibeos_top_route');
+      sessionStorage.removeItem('vibeos_sub_route');
+    } else if (route) {
+      sessionStorage.setItem('vibeos_top_route', route);
+      sessionStorage.removeItem('vibeos_sub_route');
     }
+    syncFooterVisibility();
+    return;
   }
 
-  // 2. Aesthetic family buttons (.family-card)
-  if (triggerEl.classList.contains('family-card')) {
-    const targetFamilyDrawer = triggerEl.nextElementSibling;
-    document.querySelectorAll('.family-drawer').forEach((drawer) => {
-      if (drawer !== targetFamilyDrawer) drawer.innerHTML = '';
-    });
-    if (targetFamilyDrawer && targetFamilyDrawer.innerHTML.trim() !== '') {
-      evt.preventDefault();
-      targetFamilyDrawer.innerHTML = '';
+  // 2. Any nested aesthetic family trigger inside .drawer-output
+  if (triggerEl.closest('.drawer-output')) {
+    const subRoute = triggerEl.getAttribute('hx-get') || triggerEl.getAttribute('data-hx-get');
+    const familyCard = triggerEl.closest('.family-card') || triggerEl;
+    const targetFamilyDrawer = familyCard.nextElementSibling?.classList.contains('family-drawer')
+      ? familyCard.nextElementSibling
+      : null;
+
+    if (targetFamilyDrawer) {
+      document.querySelectorAll('.family-drawer').forEach((drawer) => {
+        if (drawer !== targetFamilyDrawer) drawer.innerHTML = '';
+      });
+
+      if (targetFamilyDrawer.innerHTML.trim() !== '') {
+        evt.preventDefault();
+        targetFamilyDrawer.innerHTML = '';
+        sessionStorage.removeItem('vibeos_sub_route');
+        return;
+      }
+    }
+
+    if (subRoute) {
+      sessionStorage.setItem('vibeos_sub_route', subRoute);
     }
   }
 });
 
-</script>
+// Restore open drawers after refresh
+let pendingSubRoute = sessionStorage.getItem('vibeos_sub_route');
 
+document.body.addEventListener('htmx:afterSettle', () => {
+  syncFooterVisibility();
+
+  // Wait until HTMX has fully settled and bound events on the newly loaded aesthetics/index.html
+  if (pendingSubRoute) {
+    const subBtn = document.querySelector(
+      `.drawer-output [hx-get="${pendingSubRoute}"], .drawer-output [data-hx-get="${pendingSubRoute}"]`
+    );
+    if (subBtn) {
+      pendingSubRoute = null;
+      subBtn.click(); // Native .click() triggers both HTMX and any custom JS listeners
+    }
+  }
+});
+
+window.addEventListener('DOMContentLoaded', () => {
+  const savedTopRoute = sessionStorage.getItem('vibeos_top_route');
+  if (savedTopRoute) {
+    const topBtn = document.querySelector(
+      `.vibe-btn[hx-get="${savedTopRoute}"], .vibe-btn[data-hx-get="${savedTopRoute}"]`
+    );
+    if (topBtn) {
+      topBtn.click();
+    }
+  }
+});
+</script>
 
 </body>
 </html>

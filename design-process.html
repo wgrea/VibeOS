@@ -1,9 +1,4 @@
 <!-- design-process.html -->
-
-<!-- How can a Design System be a mockup Operating System? -->
-
-<!-- Chipnode knowledge / Computer Organization & Design knowledge be incorporated as well? -->
-
 <div class="vibeos-window-content design-process-container">
 
   <!-- Header Section -->
@@ -12,10 +7,9 @@
       <span style="width: 8px; height: 8px; background-color: var(--neon-cyan); border-radius: 50%; box-shadow: 0 0 8px var(--neon-cyan);"></span>
       <span style="font-size: 0.8rem; font-weight: bold; color: var(--text-main);">SYSTEM PROCESS LOG</span>
     </div>
-    <h2 style="color: var(--neon-pink); font-size: 1.6rem; margin: var(--spacing-xs) 0; letter-spacing: 1px;">✏️ Design Process</h2>
-    <div style="color: var(--text-muted); font-size: 1.1rem; font-weight: 700;">
-      <code>Sketch</code> ➔ <code>Wireframe</code> ➔ <code>CSS Tokens</code> ➔ <code>Live HTMX Prototype</code>
-      <code>How is OS knowledge applied here?</code> -> <code>How can I apply graphic/visual/motion design knowledge here?</code>
+    <h2 style="color: var(--neon-pink); font-size: 1.6rem; margin: var(--spacing-xs) 0; letter-spacing: 1px;">✏️ Design Process &amp; Architecture</h2>
+    <div style="color: var(--text-muted); font-size: 1.05rem; font-weight: 700;">
+      <code>Code-as-FigJam</code> ➔ <code>CSS Tokens</code> ➔ <code>HTMX State</code> ➔ <code>Three.js Demand Paging</code>
     </div>
   </header>
 
@@ -24,10 +18,11 @@
     <button 
       class="btn-retro active"
       hx-get="design-process.html"
+      hx-select="#process-stage-viewport > *"
       hx-target="#process-stage-viewport"
       hx-swap="innerHTML"
     >
-      🖥️ Architecture
+      🖥️ Architecture &amp; Meta
     </button>
     <button 
       class="btn-retro"
@@ -39,25 +34,33 @@
     </button>
     <button 
       class="btn-retro"
-      hx-get="aesthetics/index.html"
+      hx-get="aesthetics/staging.html"
       hx-target="#process-stage-viewport"
       hx-swap="innerHTML"
     >
-      🎨 Aesthetics & Vibe
+      🧪 R&amp;D Staging Board
     </button>
   </nav>
 
   <!-- Dynamic Content Viewport -->
   <div id="process-stage-viewport" class="dynamic-display-area" style="flex-direction: column; align-items: stretch; text-align: left; background: transparent; padding: 0; border: none;">
 
-    <!-- Section 1: Architecture Metaphor -->
+    <!-- Section 1: Prototyping Philosophy (Code as FigJam) -->
     <article class="card">
-      <h3>🖥️ Architecture: The Browser-as-OS Metaphor</h3>
+      <h3>🎨 Prototyping Workflow: Using Code Like FigJam</h3>
+      <p>
+        Instead of maintaining separate static canvases in traditional whiteboarding tools, VibeOS treats <strong>HTML, CSS, and static folders directly as a spatial FigJam board</strong>. Ideas start as raw semantic markup and lightweight staging files (<code>aesthetics/staging.html</code>), allowing layout constraints, token inheritance, and interactive states to be stress-tested immediately in the browser.
+      </p>
+    </article>
+
+    <!-- Section 2: Architecture Metaphor & Computer Org/Design -->
+    <article class="card" style="margin-top: var(--spacing-md);">
+      <h3>⚙️ Operating Systems &amp; Computer Org/Design Aesthetics</h3>
       
       <div class="concept-block">
-        <h4 style="color: var(--neon-pink); margin-bottom: var(--spacing-xs);">1. The Design Token "Kernel"</h4>
+        <h4 style="color: var(--neon-pink); margin-bottom: var(--spacing-xs);">1. Design Systems as a Mockup OS</h4>
         <p>
-          Just as a low-level OS kernel manages hardware states, <code>css/tokens.css</code> acts as VibeOS's central configuration registry. Typography scales, neon accents, window borders, and surface materials derive directly from global variables.
+          Rather than treating aesthetics as a flat list of themes, VibeOS treats each visual family like a runtime environment with shared interaction primitives, state transitions, and token rules. Just as a low-level OS kernel manages hardware states, <code>css/tokens.css</code> acts as the central configuration registry.
         </p>
         <pre style="background: var(--bg-dark); border: 1px solid var(--border-outer); padding: var(--spacing-sm); color: var(--neon-green); font-size: 0.9rem; border-radius: var(--radius-box); overflow-x: auto;"><code>/* css/tokens.css */
 :root {
@@ -70,16 +73,23 @@
       </div>
 
       <div class="concept-block">
-        <h4 style="color: var(--neon-pink); margin-bottom: var(--spacing-xs);">2. Component Micro-Architecture (Layout Scalability)</h4>
+        <h4 style="color: var(--neon-pink); margin-bottom: var(--spacing-xs);">2. Pre-Paging vs. Demand Paging</h4>
         <p>
-          Window shells, taskbar components, and application views remain decoupled. Triggering app views via HTMX unmounts and mounts partials on demand without resetting top-level system state.
+          Core UI shells and tokens load upfront (<strong>pre-paging</strong>), while heavy Three.js scene factories and era assets hydrate only when a user selects a specific aesthetic pill (<strong>demand paging</strong>).
+        </p>
+      </div>
+
+      <div class="concept-block">
+        <h4 style="color: var(--neon-pink); margin-bottom: var(--spacing-xs);">3. Interaction Kernel</h4>
+        <p>
+          A shared viewport controller (<code>experience-viewer.js</code>) manages input, spring physics, and camera state across every aesthetic without duplicating boilerplate.
         </p>
       </div>
     </article>
 
-    <!-- Section 2: Core OS Systems -->
+    <!-- Section 3: Core OS Systems -->
     <article class="card" style="margin-top: var(--spacing-md);">
-      <h3>⚙️ Core OS Systems & UI Translation</h3>
+      <h3>🖥️ Core OS Systems &amp; UI Translation</h3>
       
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--spacing-md);">
         
@@ -102,27 +112,42 @@
       </div>
 
       <div class="card" style="background: var(--bg-card); margin-top: var(--spacing-sm);">
-        <h4 style="color: var(--neon-pink);">3. Directory Tree & Path Resolution 💾</h4>
+        <h4 style="color: var(--neon-pink);">3. Directory Tree, Path Resolution &amp; Debouncing 💾🚦</h4>
         <p>
-          Structured hierarchy using relative paths (e.g. <code>aesthetics/vaporwave-timeline.html</code> or <code>spiritual-skills.html</code>) to dynamically resolve sub-views.
+          Structured hierarchy using relative paths (e.g. <code>aesthetics/vaporwave-timeline.html</code> or <code>spiritual-skills.html</code>) dynamically resolves sub-views without database overhead, while HTMX throttling (<code>hx-trigger="click throttle:300ms"</code>) prevents UI race conditions during rapid user clicks.
         </p>
       </div>
     </article>
 
-    <!-- Section 3: Input & Safeguards -->
+    <!-- Section 4: Pop vs. Non-Pop & Public Backlog -->
     <article class="card" style="margin-top: var(--spacing-md);">
-      <h3>🚦 Concurrency & Input Debouncing</h3>
-      <p>
-        To prevent UI race conditions during rapid user clicks or window dragging, interactive elements utilize HTMX throttling (<code>hx-trigger="click throttle:300ms"</code>) to guarantee deterministic state flow.
-      </p>
+      <h3>📊 Pop vs. Non-Pop Aesthetics &amp; Public Backlog</h3>
+      <ul>
+        <li>
+          <strong>Aesthetic Cohesion vs. Subgenre Noise:</strong> A true aesthetic delivers a distinct sensory mood, color grammar, and tactile feel—whereas broad genres alone lack enough visual specificity to create an unmistakable "vibe."
+        </li>
+        <li>
+          <strong>Why the Backlog is Visible:</strong> Keeping the staging tracker open lets visitors and recruiters see the curation filter in action—how raw ideas are evaluated, grouped by schema, and graduated into interactive prototypes.
+        </li>
+      </ul>
+    </article>
+
+    <!-- Section 5: Differentiation from Guidebook Gallery -->
+    <article class="card" style="margin-top: var(--spacing-md);">
+      <h3>🚀 How VibeOS Stands Out from Guidebook Gallery</h3>
+      <ul>
+        <li>
+          <strong>Interactive 3D Primitives over Static Moodboards:</strong> Instead of passive image galleries, every sub-aesthetic is expressed through live, draggable WebGL geometry, lighting, and spring physics.
+        </li>
+        <li>
+          <strong>Real-Time Parameterization:</strong> Studios like the <em>Material &amp; Garment Lab</em> let users manipulate PBR roughness, clearcoat, silhouettes, and colors directly in the browser.
+        </li>
+        <li>
+          <strong>Systems-First Information Architecture:</strong> Built with static, zero-database HTML fragments (HTMX) and modular ES factories, proving clean frontend architecture alongside visual exploration.
+        </li>
+      </ul>
     </article>
 
   </div>
 
 </div>
-
-<!-- Add: I decided to use code like it is Figjam -->
-
-<!-- • Cognitive Load & Hierarchy: Good readability comes from high contrast, generous line height (around 1.5), short line lengths (50–75 characters), and clear grouping.
-• Progressive Disclosure: Removing dense paragraphs was a smart instinct. Instead of tiny walls of text or giant headlines, use short, scannable labels (like your era pills) paired with a clean detail card that only reveals deeper notes when a user clicks an item.
- -->
