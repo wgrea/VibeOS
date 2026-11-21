@@ -41,10 +41,10 @@ export function createExperienceViewer({
 
     const eras = {};
 
-    Object.entries(eraFactories).forEach(([key, factory]) => {
-      eras[key] = factory();
-      eras[key].group.visible = key === activeEra;
-      scene.add(eras[key].group);
+Object.entries(eraFactories).forEach(([key, factory]) => {
+  eras[key] = factory({ camera, domElement: renderer.domElement, box });
+  eras[key].group.visible = key === activeEra;
+  scene.add(eras[key].group);
 
       if (eras[key].draggable) {
         makeMovable(eras[key].draggable);
@@ -65,9 +65,12 @@ export function createExperienceViewer({
       activeEra = eraKey;
       sessionStorage.setItem(storageKey, eraKey);
 
-      Object.entries(eras).forEach(([key, era]) => {
-        era.group.visible = key === activeEra;
-      });
+// Inside selectEra(eraKey, shouldBounce = true)
+Object.entries(eras).forEach(([key, era]) => {
+  const isActive = key === activeEra;
+  era.group.visible = isActive;
+  era.onSelect?.(isActive);
+});
 
       if (eras[activeEra].background) {
         box.style.background = eras[activeEra].background;
