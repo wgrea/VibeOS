@@ -1,11 +1,32 @@
 <!-- aesthetics/lab/index.html -->
 <section class="aesthetic-section" data-family="lab">
 
-  <!-- Era Triggers (Matched to lab-canvas.js) -->
+  <!-- Era Triggers -->
   <nav class="era-pill-bar" aria-label="Interactive Material, Glam & Garment Lab">
     <button type="button" class="era-pill active" data-era="glam">✨ Glam Aesthetic</button>
     <button type="button" class="era-pill" data-era="outfit">🖤 Outfit Customizer</button>
+    <button type="button" class="era-pill" data-era="keyboard">DJ keyboard</button>
   </nav>
+
+  <!-- Track Selector (Shown ONLY on DJ keyboard) -->
+  <div id="dj-controls" class="lab-controls" hidden>
+    <label for="dj-track-select">
+      Track:
+      <select id="dj-track-select"></select>
+    </label>
+  </div>
+
+  <!-- Outfit Controls Right Above the 3D Viewport (Shown ONLY on Outfit Customizer) -->
+  <div id="outfit-controls" class="lab-controls" hidden>
+    <div class="pill-row">
+      <button type="button" class="pill-btn active" data-fabric="latex">Latex</button>
+      <button type="button" class="pill-btn" data-fabric="pvc">PVC</button>
+      <button type="button" class="pill-btn" data-fabric="leather">Leather</button>
+    </div>
+
+    <div class="swatch-grid" id="outfit-swatches"></div>
+  </div>
+
 
   <!-- Live Three.js Viewport -->
   <div
@@ -14,40 +35,10 @@
     style="background: radial-gradient(circle at 50% 30%, #fdf2f8 0%, #f472b6 45%, #831843 100%);"
   ></div>
 
-  <!-- Era Description + Live Garment/Material Controls -->
+  <!-- Object-Specific Lore & Description Card (Managed by setupEraNav) -->
   <div id="lab-stage" class="era-display-card">
     <h3>🧥 Interactive Material, Glam &amp; Garment Studio</h3>
-    <p>Select a garment or material pill above, then customize colors, PBR surface finishes, and silhouettes below.</p>
-
-    <div class="lab-controls" style="display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 0.75rem;">
-      <label>
-        Color:
-        <input type="color" id="lab-color-picker" value="#18181b" />
-      </label>
-
-      <label>
-        PBR Finish:
-        <select id="lab-finish-select">
-          <option value="latex">High-Gloss Latex</option>
-          <option value="pvc">Mirror PVC Vinyl</option>
-          <option value="leather">Supple Full-Grain Leather</option>
-          <option value="nylon">Ripstop Ski Nylon</option>
-          <option value="denim">Utilitarian Workwear Twill</option>
-        </select>
-      </label>
-
-      <label>
-        Snowsuit Era:
-        <select id="lab-snowsuit-type">
-          <option value="vintage">70s/80s Vintage Colorblock</option>
-          <option value="classic">90s Classic Ski</option>
-          <option value="modern">Modern Sleek Ski Suit</option>
-        </select>
-      </label>
-
-      <button type="button" id="lab-toggle-sleeves">Toggle Sleeves</button>
-      <button type="button" id="lab-toggle-legs">Toggle Shorts / Full Leg</button>
-    </div>
+    <p>Select a module above to explore materials, customize a catsuit, or play the 3D DJ workstation.</p>
   </div>
 
 </section>
