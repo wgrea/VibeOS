@@ -1,26 +1,34 @@
 // js/dark-canvas.js
 import { createExperienceViewer } from './experience-viewer.js';
 
-import { createDreamWeird } from '../aesthetics/dark/dream-weird.js';
-import { createHorrorCornfield } from '../aesthetics/dark/horror-cornfield.js';
-import { createHorrorCarnival } from '../aesthetics/dark/horror-carnival.js';
-import { createWitchSpiritual } from '../aesthetics/dark/witch-spiritual.js';
+import { createDreamcore } from '../aesthetics/dark/dreamcore.js';
+import { createWeirdcore } from '../aesthetics/dark/weirdcore.js';
+import { createCornfield } from '../aesthetics/dark/cornfield.js';
+import { createCarnival } from '../aesthetics/dark/carnival.js';
+import { createWitch } from '../aesthetics/dark/witch.js';
 import { createScammer } from '../aesthetics/dark/scammer.js';
 import { createCaptchacore } from '../aesthetics/dark/captchacore.js';
+import { createBastardcore } from '../aesthetics/dark/bastardcore.js';
 import { createCybercore } from '../aesthetics/dark/cybercore.js';
-import { createGrungeEmo } from '../aesthetics/dark/grunge-emo.js';
+import { createGybercore } from '../aesthetics/dark/gybercore.js';
+import { createGrunge } from '../aesthetics/dark/grunge.js';
+import { createEmo } from '../aesthetics/dark/emo.js';
 
 createExperienceViewer({
   containerId: 'dark-canvas-container',
   defaultEra: 'dream-weird',
   eraFactories: {
-    'dream-weird': createDreamWeird,
-    'horror-cornfield': createHorrorCornfield,
-    'horror-carnival': createHorrorCarnival,
-    'witch-spiritual': createWitchSpiritual,
+    dreamcore: createDreamcore,
+    weirdcore: createWeirdcore,
+    cornfield: createCornfield,
+    carnival: createCarnival,
+    witch: createWitch,
     scammer: createScammer,
     captchacore: createCaptchacore,
+    bastardcore: createBastardcore,
     cybercore: createCybercore,
-    'grunge-emo': createGrungeEmo,
+    gybercore: createGybercore,
+    grunge: createGrunge,
+    emo: createEmo
   },
 });

@@ -127,3 +127,103 @@ dreampunk: createDreampunk,
 
   }
 });
+
+
+// --- Vaporwave Canvas Audio Controller (Scoped Strictly to Vaporwave) ---
+const VAPORWAVE_TUNES = {
+  mallsoft: new URL('../../tunes/mallsoft.mp3', import.meta.url).href,
+};
+
+
+// Reuse singleton audio player so tracks never overlap across families or HTMX swaps
+if (!window.__vibeAudio) {
+  window.__vibeAudio = new Audio();
+  window.__vibeAudio.loop = true;
+  window.__vibeAudio.volume = 0.5;
+}
+const vibeAudio = window.__vibeAudio;
+
+function stopVaporwaveAudio() {
+  if (!window.__vibeAudioOwner || window.__vibeAudioOwner === 'vaporwave') {
+    vibeAudio.pause();
+    vibeAudio.currentTime = 0;
+    vibeAudio.removeAttribute('src');
+    vibeAudio.load();
+    window.__vibeTargetUrl = '';
+  }
+}
+
+function playVaporwaveTrack(trackUrl) {
+  window.__vibeAudioOwner = 'vaporwave';
+
+  if (!trackUrl) {
+    stopVaporwaveAudio();
+    return;
+  }
+
+  if (window.__vibeTargetUrl !== trackUrl) {
+    vibeAudio.pause();
+    vibeAudio.currentTime = 0;
+    window.__vibeTargetUrl = trackUrl;
+    vibeAudio.src = trackUrl;
+  }
+
+  vibeAudio.play().catch(() => {
+    // Unlocks on first pointerdown/keydown after a hard F5 refresh
+  });
+}
+
+function syncVaporwaveAudio() {
+  const vaporwaveSection = document.querySelector('.aesthetic-section[data-family="vaporwave"]');
+  if (!vaporwaveSection) {
+    stopVaporwaveAudio();
+    return;
+  }
+
+  const activePill = vaporwaveSection.querySelector('.era-pill.active[data-era]');
+  const eraSlug = activePill ? activePill.dataset.era : '';
+  playVaporwaveTrack(VAPORWAVE_TUNES[eraSlug] || '');
+}
+
+// Unlock audio on first click/drag/keypress if refreshed directly on the Vaporwave page
+if (!window.__vibeAudioUnlockBound) {
+  window.__vibeAudioUnlockBound = true;
+  const unlock = () => {
+    if (window.__vibeTargetUrl && vibeAudio.paused) {
+      vibeAudio.play().catch(() => {});
+    }
+  };
+  window.addEventListener('pointerdown', unlock, { passive: true });
+  window.addEventListener('keydown', unlock, { passive: true });
+}
+
+const vaporwaveObserver = new MutationObserver(() => syncVaporwaveAudio());
+
+function attachVaporwaveObserver() {
+  const pillBar = document.querySelector('.aesthetic-section[data-family="vaporwave"] .era-pill-bar');
+  if (!pillBar) return;
+  vaporwaveObserver.disconnect();
+  vaporwaveObserver.observe(pillBar, {
+    subtree: true,
+    attributes: true,
+    attributeFilter: ['class'],
+  });
+}
+
+attachVaporwaveObserver();
+syncVaporwaveAudio();
+
+document.addEventListener('click', (e) => {
+  if (e.target.closest('.aesthetic-section[data-family="vaporwave"]')) {
+    requestAnimationFrame(syncVaporwaveAudio);
+  }
+});
+
+document.addEventListener('htmx:beforeSwap', () => {
+  stopVaporwaveAudio();
+});
+
+document.addEventListener('htmx:afterSwap', () => {
+  attachVaporwaveObserver();
+  syncVaporwaveAudio();
+});
