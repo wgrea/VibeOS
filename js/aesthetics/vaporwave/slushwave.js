@@ -5,71 +5,129 @@ import * as THREE from 'three';
 export function createSlushwave() {
   const group = new THREE.Group();
 
-  // 1. Glossy Turquoise Vaporwave Pool Water + Tiled Grid
-  const poolWater = new THREE.Mesh(
-    new THREE.PlaneGeometry(11, 9),
+  // 1. Blurred Nocturnal Neon Mirror Surface
+  const mirrorFloor = new THREE.Mesh(
+    new THREE.PlaneGeometry(14, 14),
     new THREE.MeshPhysicalMaterial({
-      color: 0x06b6d4, transparent: true, opacity: 0.78, roughness: 0.05, clearcoat: 1.0
+      color: 0x1e1b4b,
+      roughness: 0.12,
+      metalness: 0.75,
+      clearcoat: 1.0,
     })
   );
-  poolWater.rotation.x = -Math.PI / 2;
-  poolWater.position.y = -1.1;
-  group.add(poolWater);
+  mirrorFloor.rotation.x = -Math.PI / 2;
+  mirrorFloor.position.y = -1.2;
+  group.add(mirrorFloor);
 
-  const tileGrid = new THREE.GridHelper(11, 22, 0xffffff, 0x67e8f9);
-  tileGrid.position.y = -1.09;
-  group.add(tileGrid);
+  // 2. Draggable Liquid-Melted Slushwave Core
+  const slushGroup = new THREE.Group();
 
-  // Classic White Ceramic Pool Steps on the Left Edge
-  const stepMat = new THREE.MeshStandardMaterial({ color: 0xf8fafc, roughness: 0.25 });
-  for (let i = 0; i < 3; i++) {
-    const step = new THREE.Mesh(new THREE.BoxGeometry(1.1 - i * 0.25, 0.22, 3.2), stepMat);
-    step.position.set(-3.4 - i * 0.1, -1.05 + i * 0.22, -0.5);
-    group.add(step);
+  const liquidGeo = new THREE.SphereGeometry(0.92, 48, 48);
+  const liquidPos = liquidGeo.attributes.position;
+  const basePos = new Float32Array(liquidPos.array);
+
+  const liquidCore = new THREE.Mesh(
+    liquidGeo,
+    new THREE.MeshPhysicalMaterial({
+      color: 0xe879f9,
+      emissive: 0x7e22ce,
+      emissiveIntensity: 0.55,
+      roughness: 0.08,
+      metalness: 0.25,
+      clearcoat: 1.0,
+      transparent: true,
+      opacity: 0.82,
+    })
+  );
+  slushGroup.add(liquidCore);
+
+  // 3. Sweeping Phaser / Flanger Wave Ribbons
+  const phaserRings = [];
+  const ringColors = [0x38bdf8, 0xf472b6, 0xc084fc, 0x2dd4bf];
+
+  ringColors.forEach((hex, i) => {
+    const ring = new THREE.Mesh(
+      new THREE.TorusGeometry(1.18 + i * 0.14, 0.032, 16, 80),
+      new THREE.MeshPhysicalMaterial({
+        color: hex,
+        emissive: hex,
+        emissiveIntensity: 0.65,
+        roughness: 0.1,
+        transparent: true,
+        opacity: 0.72,
+      })
+    );
+    ring.rotation.x = Math.PI / 2.2 + i * 0.18;
+    ring.rotation.y = i * 0.45;
+    slushGroup.add(ring);
+    phaserRings.push({ mesh: ring, speed: 0.28 - i * 0.04, phase: i * 1.1 });
+  });
+
+  group.add(slushGroup);
+
+  // 4. Slow-Drifting Nocturnal Mist / Bokeh Droplets
+  const bokehOrbs = [];
+  for (let i = 0; i < 16; i++) {
+    const orb = new THREE.Mesh(
+      new THREE.SphereGeometry(0.06 + (i % 3) * 0.025, 14, 14),
+      new THREE.MeshBasicMaterial({
+        color: i % 2 === 0 ? 0xf0abfc : 0x67e8f9,
+        transparent: true,
+        opacity: 0.45,
+      })
+    );
+    const angle = (i / 16) * Math.PI * 2;
+    const radius = 1.65 + (i % 4) * 0.25;
+    orb.position.set(Math.cos(angle) * radius, -0.6 + (i % 5) * 0.35, Math.sin(angle) * radius);
+    group.add(orb);
+    bokehOrbs.push({ mesh: orb, angle, radius, baseY: orb.position.y, phase: i * 0.7 });
   }
 
-  // 2. Draggable Pink Pool Flamingo
-  const flamingo = new THREE.Group();
-  const pinkMat = new THREE.MeshPhysicalMaterial({ color: 0xff4da6, roughness: 0.15, clearcoat: 0.9 });
+  // 5. Lush Twilight Violet, Magenta & Cyan Lighting
+  const magentaLight = new THREE.PointLight(0xf472b6, 11, 11);
+  magentaLight.position.set(-2.2, 1.8, 2.2);
+  group.add(magentaLight);
 
-  // Plump Flamingo Body & Tail
-  const body = new THREE.Mesh(new THREE.SphereGeometry(0.45, 24, 24), pinkMat);
-  body.scale.set(1.35, 0.85, 0.9);
-  body.position.y = -0.65;
-  flamingo.add(body);
-
-  // Curved S-Neck + Head + Two-Tone Beak
-  const neckCurve = new THREE.CatmullRomCurve3([
-    new THREE.Vector3(0.42, -0.55, 0),
-    new THREE.Vector3(0.58, -0.1, 0),
-    new THREE.Vector3(0.38, 0.35, 0),
-    new THREE.Vector3(0.55, 0.55, 0)
-  ]);
-  const neck = new THREE.Mesh(new THREE.TubeGeometry(neckCurve, 16, 0.065, 12, false), pinkMat);
-  flamingo.add(neck);
-
-  const head = new THREE.Mesh(new THREE.SphereGeometry(0.13, 16, 16), pinkMat);
-  head.position.set(0.58, 0.56, 0);
-  flamingo.add(head);
-
-  const beak = new THREE.Mesh(
-    new THREE.ConeGeometry(0.06, 0.22, 12),
-    new THREE.MeshStandardMaterial({ color: 0x0f172a })
-  );
-  beak.rotation.z = -Math.PI / 1.6;
-  beak.position.set(0.72, 0.51, 0);
-  flamingo.add(beak);
-
-  group.add(flamingo);
+  const cyanLight = new THREE.PointLight(0x22d3ee, 11, 11);
+  cyanLight.position.set(2.2, -1.2, 2.2);
+  group.add(cyanLight);
 
   return {
     group,
-    draggable: flamingo,
-    background: 'linear-gradient(180deg, #a855f7 0%, #f472b6 48%, #22d3ee 100%)',
-    update(t) {
-      // Gentle water bobbing on the pool surface
-      flamingo.position.y = Math.sin(t * 2.2) * 0.06;
-      flamingo.rotation.z = Math.sin(t * 1.5) * 0.06;
-    }
+    description:
+      'Ultra-slowed, phaser-drenched 80s R&B and smooth-jazz loops submerged in liquid reverb, blurred neon city bokeh, and hypnotic twilight melancholy.',
+    background: 'radial-gradient(circle at 50% 35%, #701a75 0%, #311042 55%, #090d16 100%)',
+    update(t, bounce, spring) {
+      // Heavy, liquid-slow phaser wave distortion on the core
+      for (let i = 0; i < liquidPos.count; i++) {
+        const bx = basePos[i * 3];
+        const by = basePos[i * 3 + 1];
+        const bz = basePos[i * 3 + 2];
+        const slushWave =
+          Math.sin(by * 3.2 - t * 1.3) * 0.08 + Math.cos(bx * 2.8 + t * 1.1) * 0.06;
+        const scale = 1 + slushWave;
+        liquidPos.setXYZ(i, bx * scale, by * scale, bz * scale);
+      }
+      liquidPos.needsUpdate = true;
+
+      liquidCore.rotation.y = t * 0.18;
+      slushGroup.position.y = Math.sin(t * 0.9) * 0.08 - bounce * 0.2;
+
+      // Sweeping out-of-phase flanger ribbons
+      phaserRings.forEach((r) => {
+        r.mesh.rotation.z = t * r.speed;
+        r.mesh.rotation.x = Math.PI / 2.2 + Math.sin(t * 0.55 + r.phase) * 0.28;
+      });
+
+      // Blurred neon bokeh drifting in slow motion
+      bokehOrbs.forEach((b) => {
+        const a = b.angle + t * 0.16;
+        b.mesh.position.x = Math.cos(a) * b.radius;
+        b.mesh.position.z = Math.sin(a) * b.radius;
+        b.mesh.position.y = b.baseY + Math.sin(t * 0.8 + b.phase) * 0.15;
+      });
+
+      group.scale.setScalar(1 + spring * 0.24);
+    },
   };
 }

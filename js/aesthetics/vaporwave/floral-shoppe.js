@@ -5,31 +5,70 @@ import * as THREE from 'three';
 export function createFloralShoppe() {
   const group = new THREE.Group();
 
-  // Neon Cyan & Magenta Grid Floor
-  const grid = new THREE.GridHelper(16, 20, 0x06b6d4, 0xec4899);
-  grid.position.y = -1.3;
-  group.add(grid);
+  // 1. Classic Black & White Checkered Floor
+  const floorGroup = new THREE.Group();
+  const tileSize = 0.85;
+  const gridCount = 12;
+  const whiteMat = new THREE.MeshBasicMaterial({ color: 0xf8fafc });
+  const blackMat = new THREE.MeshBasicMaterial({ color: 0x0f172a });
+  const tileGeo = new THREE.PlaneGeometry(tileSize, tileSize);
+  tileGeo.rotateX(-Math.PI / 2);
 
-  // Striped 80s Sunset
+  for (let x = -gridCount / 2; x < gridCount / 2; x++) {
+    for (let z = -gridCount / 2; z < gridCount / 2; z++) {
+      const isWhite = (x + z) % 2 === 0;
+      const tile = new THREE.Mesh(tileGeo, isWhite ? whiteMat : blackMat);
+      tile.position.set(
+        (x + 0.5) * tileSize,
+        -1.3,
+        (z + 0.5) * tileSize
+      );
+      floorGroup.add(tile);
+    }
+  }
+  group.add(floorGroup);
+
+  // 2. Striped 80s Vaporwave Sunset
   const sunGroup = new THREE.Group();
-  sunGroup.add(new THREE.Mesh(
-    new THREE.CircleGeometry(1.9, 32),
-    new THREE.MeshBasicMaterial({ color: 0xf472b6 })
-  ));
+  sunGroup.add(
+    new THREE.Mesh(
+      new THREE.CircleGeometry(1.9, 32),
+      new THREE.MeshBasicMaterial({ color: 0xff71ce })
+    )
+  );
   [-0.3, -0.7, -1.1, -1.45].forEach((y, i) => {
     const bar = new THREE.Mesh(
       new THREE.PlaneGeometry(3.9, 0.08 + i * 0.04),
-      new THREE.MeshBasicMaterial({ color: 0x3b0764 })
+      new THREE.MeshBasicMaterial({ color: 0x4c1d95 })
     );
     bar.position.set(0, y, 0.01);
     sunGroup.add(bar);
   });
-  sunGroup.position.set(0, 0.6, -3.5);
+  sunGroup.position.set(0, 0.65, -3.6);
   group.add(sunGroup);
 
-  // Draggable Sculpted Marble Statue Bust
+  // 3. Flanking Classical Roman Columns
+  const colMat = new THREE.MeshStandardMaterial({ color: 0xf1f5f9, roughness: 0.4 });
+  [-2.3, 2.3].forEach((x) => {
+    const column = new THREE.Group();
+    const shaft = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.25, 2.4, 16), colMat);
+    const base = new THREE.Mesh(new THREE.BoxGeometry(0.65, 0.2, 0.65), colMat);
+    base.position.y = -1.2;
+    const capital = new THREE.Mesh(new THREE.BoxGeometry(0.68, 0.22, 0.68), colMat);
+    capital.position.y = 1.2;
+
+    column.add(shaft, base, capital);
+    column.position.set(x, 0, -1.8);
+    group.add(column);
+  });
+
+  // 4. Draggable Sculpted Marble Statue Bust (Helios)
   const statue = new THREE.Group();
-  const marble = new THREE.MeshStandardMaterial({ color: 0xf8fafc, roughness: 0.35 });
+  const marble = new THREE.MeshStandardMaterial({
+    color: 0xffffff,
+    roughness: 0.3,
+    metalness: 0.05
+  });
 
   // Fluted Pedestal + Neck + Draped Shoulders
   const plinth = new THREE.Mesh(new THREE.CylinderGeometry(0.45, 0.55, 0.35, 16), marble);
@@ -70,9 +109,20 @@ export function createFloralShoppe() {
 
   group.add(statue);
 
+  // 5. Vaporwave Cyan & Pink Studio Lighting
+  const pinkLight = new THREE.PointLight(0xff71ce, 9, 12);
+  pinkLight.position.set(-2.5, 2, 2.5);
+  group.add(pinkLight);
+
+  const cyanLight = new THREE.PointLight(0x01cdfe, 9, 12);
+  cyanLight.position.set(2.5, 1.5, 2.5);
+  group.add(cyanLight);
+
   return {
     group,
     draggable: statue,
+    description:
+      'Classic vaporwave iconography combining Greco-Roman marble busts, checkered floors, pastel pink-and-cyan gradients, and surreal 90s desktop nostalgia.',
     background: 'linear-gradient(180deg, #ff71ce 0%, #b967ff 55%, #01cdfe 100%)',
     update(t) {
       statue.rotation.y = Math.sin(t * 0.6) * 0.35;
