@@ -221,7 +221,6 @@ export function createPhysicalMedia() {
 
   return {
     group,
-    draggable: shelfUnit,
     description:
       'A 2026 physical-ownership revival celebrating tangible media collections—featuring shelves of DVDs and Blu-rays surrounded by floating VHS tapes, retro game cartridges, cassette tapes, and iridescent optical discs.',
     background: 'radial-gradient(circle at 50% 30%, #f1f5f9 0%, #cbd5e1 50%, #475569 100%)',
