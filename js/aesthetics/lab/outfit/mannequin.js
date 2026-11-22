@@ -4,23 +4,24 @@ import * as THREE from 'three';
 export const BODY_PROFILES = {
   boy: {
     label: 'Boy',
-    chestScale: [1.16, 1, 0.72],
-    hipScale: [1.05, 1, 0.74],
-    armOffset: 0.44,
-    armRadius: 0.072,
-    legOffset: 0.155,
-    legRadius: 0.098
+    chestScale: [1.26, 1, 0.78],   // Broader shoulders & upper torso
+    hipScale: [0.98, 1, 0.70],     // Straighter, narrower hips
+    armOffset: 0.46,
+    armRadius: 0.076,
+    legOffset: 0.15,
+    legRadius: 0.102
   },
   girl: {
     label: 'Girl',
-    chestScale: [1.02, 1, 0.68],
-    hipScale: [1.13, 1, 0.76],
-    armOffset: 0.40,
-    armRadius: 0.064,
-    legOffset: 0.16,
-    legRadius: 0.094
+    chestScale: [0.94, 1, 0.64],   // Narrower shoulders & ribcage
+    hipScale: [1.22, 1, 0.80],     // Wider hips
+    armOffset: 0.37,
+    armRadius: 0.060,
+    legOffset: 0.165,
+    legRadius: 0.092
   }
 };
+
 
 export function buildMannequin(initialType = 'boy') {
   const mannequinGroup = new THREE.Group();

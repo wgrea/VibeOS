@@ -1,4 +1,7 @@
 // js/aesthetics/lab/outfit/presets.js
+import { TEXTURES } from './textures.js';
+export { COLORS, AESTHETIC_PALETTES } from './palettes.js';
+
 export const FABRICS = {
   pvc: {
     label: 'PVC',
@@ -9,7 +12,9 @@ export const FABRICS = {
       clearcoat: 1.0,
       clearcoatRoughness: 0.02,
       reflectivity: 1.0,
-      sheen: 0.15
+      sheen: 0.15,
+      bumpMap: null,
+      bumpScale: 0
     }
   },
   latex: {
@@ -21,20 +26,24 @@ export const FABRICS = {
       clearcoat: 0.85,
       clearcoatRoughness: 0.09,
       reflectivity: 0.9,
-      sheen: 0.0
+      sheen: 0.0,
+      bumpMap: null,
+      bumpScale: 0
     }
   },
   leather: {
     label: 'Leather',
     stats: { shine: 25, flex: 60, cost: 95 },
     mat: {
-      roughness: 0.58,
+      roughness: 0.56,
       metalness: 0.04,
-      clearcoat: 0.15,
-      clearcoatRoughness: 0.5,
+      clearcoat: 0.18,
+      clearcoatRoughness: 0.48,
       reflectivity: 0.4,
       sheen: 0.65,
-      sheenRoughness: 0.45
+      sheenRoughness: 0.45,
+      bumpMap: TEXTURES.leather(),
+      bumpScale: 0.012
     }
   },
   nylon: {
@@ -47,20 +56,54 @@ export const FABRICS = {
       clearcoatRoughness: 0.35,
       reflectivity: 0.55,
       sheen: 0.5,
-      sheenRoughness: 0.35
+      sheenRoughness: 0.35,
+      bumpMap: TEXTURES.ripstop(),
+      bumpScale: 0.009
+    }
+  },
+  nomex: {
+    label: 'Nomex Aramid',
+    stats: { shine: 18, flex: 72, cost: 100 },
+    mat: {
+      roughness: 0.78,
+      metalness: 0.03,
+      clearcoat: 0.05,
+      clearcoatRoughness: 0.85,
+      reflectivity: 0.2,
+      sheen: 0.55,
+      sheenRoughness: 0.65,
+      bumpMap: TEXTURES.nomex(),
+      bumpScale: 0.016
+    }
+  },
+  raceSatin: {
+    label: 'Race Satin',
+    stats: { shine: 65, flex: 80, cost: 70 },
+    mat: {
+      roughness: 0.34,
+      metalness: 0.14,
+      clearcoat: 0.35,
+      clearcoatRoughness: 0.28,
+      reflectivity: 0.75,
+      sheen: 0.85,
+      sheenRoughness: 0.25,
+      bumpMap: TEXTURES.ripstop(),
+      bumpScale: 0.006
     }
   },
   fleece: {
     label: 'Cotton Fleece',
     stats: { shine: 5, flex: 85, cost: 35 },
     mat: {
-      roughness: 0.92,
+      roughness: 0.94,
       metalness: 0.0,
       clearcoat: 0.0,
       clearcoatRoughness: 1.0,
-      reflectivity: 0.1,
-      sheen: 0.35,
-      sheenRoughness: 0.85
+      reflectivity: 0.08,
+      sheen: 0.75,
+      sheenRoughness: 0.88,
+      bumpMap: TEXTURES.fleece(),
+      bumpScale: 0.022
     }
   },
   plush: {
@@ -71,9 +114,11 @@ export const FABRICS = {
       metalness: 0.0,
       clearcoat: 0.0,
       clearcoatRoughness: 1.0,
-      reflectivity: 0.05,
-      sheen: 0.95,
-      sheenRoughness: 0.9
+      reflectivity: 0.04,
+      sheen: 1.0,
+      sheenRoughness: 0.92,
+      bumpMap: TEXTURES.plush(),
+      bumpScale: 0.038
     }
   },
   denim: {
@@ -85,80 +130,40 @@ export const FABRICS = {
       clearcoat: 0.0,
       clearcoatRoughness: 1.0,
       reflectivity: 0.15,
-      sheen: 0.4,
-      sheenRoughness: 0.75
+      sheen: 0.45,
+      sheenRoughness: 0.75,
+      bumpMap: TEXTURES.denim(),
+      bumpScale: 0.015
     }
   },
   corduroy: {
     label: 'Corduroy',
     stats: { shine: 12, flex: 65, cost: 55 },
     mat: {
-      roughness: 0.94,
+      roughness: 0.92,
       metalness: 0.0,
       clearcoat: 0.0,
       clearcoatRoughness: 1.0,
       reflectivity: 0.12,
-      sheen: 0.65,
-      sheenRoughness: 0.6
+      sheen: 0.8,
+      sheenRoughness: 0.55,
+      bumpMap: TEXTURES.corduroy(),
+      bumpScale: 0.032
     }
   },
   cotton: {
     label: 'Cotton',
     stats: { shine: 8, flex: 75, cost: 30 },
     mat: {
-      roughness: 0.85,
+      roughness: 0.86,
       metalness: 0.0,
       clearcoat: 0.0,
       clearcoatRoughness: 1.0,
       reflectivity: 0.12,
-      sheen: 0.25,
-      sheenRoughness: 0.8
+      sheen: 0.3,
+      sheenRoughness: 0.8,
+      bumpMap: TEXTURES.cotton(),
+      bumpScale: 0.008
     }
-  }
-};
-
-export const COLORS = [
-  { name: 'Obsidian Black', hex: 0x111318, css: '#111318' },
-  { name: 'Burgundy', hex: 0x6b1426, css: '#6b1426' },
-  { name: 'Crimson Red', hex: 0xb91c1c, css: '#b91c1c' },
-  { name: 'Indigo Denim', hex: 0x1e3a5f, css: '#1e3a5f' },
-  { name: 'Cyber Cobalt', hex: 0x1d4ed8, css: '#1d4ed8' },
-  { name: 'Acid Emerald', hex: 0x047857, css: '#047857' },
-  { name: 'Pearl White', hex: 0xf1f5f9, css: '#f1f5f9' },
-  { name: 'Ultraviolet', hex: 0x6d28d9, css: '#6d28d9' },
-  { name: 'Bubblegum Pink', hex: 0xdb2777, css: '#db2777' },
-  { name: 'Espresso Bronze', hex: 0x451a03, css: '#451a03' }
-];
-
-export const AESTHETIC_PALETTES = {
-  none: {
-    label: 'Single Color',
-    primary: null,
-    secondary: null,
-    accent: null
-  },
-  frutigerAero: {
-    label: 'Frutiger Aero',
-    primary: 0xf1f5f9,
-    secondary: 0x0284c7,
-    accent: 0x10b981
-  },
-  vaporwave: {
-    label: 'Vaporwave',
-    primary: 0x1e1b4b,
-    secondary: 0xdb2777,
-    accent: 0x06b6d4
-  },
-  darkNeon: {
-    label: 'Dark Neon',
-    primary: 0x090b10,
-    secondary: 0x6d28d9,
-    accent: 0x22d3ee
-  },
-  gpCrimson: {
-    label: 'GP Crimson',
-    primary: 0xb91c1c,
-    secondary: 0xf8fafc,
-    accent: 0x111318
   }
 };
