@@ -6,6 +6,8 @@ import { createDieselpunkSprite } from '../aesthetics/gaming/dieselpunk-sprite.j
 import { createY2kArena } from '../aesthetics/gaming/y2k-arena.js';
 import { createY2k } from '../aesthetics/gaming/y2k.js';
 import { create2000sFps } from '../aesthetics/gaming/2000s-fps.js';
+import { createViceCity } from '../aesthetics/gaming/vice-city.js';
+import { createSanAndreas } from '../aesthetics/gaming/san-andreas.js';
 import { createPhysicalMedia } from '../aesthetics/gaming/physical-media.js';
 import { create2019Ambience } from '../aesthetics/gaming/2019-ambience.js';
 
@@ -18,6 +20,8 @@ createExperienceViewer({
     'y2k-arena': createY2kArena,
     y2k: createY2k,
     '2000s-fps': create2000sFps,
+        'vice-city': createViceCity,
+    'san-andreas': createSanAndreas,
     'physical-media': createPhysicalMedia,
     '2019-ambience': create2019Ambience,
   },
