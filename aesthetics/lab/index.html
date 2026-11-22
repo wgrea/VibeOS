@@ -18,15 +18,78 @@
 
   <!-- Outfit Controls Right Above the 3D Viewport (Shown ONLY on Outfit Customizer) -->
   <div id="outfit-controls" class="lab-controls" hidden>
+    <!-- Body & Base Layer -->
     <div class="pill-row">
-      <button type="button" class="pill-btn active" data-fabric="latex">Latex</button>
+      <button type="button" class="pill-btn active" data-body="boy">Boy</button>
+      <button type="button" class="pill-btn" data-body="girl">Girl</button>
+      <button type="button" class="pill-btn active" data-base="none">Grey Figure</button>
+      <button type="button" class="pill-btn" data-base="catsuit">Catsuit Base</button>
+    </div>
+
+    <!-- Full One-Pieces -->
+    <div class="pill-row">
+      <button type="button" class="pill-btn active" data-onepiece="none">No Suit</button>
+      <button type="button" class="pill-btn" data-onepiece="jumpsuit">Jumpsuit</button>
+      <button type="button" class="pill-btn" data-onepiece="racing-suit">Racing Suit</button>
+      <button type="button" class="pill-btn" data-onepiece="snowsuit">Snowsuit</button>
+      <button type="button" class="pill-btn" data-onepiece="fluffy-onesie">Fluffy Onesie</button>
+    </div>
+
+    <!-- Separates (Tops & Bottoms) -->
+    <div class="pill-row">
+      <button type="button" class="pill-btn active" data-top="none">No Top</button>
+      <button type="button" class="pill-btn" data-top="jacket">Jacket</button>
+      <button type="button" class="pill-btn" data-top="sweatshirt">Sweatshirt</button>
+      <button type="button" class="pill-btn active" data-bottom="none">No Pants</button>
+      <button type="button" class="pill-btn" data-bottom="pants">Pants</button>
+    </div>
+
+    <!-- Contextual Sub-Style Variants -->
+    <div id="outfit-variant-row" class="pill-row">
+      <div data-variant-group="jacket" hidden>
+        <button type="button" class="pill-btn active" data-variant="moto">Moto</button>
+        <button type="button" class="pill-btn" data-variant="bomber">Bomber</button>
+        <button type="button" class="pill-btn" data-variant="puffer">Puffer</button>
+        <button type="button" class="pill-btn" data-variant="windbreaker">Windbreaker</button>
+      </div>
+      <div data-variant-group="sweatshirt" hidden>
+        <button type="button" class="pill-btn active" data-variant="hoodie">Hoodie</button>
+        <button type="button" class="pill-btn" data-variant="crewneck">Crewneck</button>
+        <button type="button" class="pill-btn" data-variant="quarter-zip">Quarter-Zip</button>
+      </div>
+      <div data-variant-group="pants" hidden>
+        <button type="button" class="pill-btn active" data-variant="cargo">Cargo</button>
+        <button type="button" class="pill-btn" data-variant="leather-moto">Moto</button>
+        <button type="button" class="pill-btn" data-variant="track">Track</button>
+        <button type="button" class="pill-btn" data-variant="snow">Snow</button>
+      </div>
+    </div>
+
+    <!-- Fabrics & Closures -->
+    <div class="pill-row">
+      <button type="button" class="pill-btn active" data-fabric="leather">Leather</button>
+      <button type="button" class="pill-btn" data-fabric="latex">Latex</button>
       <button type="button" class="pill-btn" data-fabric="pvc">PVC</button>
-      <button type="button" class="pill-btn" data-fabric="leather">Leather</button>
+      <button type="button" class="pill-btn" data-fabric="nylon">Nylon</button>
+      <button type="button" class="pill-btn" data-fabric="fleece">Fleece</button>
+      <button type="button" class="pill-btn" data-fabric="plush">Plush</button>
+      <button type="button" class="pill-btn" data-fabric="denim">Denim</button>
+      <button type="button" class="pill-btn" data-fabric="corduroy">Corduroy</button>
+      <button type="button" class="pill-btn" data-fabric="cotton">Cotton</button>
+    </div>
+
+    <div class="pill-row">
+      <button type="button" class="pill-btn active" data-closure="zipper">Zipper</button>
+      <button type="button" class="pill-btn" data-closure="buttons">Buttons</button>
+      <button type="button" class="pill-btn active" data-palette="none">Single Color</button>
+      <button type="button" class="pill-btn" data-palette="frutigerAero">Frutiger Aero</button>
+      <button type="button" class="pill-btn" data-palette="vaporwave">Vaporwave</button>
+      <button type="button" class="pill-btn" data-palette="darkNeon">Dark Neon</button>
+      <button type="button" class="pill-btn" data-palette="gpCrimson">GP Crimson</button>
     </div>
 
     <div class="swatch-grid" id="outfit-swatches"></div>
   </div>
-
 
   <!-- Live Three.js Viewport -->
   <div
