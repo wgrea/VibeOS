@@ -22,7 +22,6 @@ export const BODY_PROFILES = {
   }
 };
 
-
 export function buildMannequin(initialType = 'boy') {
   const mannequinGroup = new THREE.Group();
 
@@ -48,7 +47,7 @@ export function buildMannequin(initialType = 'boy') {
   neck.position.y = 1.02;
   mannequinGroup.add(neck);
 
-  // Neutral Torso & Pelvis (aligned with catsuit.js y-positions)
+  // Neutral Torso & Pelvis (aligned with garment y-positions)
   const chest = new THREE.Mesh(new THREE.CylinderGeometry(0.285, 0.205, 0.54, 24), skinMat);
   chest.position.y = 0.58;
   mannequinGroup.add(chest);
@@ -69,9 +68,9 @@ export function buildMannequin(initialType = 'boy') {
   const feet = [];
 
   [-1, 1].forEach((side) => {
-    // Shoulder cap
-    const shoulder = new THREE.Mesh(new THREE.SphereGeometry(0.085, 16, 16), jointMat);
-    shoulder.position.set(side * 0.34, 0.78, 0);
+    // Shoulder cap (tucked slightly lower & inward so sloped garment shoulders never clip)
+    const shoulder = new THREE.Mesh(new THREE.SphereGeometry(0.078, 16, 16), jointMat);
+    shoulder.position.set(side * 0.325, 0.735, 0);
     mannequinGroup.add(shoulder);
 
     // Arm
@@ -119,7 +118,8 @@ export function buildMannequin(initialType = 'boy') {
     arms.forEach(({ mesh, shoulder, side }) => {
       mesh.position.x = side * profile.armOffset;
       mesh.scale.set(armScale, 1, armScale);
-      shoulder.position.x = side * (profile.armOffset - 0.10);
+      shoulder.position.x = side * (profile.armOffset - 0.115);
+      shoulder.scale.set(armScale, armScale, armScale);
     });
 
     hands.forEach(({ mesh, side }) => {

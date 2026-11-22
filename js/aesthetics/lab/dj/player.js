@@ -1,11 +1,10 @@
 // aesthetics/lab/dj/player.js
+// 3D Music Player Deck
 import * as THREE from 'three';
+import { TRACKS } from './tracks.js';
 
-// Add any future songs here — the dropdown menu updates automatically
-const TUNES = [
-  { title: 'Mallsoft', src: './tunes/mallsoft.mp3' },
-  { title: 'Y2K Arena', src: './tunes/y2karena.mp3' }
-];
+// Filter tracks for the DJ deck (or include all TRACKS if you want Jukebox tracks here too)
+const DECK_TUNES = TRACKS;
 
 function makeButtonTexture(symbol, bgHex) {
   const canvas = document.createElement('canvas');
@@ -25,31 +24,51 @@ function makeButtonTexture(symbol, bgHex) {
   return new THREE.CanvasTexture(canvas);
 }
 
+// Singleton audio state so re-entering the page never spawns a second Audio instance
+function getAudioSingleton() {
+  if (!window.__vibeDjAudio) {
+    const audio = new Audio(DECK_TUNES.src);
+    audio.loop = true;
+    window.__vibeDjAudio = {
+      audio,
+      trackIndex: 0,
+      audioCtx: null,
+      analyser: null,
+      freqData: null
+    };
+  }
+  return window.__vibeDjAudio;
+}
+
 export function createPlayer({ camera, domElement, box } = {}) {
+  const state = getAudioSingleton();
+  const { audio } = state;
+
+  // Clean up any leftover listeners from a previous mount
+  if (state.cleanupController) {
+    state.cleanupController.abort();
+  }
+  const controller = new AbortController();
+  state.cleanupController = controller;
+  const { signal } = controller;
+
   const group = new THREE.Group();
   const buttons = [];
   let isActiveEra = false;
-  let trackIndex = 0;
-
-  let audioCtx = null;
-  let analyser = null;
-  let freqData = null;
-
-  const audio = new Audio(TUNES[0].src);
-  audio.loop = true;
 
   function ensureAudioGraph() {
-    if (audioCtx) {
-      if (audioCtx.state === 'suspended') audioCtx.resume();
+    if (state.audioCtx) {
+      if (state.audioCtx.state === 'suspended') state.audioCtx.resume();
       return;
     }
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    const source = audioCtx.createMediaElementSource(audio);
-    analyser = audioCtx.createAnalyser();
-    analyser.fftSize = 64;
-    freqData = new Uint8Array(analyser.frequencyBinCount);
-    source.connect(analyser);
-    analyser.connect(audioCtx.destination);
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    state.audioCtx = new AudioCtx();
+    const source = state.audioCtx.createMediaElementSource(audio);
+    state.analyser = state.audioCtx.createAnalyser();
+    state.analyser.fftSize = 64;
+    state.freqData = new Uint8Array(state.analyser.frequencyBinCount);
+    source.connect(state.analyser);
+    state.analyser.connect(state.audioCtx.destination);
   }
 
   // 1. 3D Player Deck Body
@@ -74,7 +93,8 @@ export function createPlayer({ camera, domElement, box } = {}) {
   const screenCtx = screenCanvas.getContext('2d');
   const screenTex = new THREE.CanvasTexture(screenCanvas);
 
-  function updateScreen(isPlaying = false) {
+  function updateScreen(isPlaying = !audio.paused) {
+    const currentTune = DECK_TUNES[state.trackIndex] || DECK_TUNES[0];
     screenCtx.fillStyle = '#020617';
     screenCtx.fillRect(0, 0, 256, 64);
     screenCtx.strokeStyle = '#38bdf8';
@@ -86,9 +106,21 @@ export function createPlayer({ camera, domElement, box } = {}) {
     screenCtx.textAlign = 'center';
     screenCtx.textBaseline = 'middle';
     const prefix = isPlaying ? '▶ ' : '❚❚ ';
-    screenCtx.fillText(`${prefix}${TUNES[trackIndex].title.toUpperCase()}`, 128, 33);
+    screenCtx.fillText(`${prefix}${currentTune.title.toUpperCase()}`, 128, 33);
     screenTex.needsUpdate = true;
   }
+
+  // 4. Single 3D Play / Pause Button on Deck
+  const playMat = new THREE.MeshStandardMaterial({
+    map: makeButtonTexture('▶ / ❚❚', '#059669'),
+    emissive: 0x10b981,
+    emissiveIntensity: audio.paused ? 0.25 : 1.1
+  });
+  const playBtn = new THREE.Mesh(new THREE.BoxGeometry(1.18, 0.15, 0.42), playMat);
+  playBtn.position.set(0.58, 0.17, 0.46);
+  playBtn.userData = { action: 'play', baseY: playBtn.position.y };
+  group.add(playBtn);
+  buttons.push(playBtn);
 
   const screenMesh = new THREE.Mesh(
     new THREE.BoxGeometry(1.18, 0.06, 0.34),
@@ -96,18 +128,6 @@ export function createPlayer({ camera, domElement, box } = {}) {
   );
   screenMesh.position.set(0.58, 0.14, -0.64);
   group.add(screenMesh);
-
-  // 4. Single 3D Play / Pause Button on Deck
-  const playMat = new THREE.MeshStandardMaterial({
-    map: makeButtonTexture('▶ / ❚❚', '#059669'),
-    emissive: 0x10b981,
-    emissiveIntensity: 0.25
-  });
-  const playBtn = new THREE.Mesh(new THREE.BoxGeometry(1.18, 0.15, 0.42), playMat);
-  playBtn.position.set(0.58, 0.17, 0.46);
-  playBtn.userData = { action: 'play', baseY: playBtn.position.y };
-  group.add(playBtn);
-  buttons.push(playBtn);
 
   // 5. 3D Beat-Reactive Equalizer Bars
   const eqBars = [];
@@ -124,7 +144,7 @@ export function createPlayer({ camera, domElement, box } = {}) {
   }
 
   group.rotation.x = 0.42;
-  updateScreen(false);
+  updateScreen(!audio.paused);
 
   // 6. Populate Song Dropdown Menu in #lab-stage
   const section = box?.closest('.aesthetic-section') || document;
@@ -132,15 +152,18 @@ export function createPlayer({ camera, domElement, box } = {}) {
   const trackSelect = section.querySelector('#dj-track-select');
 
   if (trackSelect) {
-    trackSelect.innerHTML = TUNES.map(
-      (tune, i) => `<option value="${i}">${tune.title}</option>`
-    ).join('');
+    trackSelect.innerHTML = DECK_TUNES.map((tune, i) => {
+      const note = tune.jukeboxOnly ? 'Jukebox Only' : `Played in ${tune.locationLabel}`;
+      const selected = i === state.trackIndex ? 'selected' : '';
+      return `<option value="${i}" ${selected}>${tune.title} — ${note}</option>`;
+    }).join('');
+
 
     trackSelect.addEventListener('change', (e) => {
       ensureAudioGraph();
-      trackIndex = Number(e.target.value);
+      state.trackIndex = Number(e.target.value);
       const wasPlaying = !audio.paused;
-      audio.src = TUNES[trackIndex].src;
+      audio.src = DECK_TUNES[state.trackIndex].src;
 
       if (wasPlaying) {
         audio.play();
@@ -149,7 +172,7 @@ export function createPlayer({ camera, domElement, box } = {}) {
       } else {
         updateScreen(false);
       }
-    });
+    }, { signal });
   }
 
   // 7. Raycast Clicks on the 3D Play/Pause Button
@@ -179,7 +202,20 @@ export function createPlayer({ camera, domElement, box } = {}) {
         updateScreen(false);
       }
     }
-  });
+  }, { signal });
+
+  // 8. Stop audio & clean up listeners when navigating away via HTMX
+  function stopAndCleanup() {
+    if (!audio.paused) {
+      audio.pause();
+    }
+    playMat.emissiveIntensity = 0.25;
+    updateScreen(false);
+    controller.abort();
+  }
+
+  document.body.addEventListener('htmx:beforeSwap', stopAndCleanup, { signal });
+  window.addEventListener('pagehide', stopAndCleanup, { signal });
 
   return {
     group,
@@ -191,15 +227,17 @@ export function createPlayer({ camera, domElement, box } = {}) {
         audio.pause();
         playMat.emissiveIntensity = 0.25;
         updateScreen(false);
+      } else {
+        updateScreen(!audio.paused);
       }
     },
     update(t, bounce, spring) {
       group.position.y = spring * 0.1;
-      if (!audio.paused && analyser) {
+      if (!audio.paused && state.analyser) {
         disc.rotation.y = -t * 2.5;
-        analyser.getByteFrequencyData(freqData);
+        state.analyser.getByteFrequencyData(state.freqData);
         eqBars.forEach((bar, i) => {
-          const val = (freqData[i * 2] || 0) / 255;
+          const val = (state.freqData[i * 2] || 0) / 255;
           bar.scale.y = Math.max(0.15, val * 1.6);
         });
       } else {
