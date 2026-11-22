@@ -16,31 +16,45 @@
     </label>
   </div>
 
-  <!-- Outfit Controls Right Above the 3D Viewport (Shown ONLY on Outfit Customizer) -->
+  <!-- Live Three.js Viewport (Kept above controls so figure changes stay visible) -->
+  <div
+    id="lab-canvas-container"
+    class="three-viewport"
+    style="background: radial-gradient(circle at 50% 30%, #fdf2f8 0%, #f472b6 45%, #831843 100%);"
+  ></div>
+
+  <!-- Track Selector (Shown ONLY on DJ keyboard) -->
+  <div id="dj-controls" class="lab-controls" hidden>
+    <label for="dj-track-select">
+      Track:
+      <select id="dj-track-select"></select>
+    </label>
+  </div>
+
+  <!-- Outfit Controls Right Below the 3D Viewport -->
   <div id="outfit-controls" class="lab-controls" hidden>
+    <!-- Active Selection Tray (Click a chip to target its color; click × to remove) -->
+    <div id="outfit-selected-tray" class="outfit-selected-tray" aria-live="polite"></div>
+
     <!-- Body & Base Layer -->
     <div class="pill-row">
       <button type="button" class="pill-btn active" data-body="boy">Boy</button>
       <button type="button" class="pill-btn" data-body="girl">Girl</button>
-      <button type="button" class="pill-btn active" data-base="none">Grey Figure</button>
       <button type="button" class="pill-btn" data-base="catsuit">Catsuit Base</button>
     </div>
 
     <!-- Full One-Pieces -->
     <div class="pill-row">
-      <button type="button" class="pill-btn active" data-onepiece="none">No Suit</button>
       <button type="button" class="pill-btn" data-onepiece="jumpsuit">Jumpsuit</button>
       <button type="button" class="pill-btn" data-onepiece="racing-suit">Racing Suit</button>
       <button type="button" class="pill-btn" data-onepiece="snowsuit">Snowsuit</button>
       <button type="button" class="pill-btn" data-onepiece="fluffy-onesie">Fluffy Onesie</button>
     </div>
 
-    <!-- Separates (Tops & Bottoms) -->
+    <!-- Separates -->
     <div class="pill-row">
-      <button type="button" class="pill-btn active" data-top="none">No Top</button>
       <button type="button" class="pill-btn" data-top="jacket">Jacket</button>
       <button type="button" class="pill-btn" data-top="sweatshirt">Sweatshirt</button>
-      <button type="button" class="pill-btn active" data-bottom="none">No Pants</button>
       <button type="button" class="pill-btn" data-bottom="pants">Pants</button>
     </div>
 
@@ -65,38 +79,50 @@
       </div>
     </div>
 
-    <!-- Fabrics & Closures -->
-    <div class="pill-row">
-      <button type="button" class="pill-btn active" data-fabric="leather">Leather</button>
-      <button type="button" class="pill-btn" data-fabric="latex">Latex</button>
-      <button type="button" class="pill-btn" data-fabric="pvc">PVC</button>
-      <button type="button" class="pill-btn" data-fabric="nylon">Nylon</button>
-      <button type="button" class="pill-btn" data-fabric="fleece">Fleece</button>
-      <button type="button" class="pill-btn" data-fabric="plush">Plush</button>
-      <button type="button" class="pill-btn" data-fabric="denim">Denim</button>
-      <button type="button" class="pill-btn" data-fabric="corduroy">Corduroy</button>
-      <button type="button" class="pill-btn" data-fabric="cotton">Cotton</button>
-    </div>
+    <!-- Contextual Style Panel (Appears ONLY when a garment is selected) -->
+    <div id="outfit-style-panel" class="outfit-style-panel" hidden>
+      <div class="outfit-style-header">
+        Styling: <strong id="outfit-editing-label">Catsuit Base</strong>
+      </div>
 
-    <div class="pill-row">
-      <button type="button" class="pill-btn active" data-closure="zipper">Zipper</button>
-      <button type="button" class="pill-btn" data-closure="buttons">Buttons</button>
-      <button type="button" class="pill-btn active" data-palette="none">Single Color</button>
-      <button type="button" class="pill-btn" data-palette="frutigerAero">Frutiger Aero</button>
-      <button type="button" class="pill-btn" data-palette="vaporwave">Vaporwave</button>
-      <button type="button" class="pill-btn" data-palette="darkNeon">Dark Neon</button>
-      <button type="button" class="pill-btn" data-palette="gpCrimson">GP Crimson</button>
-    </div>
+      <!-- Fabrics & Closures -->
+      <div class="pill-row">
+        <button type="button" class="pill-btn active" data-fabric="leather">Leather</button>
+        <button type="button" class="pill-btn" data-fabric="latex">Latex</button>
+        <button type="button" class="pill-btn" data-fabric="pvc">PVC</button>
+        <button type="button" class="pill-btn" data-fabric="nylon">Nylon</button>
+        <button type="button" class="pill-btn" data-fabric="fleece">Fleece</button>
+        <button type="button" class="pill-btn" data-fabric="plush">Plush</button>
+        <button type="button" class="pill-btn" data-fabric="denim">Denim</button>
+        <button type="button" class="pill-btn" data-fabric="corduroy">Corduroy</button>
+        <button type="button" class="pill-btn" data-fabric="cotton">Cotton</button>
+      </div>
 
-    <div class="swatch-grid" id="outfit-swatches"></div>
+      <div class="pill-row">
+        <button type="button" class="pill-btn active" data-closure="zipper">Zipper</button>
+        <button type="button" class="pill-btn" data-closure="buttons">Buttons</button>
+      </div>
+
+      <!-- Colors & Aesthetic Palettes Together -->
+      <div class="pill-row">
+        <button type="button" class="pill-btn active" data-palette="none">Single Color</button>
+        <button type="button" class="pill-btn" data-palette="frutigerAero">Frutiger Aero</button>
+        <button type="button" class="pill-btn" data-palette="vaporwave">Vaporwave</button>
+        <button type="button" class="pill-btn" data-palette="darkNeon">Dark Neon</button>
+        <button type="button" class="pill-btn" data-palette="gpCrimson">GP Crimson</button>
+      </div>
+
+<div id="outfit-multicolor-bar" class="outfit-multicolor-bar" hidden>
+  <span class="multicolor-hint">Suit Colors (click swatches to add):</span>
+  <div id="outfit-multicolor-list" class="outfit-multicolor-list"></div>
+  <button type="button" class="pill-btn" id="outfit-multicolor-clear">Reset</button>
+</div>
+
+
+      <div class="swatch-grid" id="outfit-swatches"></div>
+    </div>
   </div>
 
-  <!-- Live Three.js Viewport -->
-  <div
-    id="lab-canvas-container"
-    class="three-viewport"
-    style="background: radial-gradient(circle at 50% 30%, #fdf2f8 0%, #f472b6 45%, #831843 100%);"
-  ></div>
 
   <!-- Object-Specific Lore & Description Card (Managed by setupEraNav) -->
   <div id="lab-stage" class="era-display-card">
