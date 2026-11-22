@@ -7,7 +7,8 @@ import { createPolynesianTropical } from '../aesthetics/kidcore/polynesian-tropi
 import { createToyurism } from '../aesthetics/kidcore/toyurism.js';
 import { createDinosaur } from '../aesthetics/kidcore/dinosaur.js';
 import { createImaginarium } from '../aesthetics/kidcore/imaginarium.js';
-import { createGlobalMicrogames } from '../aesthetics/kidcore/global-microgames.js';
+import { createWhimsical } from '../aesthetics/kidcore/whimsical.js';
+import { createUtopianScholastic } from '../aesthetics/kidcore/utopian-scholastic.js';
 
 createExperienceViewer({
   containerId: 'kidcore-canvas-container',
@@ -19,6 +20,7 @@ createExperienceViewer({
     toyurism: createToyurism,
     dinosaur: createDinosaur,
     imaginarium: createImaginarium,
-    'global-microgames': createGlobalMicrogames,
+    whimsical: createWhimsical,
+    'utopian-scholastic': createUtopianScholastic
   },
 });
