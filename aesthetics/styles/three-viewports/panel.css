@@ -1,0 +1,59 @@
+/* Wrapper + floating overlay panel */
+
+.lab-controls-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.lab-controls-wrap[hidden] {
+  display: none !important;
+}
+
+#outfit-controls.lab-controls-panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.55rem;
+  background: rgba(15, 23, 42, 0.72);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 0.75rem;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55);
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  pointer-events: none;
+  transition:
+    max-height 0.35s ease,
+    opacity 0.25s ease,
+    padding 0.25s ease,
+    margin 0.25s ease;
+}
+
+#outfit-controls.lab-controls-panel.is-open {
+  max-height: min(70vh, 560px);
+  overflow-y: auto;
+  opacity: 1;
+  padding: 0.75rem;
+  margin-top: 0.4rem;
+  pointer-events: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #475569 transparent;
+}
+
+#outfit-controls.lab-controls-panel.is-open::-webkit-scrollbar {
+  width: 6px;
+}
+
+#outfit-controls.lab-controls-panel.is-open::-webkit-scrollbar-thumb {
+  background: #475569;
+  border-radius: 3px;
+}

@@ -1,0 +1,51 @@
+/* Top + bottom toggle buttons */
+
+.lab-controls-toggle {
+  position: static;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  width: 100%;
+  padding: 0.3rem 0.75rem;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-main, #f8fafc);
+  cursor: pointer;
+  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+  border: 1px solid var(--border-outer, rgba(148, 163, 184, 0.25));
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.lab-controls-toggle:hover { background: #1e293b; }
+.lab-controls-toggle:active { transform: scale(0.99); }
+
+.lab-controls-toggle .toggle-chevron {
+  display: inline-block;
+  transition: transform 0.25s ease;
+}
+
+.lab-controls-toggle[aria-expanded="true"] .toggle-chevron {
+  transform: rotate(180deg);
+}
+
+/* Top toggle — floating pill over the viewport */
+.lab-controls-toggle:not(.lab-controls-toggle--bottom) {
+  position: absolute;
+  top: 0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+  z-index: 60;
+  border-radius: 999px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+}
+
+/* Bottom toggle — full pill, inside the panel */
+.lab-controls-toggle--bottom {
+  margin-top: 0.5rem;
+  border-radius: 0.75rem;
+  padding: 0.3rem 0.75rem;
+}

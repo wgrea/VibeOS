@@ -1,0 +1,73 @@
+/* Shared control primitives: .lab-controls layout, pill buttons, swatches */
+
+.lab-controls:not([hidden]) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.lab-controls[hidden] {
+  display: none !important;
+}
+
+.pill-row,
+.swatch-grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.lab-controls .pill-btn {
+  padding: 5px var(--spacing-sm, 0.75rem);
+  border-radius: var(--radius-pill, 999px);
+  border: 1px solid var(--border-outer, rgba(148, 163, 184, 0.25));
+  background-color: var(--bg-card, rgba(15, 23, 42, 0.55));
+  color: var(--text-muted, rgba(226, 232, 240, 0.72));
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    border-color 150ms ease,
+    background-color 150ms ease,
+    color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.lab-controls .pill-btn:hover {
+  border-color: var(--neon-cyan, #00f0ff);
+  color: var(--text-main, #ffffff);
+  background-color: rgba(0, 240, 255, 0.08);
+}
+
+.lab-controls .pill-btn.active {
+  border-color: var(--neon-cyan, #00f0ff);
+  background-color: rgba(0, 240, 255, 0.18);
+  color: var(--text-main, #ffffff);
+  font-weight: 700;
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.28);
+}
+
+.swatch-btn {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  min-height: 28px;
+  padding: 0;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.swatch-btn.active {
+  transform: scale(1.15);
+  border-color: #ffffff;
+  box-shadow: 0 0 0 2px #0f172a;
+}
