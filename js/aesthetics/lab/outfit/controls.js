@@ -14,10 +14,31 @@ const ITEM_LABELS = {
 };
 
 export function initOutfitControls({ section, state, onChange, onBodyChange }) {
-  const controls = section.querySelector('#outfit-controls');
-  if (!controls) {
-    return { controls: null, syncUI: () => {} };
+  const wrap   = section.querySelector('#outfit-controls-wrap');
+  const panel  = section.querySelector('#outfit-controls');
+  const toggles = section.querySelectorAll('[aria-controls="outfit-controls"]');
+
+  if (!wrap || !panel) {
+    return { controls: null, syncUI: () => {}, setPanelOpen: () => {} };
   }
+
+  // --- Collapsible panel wiring (top + bottom toggle) ---
+  function setPanelOpen(open) {
+    panel.classList.toggle('is-open', open);
+    toggles.forEach((btn) => {
+      btn.setAttribute('aria-expanded', String(open));
+      // Bottom button's label is fixed ("Hide Outfit Menu") — skip it
+      if (btn.classList.contains('lab-controls-toggle--bottom')) return;
+      const label = btn.querySelector('.toggle-label');
+      if (label) label.textContent = open ? 'Hide Outfit Menu' : 'Customize Outfit';
+    });
+  }
+
+  toggles.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      setPanelOpen(!panel.classList.contains('is-open'));
+    });
+  });
 
   const swatchContainer = section.querySelector('#outfit-swatches');
   const variantRow = section.querySelector('#outfit-variant-row');
@@ -87,7 +108,7 @@ export function initOutfitControls({ section, state, onChange, onBodyChange }) {
   }
 
   // 2. Body Type (Boy / Girl)
-  controls.querySelectorAll('[data-body]').forEach((btn) => {
+  panel.querySelectorAll('[data-body]').forEach((btn) => {
     btn.addEventListener('click', () => {
       state.bodyType = btn.dataset.body;
       (onBodyChange || onChange)();
@@ -95,7 +116,7 @@ export function initOutfitControls({ section, state, onChange, onBodyChange }) {
   });
 
   // 3. Catsuit Base
-  controls.querySelectorAll('[data-base="catsuit"]').forEach((btn) => {
+  panel.querySelectorAll('[data-base="catsuit"]').forEach((btn) => {
     btn.addEventListener('click', () => {
       state.hasCatsuit = !state.hasCatsuit;
       if (state.hasCatsuit) state.activeSlot = 'catsuit';
@@ -105,7 +126,7 @@ export function initOutfitControls({ section, state, onChange, onBodyChange }) {
   });
 
   // 4. One-Piece Suits
-  controls.querySelectorAll('[data-onepiece]').forEach((btn) => {
+  panel.querySelectorAll('[data-onepiece]').forEach((btn) => {
     btn.addEventListener('click', () => {
       const val = btn.dataset.onepiece;
       state.onePiece = state.onePiece === val ? 'none' : val;
@@ -120,7 +141,7 @@ export function initOutfitControls({ section, state, onChange, onBodyChange }) {
   });
 
   // 5. Tops
-  controls.querySelectorAll('[data-top]').forEach((btn) => {
+  panel.querySelectorAll('[data-top]').forEach((btn) => {
     btn.addEventListener('click', () => {
       const val = btn.dataset.top;
       state.top = state.top === val ? 'none' : val;
@@ -135,7 +156,7 @@ export function initOutfitControls({ section, state, onChange, onBodyChange }) {
   });
 
   // 6. Bottoms
-  controls.querySelectorAll('[data-bottom]').forEach((btn) => {
+  panel.querySelectorAll('[data-bottom]').forEach((btn) => {
     btn.addEventListener('click', () => {
       const val = btn.dataset.bottom;
       state.bottom = state.bottom === val ? 'none' : val;
@@ -150,7 +171,7 @@ export function initOutfitControls({ section, state, onChange, onBodyChange }) {
   });
 
   // 7. Sub-Style Variants, Fabric, Palette & Closure
-  controls.querySelectorAll('[data-variant]').forEach((btn) => {
+  panel.querySelectorAll('[data-variant]').forEach((btn) => {
     btn.addEventListener('click', () => {
       const grp = btn.closest('[data-variant-group]');
       if (grp?.dataset.variantGroup === 'pants') {
@@ -162,7 +183,7 @@ export function initOutfitControls({ section, state, onChange, onBodyChange }) {
     });
   });
 
-  controls.querySelectorAll('[data-fabric]').forEach((btn) => {
+  panel.querySelectorAll('[data-fabric]').forEach((btn) => {
     btn.addEventListener('click', () => {
       if (!state.activeSlot) return;
       state.styles[state.activeSlot].fabric = btn.dataset.fabric;
@@ -170,7 +191,7 @@ export function initOutfitControls({ section, state, onChange, onBodyChange }) {
     });
   });
 
-  controls.querySelectorAll('[data-palette]').forEach((btn) => {
+  panel.querySelectorAll('[data-palette]').forEach((btn) => {
     btn.addEventListener('click', () => {
       if (!state.activeSlot) return;
       state.styles[state.activeSlot].palette = btn.dataset.palette;
@@ -178,7 +199,7 @@ export function initOutfitControls({ section, state, onChange, onBodyChange }) {
     });
   });
 
-  controls.querySelectorAll('[data-closure]').forEach((btn) => {
+  panel.querySelectorAll('[data-closure]').forEach((btn) => {
     btn.addEventListener('click', () => {
       state.closure = btn.dataset.closure;
       onChange();
@@ -186,7 +207,7 @@ export function initOutfitControls({ section, state, onChange, onBodyChange }) {
   });
 
   function syncPillGroup(selector, isMatch) {
-    controls.querySelectorAll(selector).forEach((btn) => {
+    panel.querySelectorAll(selector).forEach((btn) => {
       const active = isMatch(btn);
       btn.classList.toggle('active', active);
       btn.setAttribute('aria-pressed', String(active));
@@ -252,5 +273,5 @@ export function initOutfitControls({ section, state, onChange, onBodyChange }) {
     renderTrays(equipped);
   }
 
-  return { controls, syncUI };
+  return { controls: wrap, syncUI, setPanelOpen };
 }

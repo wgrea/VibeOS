@@ -140,10 +140,21 @@ export function createHypnagogicDrift() {
       // Breathing spiral orbit for trailing memory orbs
       const breatheRadius = 1.62 + Math.sin(t * 0.9) * 0.2;
       echoes.forEach((e) => {
+        // Slow lateral drift, in addition to the spiral orbit
         const a = e.angle + t * 0.35;
-        e.mesh.position.x = Math.cos(a) * breatheRadius;
-        e.mesh.position.z = Math.sin(a) * breatheRadius;
+        const driftX = Math.sin(t * 0.18 + e.phase) * 0.4;   // side-to-side drift
+        const driftZ = Math.cos(t * 0.14 + e.phase) * 0.4;
+
+        e.mesh.position.x = Math.cos(a) * breatheRadius + driftX;
+        e.mesh.position.z = Math.sin(a) * breatheRadius + driftZ;
         e.mesh.position.y = e.baseY + Math.sin(t * 1.4 + e.phase) * 0.24;
+
+        // Fade in and out like a memory surfacing and sinking
+        const fade = 0.5 + Math.sin(t * 0.5 + e.phase) * 0.5;
+        e.mesh.children.forEach((c) => {
+          c.material.opacity = (c.material === echoMat ? 0.8 : 0.28) * fade;
+        });
+
         e.mesh.rotation.y = -a;
       });
 
