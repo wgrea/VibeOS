@@ -9,7 +9,7 @@ import { createFloralShoppe }
   from '../aesthetics/vaporwave/floral-shoppe.js';
 
 import { createMallsoft }
-  from '../aesthetics/vaporwave/mallsoft.js';
+  from '../aesthetics/vaporwave/mallsoft/index.js';
 
 import { createFutureFunk }
   from '../aesthetics/vaporwave/future-funk.js';
