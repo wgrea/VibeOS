@@ -65,7 +65,6 @@ import { createAbstractTech }
 import { createCleancore }
   from '../aesthetics/frutiger-aero/cleancore.js';
 
-
 createExperienceViewer({
   containerId: 'aero-canvas-container',
 

@@ -20,8 +20,6 @@ import { createSlushwave }
 import { createUtopianVirtual }
   from '../aesthetics/vaporwave/utopian-virtual.js';
 
-import { createLiminalPoolcore }
-  from '../aesthetics/vaporwave/liminal-poolcore.js';
 
 import { createBrokenTransmission } from '../aesthetics/vaporwave/broken-transmission.js';
 import { createDreampunk } from '../aesthetics/vaporwave/dreampunk.js';
@@ -56,8 +54,6 @@ import { createHypnagogicDrift }
 import { createVaporTwitch }
   from '../aesthetics/vaporwave/vapor-twitch.js';
 
-import { createWebcoreCyberia }
-  from '../aesthetics/vaporwave/webcore-cyberia.js';
 import { createPhonk }
   from '../aesthetics/vaporwave/phonk.js';
 
@@ -78,10 +74,12 @@ import { createPluggnb }
 
 import { createPromptCore }
   from '../aesthetics/vaporwave/prompt-core.js';
+  import { createScenecore } from '../aesthetics/vaporwave/scenecore.js';
+import { createSlopwave }  from '../aesthetics/vaporwave/slopwave.js';
 
 import { createGhostPop }
   from '../aesthetics/vaporwave/ghost-pop.js';
-
+import { createCorecore } from '../aesthetics/vaporwave/corecore.js';
 
 createExperienceViewer({
   containerId: 'vaporwave-canvas-container',
@@ -97,7 +95,6 @@ createExperienceViewer({
     futurefunk: createFutureFunk,
     slushwave: createSlushwave,
     utopian: createUtopianVirtual,
-    poolcore: createLiminalPoolcore,
 signalwave: createBrokenTransmission,
 dreampunk: createDreampunk,
     lofi: createLateNightLofi,
@@ -111,15 +108,17 @@ dreampunk: createDreampunk,
         barberbeats: createBarberBeats,
     hypnagogic: createHypnagogicDrift,
     vaportwitch: createVaporTwitch,
-    webcore: createWebcoreCyberia,
         phonk: createPhonk,
     voidgaze: createVoidgaze,
     dariacore: createDariacore,
     hexd: createHexd,
-        krushclub: createKrushclub,
     pluggnb: createPluggnb,
-    promptcore: createPromptCore,
     ghostpop: createGhostPop,
+    corecore: createCorecore,
+    krushclub:  createKrushclub,     // data-era="krushclub"
+scenecore:  createScenecore,     // data-era="scenecore"
+promptcore: createPromptCore,    // data-era="promptcore"
+slopwave:   createSlopwave,      // data-era="slopwave"
 
 
 

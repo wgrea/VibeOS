@@ -21,7 +21,6 @@ export function createExperienceViewer({
     if (!box || box.dataset.viewerInitialized === 'true') return;
     box.dataset.viewerInitialized = 'true';
 
-    // Re-check sessionStorage each time the drawer re-mounts via HTMX
     const currentSaved = sessionStorage.getItem(storageKey);
     if (currentSaved && eraFactories[currentSaved]) {
       activeEra = currentSaved;
@@ -41,18 +40,38 @@ export function createExperienceViewer({
 
     const eras = {};
 
-Object.entries(eraFactories).forEach(([key, factory]) => {
-  eras[key] = factory({ camera, domElement: renderer.domElement, box });
-  eras[key].group.visible = key === activeEra;
-  scene.add(eras[key].group);
-
-      if (eras[key].draggable) {
-        makeMovable(eras[key].draggable);
+    Object.entries(eraFactories).forEach(([key, factory]) => {
+      let era;
+      try {
+        era = factory({ camera, domElement: renderer.domElement, box });
+      } catch (err) {
+        console.error(`[viewer] FACTORY THREW for "${key}":`, err);
+        return;
       }
 
-      if (eras[key].attachMobileControls) {
-        eras[key].attachMobileControls(renderer.domElement);
+      if (!era) {
+        console.error(`[viewer] factory "${key}" returned ${era}`);
+        return;
       }
+
+      if (!era.group) {
+        console.error(`[viewer] factory "${key}" returned object with no .group`);
+        return;
+      }
+
+      if (!(era.group instanceof THREE.Group)) {
+        console.error(
+          `[viewer] factory "${key}" returned .group that is not a THREE.Group:`,
+          era.group
+        );
+      }
+
+      eras[key] = era;
+      era.group.visible = key === activeEra;
+      scene.add(era.group);
+
+      if (era.draggable) makeMovable(era.draggable);
+      if (era.attachMobileControls) era.attachMobileControls(renderer.domElement);
     });
 
     const nav = setupEraNav(section, {
@@ -61,16 +80,21 @@ Object.entries(eraFactories).forEach(([key, factory]) => {
     });
 
     function selectEra(eraKey, shouldBounce = true) {
-      if (!eras[eraKey]) return;
+      if (!eras[eraKey]) {
+        console.error(
+          `[selectEra] "${eraKey}" not in eras. Check that data-era in HTML matches an eraFactories key. Keys:`,
+          Object.keys(eras)
+        );
+        return;
+      }
       activeEra = eraKey;
       sessionStorage.setItem(storageKey, eraKey);
 
-// Inside selectEra(eraKey, shouldBounce = true)
-Object.entries(eras).forEach(([key, era]) => {
-  const isActive = key === activeEra;
-  era.group.visible = isActive;
-  era.onSelect?.(isActive);
-});
+      Object.entries(eras).forEach(([key, era]) => {
+        const isActive = key === activeEra;
+        era.group.visible = isActive;
+        era.onSelect?.(isActive);
+      });
 
       if (eras[activeEra].background) {
         box.style.background = eras[activeEra].background;
@@ -93,7 +117,6 @@ Object.entries(eras).forEach(([key, era]) => {
       if (shouldBounce) bounce = 0.22;
     }
 
-    // Initial sync on load (no bounce)
     selectEra(activeEra, false);
 
     box.addEventListener('pointerdown', () => {
@@ -104,7 +127,6 @@ Object.entries(eras).forEach(([key, era]) => {
 
     function animate() {
       if (!document.body.contains(box)) return;
-
       requestAnimationFrame(animate);
 
       const t = clock.getElapsedTime();
@@ -119,7 +141,12 @@ Object.entries(eras).forEach(([key, era]) => {
         controls.update();
       }
 
-      currentEra?.update(t, bounce, spring);
+      try {
+        currentEra?.update(t, bounce, spring);
+      } catch (err) {
+        console.error(`[animate] update() threw for "${activeEra}":`, err);
+      }
+
       renderer.render(scene, camera);
     }
 

@@ -9,6 +9,7 @@ import { createDinosaur } from '../aesthetics/kidcore/dinosaur.js';
 import { createImaginarium } from '../aesthetics/kidcore/imaginarium.js';
 import { createWhimsical } from '../aesthetics/kidcore/whimsical.js';
 import { createUtopianScholastic } from '../aesthetics/kidcore/utopian-scholastic.js';
+import { createHeisei } from '../aesthetics/kidcore/heisei.js';
 
 createExperienceViewer({
   containerId: 'kidcore-canvas-container',
@@ -21,6 +22,7 @@ createExperienceViewer({
     dinosaur: createDinosaur,
     imaginarium: createImaginarium,
     whimsical: createWhimsical,
-    'utopian-scholastic': createUtopianScholastic
+    'utopian-scholastic': createUtopianScholastic,
+    heisei: createHeisei,
   },
 });

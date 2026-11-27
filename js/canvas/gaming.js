@@ -2,9 +2,6 @@
 import { createExperienceViewer } from './experience-viewer.js';
 
 import { createNeoGeoStreet } from '../aesthetics/gaming/neo-geo-street.js';
-import { createDieselpunkSprite } from '../aesthetics/gaming/dieselpunk-sprite.js';
-import { createY2kArena } from '../aesthetics/gaming/y2k-arena.js';
-import { createY2k } from '../aesthetics/gaming/y2k.js';
 import { create2000sFps } from '../aesthetics/gaming/2000s-fps.js';
 import { createViceCity } from '../aesthetics/gaming/vice-city.js';
 import { createSanAndreas } from '../aesthetics/gaming/san-andreas.js';
@@ -16,9 +13,6 @@ createExperienceViewer({
   defaultEra: 'neo-geo-street',
   eraFactories: {
     'neo-geo-street': createNeoGeoStreet,
-    'dieselpunk-sprite': createDieselpunkSprite,
-    'y2k-arena': createY2kArena,
-    y2k: createY2k,
     '2000s-fps': create2000sFps,
         'vice-city': createViceCity,
     'san-andreas': createSanAndreas,
