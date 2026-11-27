@@ -9,6 +9,12 @@ import "../canvas/gaming.js";
 import "../canvas/world.js";
 import "../canvas/dark.js";
 import "../canvas/lab.js";
+import "../canvas/y2k.js";
+import "../canvas/sci-fi.js";
+import "../canvas/webcore.js";
+import "../canvas/academia.js";
+import "../canvas/glam.js";
+import "../canvas/indie-sleaze.js";
 
 // 1. Toggle-close when clicking an already-open family card
 document.addEventListener("htmx:beforeRequest", (e) => {
