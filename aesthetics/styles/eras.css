@@ -1,7 +1,5 @@
 /* aesthetics/styles/eras.css */
 
-/* aesthetics/styles/eras.css */
-
 .aesthetics-container .era-view-all-btn {
   flex: 0 0 auto;
   white-space: nowrap;
@@ -170,4 +168,52 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--neon-cyan);
+}
+
+/* Sibling Aesthetics — adjacent aesthetic links (NOT vaporwave eras) */
+.aesthetics-container .sibling-aesthetic-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  flex-wrap: wrap;
+  margin-top: var(--spacing-xs);
+  padding: var(--spacing-xs) 16px 0;
+  border-top: 1px dashed var(--border-outer);
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+}
+
+.aesthetics-container .sibling-aesthetic-label {
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.aesthetics-container .sibling-aesthetic-link {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  padding: 6px var(--spacing-sm);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-outer);
+  background-color: var(--bg-card);
+  color: var(--text-main);
+  text-decoration: none;
+  font-weight: 700;
+  transition: border-color 150ms ease, background-color 150ms ease;
+}
+
+.aesthetics-container .sibling-aesthetic-link:hover,
+.aesthetics-container .sibling-aesthetic-link:focus-visible {
+  border-color: var(--neon-cyan);
+  background-color: rgba(0, 240, 255, 0.12);
+  outline: none;
+}
+
+.aesthetics-container .sibling-aesthetic-year {
+  color: var(--text-muted);
+  font-weight: 400;
+  font-size: 0.72rem;
 }

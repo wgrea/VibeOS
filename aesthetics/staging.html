@@ -1,138 +1,95 @@
-<!-- aesthetics/staging.html (REMAINING FEATURES & EXPANSIONS BACKLOG) -->
+<!-- aesthetics/staging.html (VIBEOS ROADMAP & BACKLOG) -->
 <section class="aesthetic-section" data-family="staging">
   <header class="era-display-card">
-    <h2>🧪 Remaining Expansions &amp; Labs Backlog</h2>
+    <h2>🧪 VibeOS Roadmap &amp; Expansions Backlog</h2>
     <p>
-      Active roadmap of completed milestones, unbuilt labs, microgames, audio features, mega-aesthetics, and human-made analog movements for VibeOS.
+      Live tracker synced to the current VibeOS file tree—ordered from completed cores, to immediate next priorities, down to microgames saved for last.
     </p>
   </header>
 
   <div class="families-grid">
 
-    <!-- 1. Interactive Labs & Suno Audio -->
+    <!-- 2. Next Up: Core Priorities & Immediate Audio -->
     <article class="era-display-card">
-      <h3>🕹️ Labs &amp; Suno Audio Expansions</h3>
+      <h3>🔥 2. Up Next: Core Upgrades &amp; Immediate Audio</h3>
       <ul>
         <li>
-          <strong>✅ Garment &amp; Outfit Lab Core (Completed):</strong> Built procedural 256px PBR fabric maps (<code>textures.js</code>), material presets (<code>presets.js</code>), Boy/Girl body morphing (<code>mannequin.js</code>), and sculpted silhouettes for <em>Catsuit</em>, <em>Fluffy Onesie</em>, <em>Jacket</em>, <em>Jumpsuit</em>, <em>Pants</em>, <em>Racing Suit</em>, and <em>Sweatshirt</em>.
+          <strong>Outfit Lab Phase 2 (<code>lab/outfit/</code>):</strong> Add <em>Neoprene/Scuba</em>, <em>Velvet/Velour</em>, <em>Patent Leather</em>, <em>Spandex/Lycra</em>, and <em>Metallic Lamé</em> presets; add <em>Shirts</em> + short-sleeve/short-leg toggles; embed as a shared module inside <strong>VibeOS</strong> &amp; <strong>DJ Lab</strong>; add crisp mechanical click/cloth-swap SFX.
         </li>
         <li>
-          <strong>Outfit Lab Phase 2 (Fabrics, Cuts &amp; Integration):</strong>
-          <ul>
-            <li>Add <em>Neoprene/Scuba</em>, <em>Velvet/Velour</em>, <em>Patent Leather</em>, <em>Spandex/Lycra</em>, and <em>Metallic Lamé</em> fabric presets.</li>
-            <li>Add <em>Shirts</em> (including <em>Leather Shirt</em>) plus <em>Short-Sleeve</em> and <em>Short-Leg</em> toggles (including short-sleeve catsuits).</li>
-            <li>Embed the Outfit Customizer as a shared feature module inside <strong>VibeOS</strong> and the <strong>DJ Lab</strong> (rather than a standalone app).</li>
-          </ul>
+          <strong>Toyurism Train Table Expansion (<code>kidcore/toyurism/</code>):</strong> Expand the train table scenery/track layout (<code>engines.js</code>, <code>consists.js</code>, <code>tracks.js</code>, <code>village.js</code>) and wire immediate train audio (looping rail chug + whistle button).
         </li>
         <li>
-          <strong>DJ Lab + Suno AI Audio:</strong> Auto-play a dedicated Suno AI track per aesthetic, then unlock full track switching, BPM control, and live DJ synth/airhorn pads inside the DJ Lab (no separate EDM genre pages needed).
+          <strong>Keyboard Page &amp; DJ Lab Audio (<code>lab/dj/</code>):</strong> Add selectable instruments on the keyboard page (Piano, Synth, Organ, Retro 8-bit) alongside Suno MP3s in <code>tunes/</code>, track switching, and BPM sync.
         </li>
         <li>
-          <strong>Containment / Backrooms Lab:</strong> Build dedicated liminal horror lab featuring hazmat suits, anomaly containment props, and fluorescent retro grocery aisle transitions.
+          <strong>Sovietwave + Vintage Mega-Aesthetic Pass:</strong> Pivot away from overused neon synthwave toward a cohesive muted-teal, concrete, warm amber, CRT/cassette analog vibe across UI and audio.
         </li>
       </ul>
     </article>
 
-    <!-- 2. Top-Level Mega-Aesthetics to Add -->
+    <!-- 3. Phase 3: Interactive Worlds & Dark Folder -->
     <article class="era-display-card">
-      <h3>🏛️ Top-Level Mega-Aesthetics to Add</h3>
-      <p>
-        Major standalone aesthetic wings alongside <code>y2k/</code> to round out the VibeOS directory:
-      </p>
+      <h3>✨ 3. Next After Core: Interactive Worlds &amp; Dark Section</h3>
       <ul>
         <li>
-          <strong>Academia (<code>academia/</code>):</strong> Dark &amp; Light Academia—mahogany libraries, floating parchment pages, brass astrolabes, candlelight, classical busts, and rain-streaked gothic arch windows.
+          <strong>Mallsoft Life Sim (<code>vaporwave/mallsoft/</code>):</strong> Evolve the mallsoft page into a chill retro Life Sim (wandering the mall, inspecting items, tying into Outfit Lab).
         </li>
         <li>
-          <strong>Sci-Fi &amp; Futurism (<code>sci-fi/</code>):</strong> Dedicated future wing spanning <em>Cyberpunk</em> (neon rain &amp; techwear), <em>Cassette Futurism</em> (1970s/80s amber CRT switches &amp; brushed aluminum), and <em>Solarpunk</em> (glass bio-domes &amp; brass turbines).
+          <strong>Liminal Pool Interaction (<code>webcore/poolcore.js</code>):</strong> Make the tile rim interactive—let users hesitate at the edge or plunge into the water (with ambient pool hum &amp; ripples).
         </li>
         <li>
-          <strong>Webcore &amp; Liminal Surrealism (<code>webcore/</code>):</strong> Early 1995–2008 <em>Old Web / Geocities</em> (3D "Under Construction" signs, spinning MIDI icons) paired with <em>Dreamcore / Weirdcore</em> (endless checkered plains &amp; floating doors).
+          <strong>Dark Cornfield Survival (<code>dark/</code>):</strong> Build an interactive night cornfield survival zone inside the dark folder (using lightweight instanced stalks + eerie wind SFX).
         </li>
         <li>
-          <strong>Glam &amp; Runway Maximalism (<code>glam/</code>):</strong> Chrome catwalk stages, disco mirror balls, rhinestone sparkle shaders, and velvet ropes—built as a natural showcase for the Outfit Lab and DJ Lab.
+          <strong>Dark Menu Face (<code>dark/</code> — <em>after Cornfield &amp; Poolcore</em>):</strong> Add a creepy, camera-tracking vintage toy-train face (classic railway-face inspired) to the dark menu.
         </li>
         <li>
-          <strong>Indie Sleaze (<code>indie-sleaze/</code>):</strong> 2006–2012 underground club &amp; Tumblr/MySpace nostalgia—harsh disposable-camera flash lighting, tangled wired headphones, Polaroid collages, and grainy VHS overlays.
+          <strong>Containment / Backrooms &amp; Normcore:</strong> Expand liminal anomaly lab (<code>world/foreign-grocery.js</code>, <code>dark/surveillance.js</code>) and convert <code>world/adult-animation.js</code> → <code>normcore.js</code> movable suburban avatar world.
+        </li>
+        <li>
+          <strong>Three.js Polish Pass (100–300 Line Rule):</strong> Keep files lean with procedural <code>CanvasTexture</code>s, clearcoat/glass materials, and clean <code>dispose()</code> hooks (done: <code>heisei.js</code>, <code>dorfic.js</code>, <code>abla-aero.js</code>, <code>vector-flourish.js</code>, <code>vector-garden.js</code>, <code>futurism-aero.js</code>, <code>dark-aero.js</code>).
         </li>
       </ul>
     </article>
 
-    <!-- 3. Anti-AI & Human-Crafted Analog Aesthetics -->
+    <!-- 4. Phase 4: New Aesthetics & Analog Additions -->
     <article class="era-display-card">
-      <h3>✍️ Anti-AI &amp; Human-Made Analog Aesthetics</h3>
-      <p>
-        Counter-culture movements celebrating tangible human imperfection, physical media, and handcrafted artifacts in response to synthetic AI slop:
-      </p>
+      <h3>🌐 4. Later: New Aesthetics &amp; Analog Additions</h3>
       <ul>
         <li>
-          <strong>Zine &amp; Risograph Craft (<code>sensory-layers/</code> or <code>webcore/</code>):</strong> Hand-cut paper collages, halftone risograph ink misregistration, masking tape strips, spiral notebook margins, and visible pencil/brush strokes.
+          <strong>Liberty Core (<code>gaming/liberty-core.js</code>):</strong> Dead Internet Theory filtered through foggy <em>GTA III</em> Liberty City—looping NPCs, grid traffic, glowing pickups, and uncanny automated chatter.
         </li>
         <li>
-          <strong>Neo-Brutalist / Anti-Design Web (<code>ui-history/</code>):</strong> Raw, honest digital architecture—exposed structural grids, default system monospaced fonts, hard 1px borders, and zero glossy drop-shadows.
+          <strong>Older Brother Core (<code>gaming/older-brother-core.js</code>):</strong> Mid-2000s bedroom nostalgia—stacked CRT + PS2/Xbox, electric guitar, checkered rug, green lava lamp.
         </li>
         <li>
-          <strong>Analog &amp; Dumbphone Minimalism (<code>comfort/</code>):</strong> Deliberate offline calm—matte E-Ink monochrome displays, tactile flip phones, cassette walkmans, mechanical typewriters, and fountain pens.
+          <strong>Dark Y2K / Cyber-Club (<code>y2k/dark-y2k.js</code>):</strong> Late-night rave and <em>Matrix</em>-era glossy black PVC, neon cyan/magenta accents, and wrap-around visors.
         </li>
         <li>
-          <strong>Raw Lo-Fi / Unretouched Film (<code>indie-sleaze/</code>):</strong> Authentic 35mm film grain, light leaks, red-eye flash snapshots, and camcorder timecodes that reject hyper-smooth synthetic renders.
+          <strong>Analog &amp; Dumbphone Minimalism (<code>comfort/analog-minimal.js</code>):</strong> Matte E-Ink displays, flip phones, cassette walkmans, and mechanical typewriters.
+        </li>
+        <li>
+          <strong>Neo-Brutalist / Anti-Design (<code>ui-history/</code>):</strong> Exposed structural grids, raw monospace defaults, hard 1px borders, zero drop-shadows.
         </li>
       </ul>
     </article>
 
-    <!-- 4. Emerging & Modern Internet Aesthetics to Add -->
+    <!-- 5. Save for Last: Playable Microgames -->
     <article class="era-display-card">
-      <h3>🌐 Emerging &amp; Modern Aesthetics to Add</h3>
+      <h3>🎮 5. Save for Last: Microgames &amp; Prototypes</h3>
       <ul>
         <li>
-          <strong>Corecore (<code>dark/</code> or <code>vaporwave/</code>):</strong> Fragmented multi-screen CRT/phone feed collage, overlapping lo-fi clips, nostalgic melancholy, and sensory-overload editing aesthetic.
+          <strong>Foosball Prototype (<code>gaming/</code>):</strong> Fast 3D arcade foosball add-on (sliding/spinning rods + ball physics) nodding to European &amp; Latin American soccer/arcade culture.
         </li>
         <li>
-          <strong>Hopecore (<code>comfort/</code>):</strong> Uplifting counterpart to Corecore—warm golden sunbeams, glass prism light flares, blooming wildflowers, and drifting dandelion seeds.
+          <strong>2000s Snow FPS Microgame (<code>gaming/</code>):</strong> Early-2000s snowy tactical shooter where targets/enemies reset after disappearing (pairs with <code>y2k/arena.js</code>).
         </li>
         <li>
-          <strong>Older Brother Core (<code>gaming/</code>):</strong> Mid-2000s teenage bedroom nostalgia—stacked CRT TV + PS2/Xbox console, leaned electric guitar, checkered rug, and glowing green lava lamp.
+          <strong>Optional CRT Lounge Card/Casino Table:</strong> Retro vintage video poker or solitaire terminal (nodding to U.S./European/Australian Skill &amp; Chance traditions).
         </li>
         <li>
-          <strong>Y3K / Hyper-Chrome Futurism (<code>frutiger-aero/</code>):</strong> Gen-Z/Alpha evolution of Y2K—liquid mercury chrome metaballs, iridescent holographic glass visors, and spiky silver star emblems.
-        </li>
-        <li>
-          <strong>Surveillance / CCTV Core (<code>dark/</code>):</strong> Grainy night-vision green security camera feeds, sweeping spotlight cone, blinking red <code>REC</code> tally light, and timestamp overlays.
-        </li>
-        <li>
-          <strong>Heisei Retro (<code>kidcore/</code>):</strong> Late-1990s/2000s Japanese consumer pop nostalgia—translucent atomic-purple/pink MiniDisc players, pastel flip phones, and beaded charms.
-        </li>
-      </ul>
-    </article>
-
-    <!-- 5. Y2K Sub-Aesthetics Branching -->
-    <article class="era-display-card">
-      <h3>💿 Y2K Sub-Aesthetics to Add (1998–2006)</h3>
-      <p>
-        Sub-taxonomy tracking the shift from millennium cyber-optimism to mid-2000s pop maximalism:
-      </p>
-      <ul>
-        <li>
-          <strong>Cyber-Y2K (Silver / Ice Blue):</strong> Liquid chrome, translucent Bondi-blue CRT hardware, metallic outerwear, and sleek sci-fi optimism (1998–2001).
-        </li>
-        <li>
-          <strong>Dark Y2K / Cyber-Club:</strong> Nighttime rave and <em>Matrix</em>-era edge—glossy black PVC, glowing neon cyan/magenta accents, and tinted wrap-around visor shades.
-        </li>
-        <li>
-          <strong>McBling (2003–2006):</strong> Post-Y2K transition into hot pink, rhinestones, velour tracksuits, flip phones, and maximalist pop glamour.
-        </li>
-      </ul>
-    </article>
-
-    <!-- 6. Genre Microgames & Build-and-Polish Workflow -->
-    <article class="era-display-card">
-      <h3>🎮 Microgames &amp; Build-and-Polish Workflow</h3>
-      <ul>
-        <li>
-          <strong>Interactive Genre Microgames:</strong> Add lightweight playable microgames tailored to specific aesthetic worlds (such as tuning chaotic overlapping feeds in <em>Corecore</em> or dodging CCTV cones in <em>Surveillance Core</em>).
-        </li>
-        <li>
-          <strong>Polish-As-You-Add Three.js Rule:</strong> Inspect and refine 3D silhouettes, procedural PBR materials, UV mapping, and lighting immediately as each new Three.js file is added—avoiding technical debt before moving to the next scene.
+          <strong>World-Embedded Micro-Loops:</strong> Tuning chaotic overlapping feeds in <code>vaporwave/corecore.js</code> and dodging CCTV cones in <code>dark/surveillance.js</code>.
         </li>
       </ul>
     </article>

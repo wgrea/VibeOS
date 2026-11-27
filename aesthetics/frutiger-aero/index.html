@@ -1,7 +1,18 @@
 <!-- aesthetics/frutiger-aero/index.html -->
 <section class="aesthetic-section" data-family="frutiger-aero">
+  <nav class="sibling-aesthetic-bar" aria-label="Sibling Aesthetics">
+    <span class="sibling-aesthetic-label">Sibling aesthetic:</span>
+    <a
+      class="sibling-aesthetic-link"
+      href="#"
+      hx-get="/aesthetics/vaporwave/index.html"
+      hx-target="closest .aesthetic-section"
+      hx-swap="outerHTML"
+    >
+      🌴 Vaporwave <span class="sibling-aesthetic-year">2010–2026</span>
+    </a>
+  </nav>
 
-  <!-- Era Triggers (Matched to aero-canvas.js) -->
   <nav class="era-pill-bar" aria-label="Frutiger Aero Chronology">
     <button type="button" class="era-pill" data-era="metalheart">1998 • Metalheart</button>
     <button type="button" class="era-pill" data-era="abstracttech">1999 • Abstract Tech</button>
