@@ -6,8 +6,11 @@ export function buildClosure({
   yTop = 0.88,
   yBottom = 0.14,
   zOffset = 0.215,
-  tiltX = -0.055,
-  buttonCount = 5
+  tiltX = 0,
+  buttonCount = 5,
+  slim = false,
+  waistDropZ = 0.055,
+  topDropZ = 0.015
 } = {}) {
   const closureGroup = new THREE.Group();
 
@@ -19,32 +22,73 @@ export function buildClosure({
 
   const height = yTop - yBottom;
   const centerY = (yTop + yBottom) / 2;
+  const depthScale = slim ? 0.35 : 1.0;
 
-  // 1. Zipper Assembly (Track + Pull Tab)
+  // Contour offset relative to chest zOffset so waist/collar stay flush with torso
+  function contourZ(localY) {
+    const t = (localY + height / 2) / height; // 0 = bottom, 1 = top
+    if (t < 0.55) {
+      const u = 1 - t / 0.55;
+      return -waistDropZ * u * u;
+    }
+    const u = (t - 0.55) / 0.45;
+    return -topDropZ * u * u;
+  }
+
+  // 1. Zipper Assembly (Contoured Track + Slider + Pull Tab)
   const zipperGroup = new THREE.Group();
-  const track = new THREE.Mesh(new THREE.BoxGeometry(0.022, height, 0.024), hardwareMat);
+  const trackGeo = new THREE.BoxGeometry(
+    slim ? 0.016 : 0.022,
+    height,
+    0.024 * depthScale,
+    1,
+    24,
+    1
+  );
+  const pos = trackGeo.attributes.position;
+  for (let i = 0; i < pos.count; i++) {
+    const y = pos.getY(i);
+    pos.setZ(i, pos.getZ(i) + contourZ(y));
+  }
+  trackGeo.computeVertexNormals();
+
+  const track = new THREE.Mesh(trackGeo, hardwareMat);
   zipperGroup.add(track);
 
-  const slider = new THREE.Mesh(new THREE.BoxGeometry(0.036, 0.042, 0.036), hardwareMat);
-  slider.position.set(0, height / 2 - 0.06, 0.008);
+  const sliderY = height / 2 - 0.06;
+  const slider = new THREE.Mesh(
+    new THREE.BoxGeometry(slim ? 0.026 : 0.036, slim ? 0.030 : 0.042, 0.036 * depthScale),
+    hardwareMat
+  );
+  slider.position.set(0, sliderY, 0.008 * depthScale + contourZ(sliderY));
   zipperGroup.add(slider);
 
-  const pullTab = new THREE.Mesh(new THREE.BoxGeometry(0.024, 0.055, 0.012), hardwareMat);
-  pullTab.position.set(0, height / 2 - 0.10, 0.022);
-  pullTab.rotation.x = 0.18;
+  const pullY = height / 2 - 0.10;
+  const pullTab = new THREE.Mesh(
+    new THREE.BoxGeometry(slim ? 0.018 : 0.024, slim ? 0.040 : 0.055, 0.012 * depthScale),
+    hardwareMat
+  );
+  pullTab.position.set(0, pullY, 0.020 * depthScale + contourZ(pullY));
+  pullTab.rotation.x = slim ? 0.06 : 0.18;
   zipperGroup.add(pullTab);
 
   closureGroup.add(zipperGroup);
 
   // 2. Buttons / Snaps Assembly
   const buttonsGroup = new THREE.Group();
-  const buttonGeo = new THREE.CylinderGeometry(0.022, 0.024, 0.018, 16);
+  const buttonGeo = new THREE.CylinderGeometry(
+    slim ? 0.016 : 0.022,
+    slim ? 0.018 : 0.024,
+    0.018 * depthScale,
+    16
+  );
   buttonGeo.rotateX(Math.PI / 2);
 
   for (let i = 0; i < buttonCount; i++) {
     const t = buttonCount === 1 ? 0.5 : i / (buttonCount - 1);
+    const by = height / 2 - 0.05 - t * (height - 0.1);
     const btn = new THREE.Mesh(buttonGeo, hardwareMat);
-    btn.position.set(0, height / 2 - 0.05 - t * (height - 0.1), 0.01);
+    btn.position.set(0, by, 0.01 * depthScale + contourZ(by));
     buttonsGroup.add(btn);
   }
   closureGroup.add(buttonsGroup);

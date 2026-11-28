@@ -1,5 +1,5 @@
 // js/aesthetics/lab/outfit/controls.js
-import { COLORS } from './presets.js';
+import { COLORS } from './palettes.js';
 import { initOutfitTrays } from './tray.js';
 
 const ITEM_LABELS = {
@@ -7,7 +7,7 @@ const ITEM_LABELS = {
   jumpsuit: 'Jumpsuit',
   'racing-suit': 'Racing Suit',
   snowsuit: 'Snowsuit',
-  'fluffy-onesie': 'Fluffy Onesie',
+  onesie: 'Onesie',
   jacket: 'Jacket',
   sweatshirt: 'Sweatshirt',
   pants: 'Pants'
@@ -61,11 +61,13 @@ export function initOutfitControls({ section, state, onChange, onBodyChange }) {
     return list;
   }
 
-  function ensureValidActiveSlot() {
-    const equipped = getEquippedList();
+function ensureValidActiveSlot() {
+    let equipped = getEquippedList();
     if (equipped.length === 0) {
-      state.activeSlot = null;
-      return;
+      // Default to Catsuit Base being equipped on startup
+      state.hasCatsuit = true;
+      state.activeSlot = 'catsuit';
+      equipped = getEquippedList();
     }
     if (!equipped.some((item) => item.slot === state.activeSlot)) {
       state.activeSlot = equipped[equipped.length - 1].slot;
@@ -225,9 +227,9 @@ export function initOutfitControls({ section, state, onChange, onBodyChange }) {
     syncPillGroup('[data-bottom]', (b) => b.dataset.bottom === state.bottom);
     syncPillGroup('[data-closure]', (b) => b.dataset.closure === state.closure);
 
-    if (stylePanel) {
-      stylePanel.hidden = equipped.length === 0;
-    }
+if (stylePanel) {
+  stylePanel.removeAttribute('hidden');
+}
 
     if (state.activeSlot) {
       const activeStyle = state.styles[state.activeSlot];
@@ -272,6 +274,9 @@ export function initOutfitControls({ section, state, onChange, onBodyChange }) {
 
     renderTrays(equipped);
   }
+
+// Initial sync so catsuit, fabric, palette, and swatches are bound immediately
+  syncUI();
 
   return { controls: wrap, syncUI, setPanelOpen };
 }

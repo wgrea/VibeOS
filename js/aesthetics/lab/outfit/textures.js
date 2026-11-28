@@ -1,6 +1,7 @@
 // js/aesthetics/lab/outfit/textures.js
 import * as THREE from 'three';
 
+// 1. Helper defined first so all texture methods can call it safely
 function makeCanvasTexture(drawFn, repeatX = 12, repeatY = 12, size = 256) {
   if (typeof document === 'undefined') return null;
   const canvas = document.createElement('canvas');
@@ -31,6 +32,7 @@ function drawWrapped(ctx, size, x, y, drawCall) {
   }
 }
 
+// 2. TEXTURES object referencing makeCanvasTexture cleanly
 export const TEXTURES = {
   // Organic pebbled grain + subtle natural hide creases
   leather: () =>

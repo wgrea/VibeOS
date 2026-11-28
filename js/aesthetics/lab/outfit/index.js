@@ -2,14 +2,14 @@
 import * as THREE from 'three';
 import { FABRICS, COLORS, AESTHETIC_PALETTES } from './presets.js';
 import { buildMannequin } from './mannequin.js';
-import { buildCatsuit } from './garments/catsuit.js';
-import { buildJumpsuit } from './garments/jumpsuit.js';
-import { buildRacingSuit } from './garments/racing-suit.js';
-import { buildSnowsuit } from './garments/snowsuit.js';
-import { buildFluffyOnesie } from './garments/fluffy-onesie.js';
-import { buildJacket } from './garments/jacket.js';
-import { buildSweatshirt } from './garments/sweatshirt.js';
-import { buildPants } from './garments/pants.js';
+import { buildCatsuit } from './garments/catsuit/index.js';
+import { buildJumpsuit } from './garments/jumpsuit/index.js';
+import { buildRacingSuit } from './garments/racing-suit/index.js';
+import { buildSnowsuit } from './garments/snowsuit/index.js';
+import { buildOnesie } from './garments/onesie/index.js';
+import { buildJacket } from './garments/jacket/index.js';
+import { buildSweatshirt } from './garments/sweatshirt/index.js';
+import { buildPants } from './garments/pants/index.js';
 import { initOutfitControls } from './controls.js';
 
 function createSlotStyle(fabric = 'leather', color = COLORS[0]) {
@@ -32,7 +32,7 @@ export function createOutfit({ box } = {}) {
   const state = {
     bodyType: 'boy',
     hasCatsuit: false,
-    onePiece: 'none', // 'none' | 'jumpsuit' | 'racing-suit' | 'snowsuit' | 'fluffy-onesie'
+    onePiece: 'none', // 'none' | 'jumpsuit' | 'racing-suit' | 'snowsuit' | 'onesie'
     top: 'none',      // 'none' | 'jacket' | 'sweatshirt'
     topVariant: 'moto',
     bottom: 'none',   // 'none' | 'pants'
@@ -60,7 +60,7 @@ export function createOutfit({ box } = {}) {
     jumpsuit: buildJumpsuit(defaultHex),
     'racing-suit': buildRacingSuit(defaultHex),
     snowsuit: buildSnowsuit(defaultHex),
-    'fluffy-onesie': buildFluffyOnesie(defaultHex)
+    onesie: buildOnesie(defaultHex)
   };
   Object.values(onePieces).forEach((item) => {
     item.garmentGroup.visible = false;

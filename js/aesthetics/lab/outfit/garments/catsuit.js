@@ -12,7 +12,7 @@ function createSculptedTorsoGeometry() {
     [0.305, -0.115], // Hips (mannequin 0.275 + 0.030 clearance)
     [0.285, -0.025],
     [0.252, 0.065],
-    [0.232, 0.145],  // Waist (mannequin 0.205 + 0.027 clearance)
+    [0.242, 0.145],  // Waist (mannequin 0.205 + 0.027 clearance)
     [0.245, 0.235],
     [0.270, 0.335],
     [0.295, 0.445],
@@ -20,12 +20,11 @@ function createSculptedTorsoGeometry() {
     [0.318, 0.725],  // Upper chest
     [0.316, 0.835],  // Clears top outer corner of mannequin chest cylinder at y = 0.85!
     [0.285, 0.872],  // Smooth shoulder-to-trapezius curve above y = 0.85
-    [0.195, 0.895],  // Collar base
-    [0.132, 0.915],  // Mock-neck base
-    [0.120, 0.985],  // Upper mock-neck
-    [0.122, 1.015],  // Rolled collar outer lip
-    [0.108, 1.015],  // Rolled collar inner lip
-    [0.108, 0.935]   // Inner collar lining
+[0.185, 0.892],  // Collar base
+ [0.125, 0.912],  // Crew-neck rim outer
+ [0.112, 0.922],  // Collar top lip
+ [0.106, 0.912],  // Collar inner lip
+ [0.106, 0.880]   // Inner collar lining
   ];
 
   const lathePoints = profilePoints.map(([r, y]) => new THREE.Vector2(r, y));
@@ -72,7 +71,7 @@ function createTailoredLimbGeometry({ topR, midR, bottomR, length, jointY = 0, r
     let y = pos.getY(i);
     let z = pos.getZ(i);
 
-    const t = (y + halfLen) / length;
+    const t = THREE.MathUtils.clamp((y + halfLen) / length, 0, 1);
 
     let targetR;
     if (t > 0.5) {
@@ -81,10 +80,6 @@ function createTailoredLimbGeometry({ topR, midR, bottomR, length, jointY = 0, r
     } else {
       const u = t * 2;
       targetR = THREE.MathUtils.lerp(bottomR, midR, Math.pow(u, 0.8));
-    }
-
-    if (t < 0.045) {
-      targetR += Math.sin((t / 0.045) * Math.PI) * 0.004;
     }
 
     const distFromJoint = Math.abs(y - jointY);
@@ -191,34 +186,35 @@ export function buildCatsuit(initialHex) {
     seamMeshes.push(princessSeam);
   });
 
-  const backSpineSeam = createSeamTube(
-    [
-      new THREE.Vector3(0, -0.28, -0.230),
-      new THREE.Vector3(0, -0.10, -0.303),
-      new THREE.Vector3(0, 0.14, -0.230),
-      new THREE.Vector3(0, 0.44, -0.293),
-      new THREE.Vector3(0, 0.76, -0.316),
-      new THREE.Vector3(0, 0.91, -0.132),
-      new THREE.Vector3(0, 1.00, -0.120)
-    ],
-    0.0034,
-    seamMat
-  );
+const backSpineSeam = createSeamTube(
+  [
+    new THREE.Vector3(0, -0.28, -0.230),
+    new THREE.Vector3(0, -0.10, -0.303),
+    new THREE.Vector3(0, 0.14, -0.230),
+    new THREE.Vector3(0, 0.44, -0.293),
+    new THREE.Vector3(0, 0.76, -0.316),
+    new THREE.Vector3(0, 0.905, -0.130)
+  ],
+  0.0030,
+  seamMat
+);
   torso.add(backSpineSeam);
   seamMeshes.push(backSpineSeam);
 
-  const collarRing = new THREE.Mesh(new THREE.TorusGeometry(0.136, 0.004, 10, 36), seamMat);
-  collarRing.rotation.x = Math.PI / 2;
-  collarRing.position.y = 0.91;
-  torso.add(collarRing);
+const collarRing = new THREE.Mesh(new THREE.TorusGeometry(0.122, 0.0022, 10, 36), seamMat);
+collarRing.rotation.x = Math.PI / 2;
+collarRing.position.y = 0.912;
 
   // 3. Front closure
-  const { closureGroup, setClosureType, setDepth } = buildClosure({
-    type: 'zipper',
-    yTop: 0.90,
-    yBottom: 0.14,
-    zOffset: 0.215
-  });
+const { closureGroup, setClosureType, setDepth } = buildClosure({
+  type: 'zipper',
+  yTop: 0.89,
+  yBottom: 0.26,
+  zOffset: 0.215,
+  slim: true,
+  waistDropZ: 0.048,
+  topDropZ: 0.025
+});
   suitGroup.add(closureGroup);
 
   // 4. Full-length sleeves & legs aligned to mannequin.js
@@ -242,8 +238,8 @@ export function buildCatsuit(initialHex) {
   });
 
   [-1, 1].forEach((side) => {
-    const shoulderCover = new THREE.Mesh(new THREE.SphereGeometry(0.102, 20, 16), suitMat);
-    shoulderCover.position.set(side * 0.34, 0.75, 0);
+const shoulderCover = new THREE.Mesh(new THREE.SphereGeometry(0.095, 20, 16), suitMat);
+shoulderCover.position.set(side * 0.345, 0.735, 0);
     suitGroup.add(shoulderCover);
 
     const armPivot = new THREE.Group();
@@ -263,7 +259,7 @@ export function buildCatsuit(initialHex) {
     wristCap.position.y = -0.37;
     armPivot.add(wristCap);
 
-    const wristCuff = new THREE.Mesh(new THREE.TorusGeometry(0.0865, 0.0035, 8, 24), seamMat);
+const wristCuff = new THREE.Mesh(new THREE.TorusGeometry(0.085, 0.0018, 8, 24), seamMat);
     wristCuff.rotation.x = Math.PI / 2;
     wristCuff.position.y = -0.36;
     armPivot.add(wristCuff);
@@ -288,7 +284,7 @@ export function buildCatsuit(initialHex) {
     ankleCap.position.y = -0.46;
     legPivot.add(ankleCap);
 
-    const ankleCuff = new THREE.Mesh(new THREE.TorusGeometry(0.1145, 0.0038, 8, 24), seamMat);
+const ankleCuff = new THREE.Mesh(new THREE.TorusGeometry(0.113, 0.0018, 8, 24), seamMat);
     ankleCuff.rotation.x = Math.PI / 2;
     ankleCuff.position.y = -0.45;
     legPivot.add(ankleCuff);
@@ -317,21 +313,21 @@ export function buildCatsuit(initialHex) {
     morphTorsoVertices(torsoGeo, profile.chestScale, profile.hipScale);
     seamMeshes.forEach((m) => morphTorsoVertices(m.geometry, profile.chestScale, profile.hipScale));
 
-    const armScale = (profile.armRadius + 0.015) / 0.085;
-    const legScale = (profile.legRadius + 0.017) / 0.113;
+const armScale = (profile.armRadius + 0.011) / 0.085;
+const legScale = (profile.legRadius + 0.012) / 0.113;
 
-    arms.forEach(({ mesh, shoulderCover, side }) => {
-      mesh.position.x = side * profile.armOffset;
-mesh.scale.set(armScale, 1, armScale);
-shoulderCover.position.set(side * (profile.armOffset - 0.105), 0.75, 0);
-shoulderCover.scale.set(armScale * 1.08, armScale * 1.08, armScale * 1.08);
+arms.forEach(({ mesh, shoulderCover, side }) => {
+  mesh.position.x = side * profile.armOffset;
+  mesh.scale.set(armScale, 1, armScale);
+  shoulderCover.position.set(side * (profile.armOffset - 0.115), 0.735, 0);
+  shoulderCover.scale.setScalar(armScale);
 });
 legs.forEach(({ mesh, side }) => {
 mesh.position.x = side * profile.legOffset;
 mesh.scale.set(legScale, 1, legScale);
 });
 // Keep zipper flush against chest Z-depth for Boy (0.78) and Girl (0.64)
-setDepth(0.312 * chestZ + 0.008);
+setDepth(0.314 * chestZ + 0.003);
 }
 return { suitGroup, applyStyle, syncBody, setClosureType };
 }
