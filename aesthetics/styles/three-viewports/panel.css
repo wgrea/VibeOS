@@ -1,5 +1,22 @@
-/* Wrapper + floating overlay panel */
+.aesthetic-section[data-family="lab"] {
+  position: relative;
+}
 
+/* Era Pill Navigation on top */
+.aesthetic-section[data-family="lab"] .era-pill-bar {
+  margin-bottom: 1rem;
+}
+
+/* PERMANENT SIDE-BY-SIDE: Menu on left, 3D Avatar Viewport on right (never stacks vertically) */
+.lab-workspace-grid {
+  display: grid;
+  grid-template-columns: 1fr 340px; /* Menu takes flexible left space, avatar stays fixed compact size on right */
+  gap: 1rem;
+  align-items: start;
+  position: relative;
+}
+
+/* Left side: Controls wrapper */
 .lab-controls-wrap {
   position: relative;
   width: 100%;
@@ -9,51 +26,136 @@
   display: none !important;
 }
 
+/* The panel is always fully shown and vertically scrollable without horizontal overflow */
 #outfit-controls.lab-controls-panel {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  z-index: 50;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 10;
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  gap: 0.55rem;
-  background: rgba(15, 23, 42, 0.72);
+  gap: 0.6rem;
+  background: rgba(15, 23, 42, 0.88);
   backdrop-filter: blur(14px) saturate(140%);
   -webkit-backdrop-filter: blur(14px) saturate(140%);
   border: 1px solid rgba(148, 163, 184, 0.25);
   border-radius: 0.75rem;
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55);
-  max-height: 0;
-  opacity: 0;
-  overflow: hidden;
-  padding: 0;
-  margin: 0;
-  pointer-events: none;
-  transition:
-    max-height 0.35s ease,
-    opacity 0.25s ease,
-    padding 0.25s ease,
-    margin 0.25s ease;
-}
-
-#outfit-controls.lab-controls-panel.is-open {
-  max-height: min(70vh, 560px);
-  overflow-y: auto;
-  opacity: 1;
   padding: 0.75rem;
-  margin-top: 0.4rem;
-  pointer-events: auto;
+  margin: 0;
+  max-height: 80vh;
+  overflow-y: auto;
+  overflow-x: hidden;
   scrollbar-width: thin;
   scrollbar-color: #475569 transparent;
 }
 
-#outfit-controls.lab-controls-panel.is-open::-webkit-scrollbar {
+#outfit-controls.lab-controls-panel::-webkit-scrollbar {
   width: 6px;
 }
 
-#outfit-controls.lab-controls-panel.is-open::-webkit-scrollbar-thumb {
+#outfit-controls.lab-controls-panel::-webkit-scrollbar-thumb {
   background: #475569;
   border-radius: 3px;
+}
+
+/* Clean vertical pill rows */
+.pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  width: 100%;
+}
+
+.pill-btn {
+  flex: 1 1 auto;
+  min-width: calc(33.333% - 0.3rem);
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* Right side: STICKY 3D Viewport container always on the side */
+.lab-sticky-viewport-container {
+  position: sticky;
+  top: 1rem;
+  z-index: 40;
+  width: 100%;
+}
+
+/* Snug viewport to eliminate extra empty space around the mannequin */
+.three-viewport {
+  width: 100%;
+  height: 400px; /* Compact height so it frames the mannequin closely */
+  border-radius: 0.75rem;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.three-viewport canvas {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain;
+}
+
+/* Color Swatches Grid */
+.swatch-grid,
+#outfit-swatches {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.5rem;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+/* Individual Swatch Buttons */
+.swatch-btn {
+  width: 100%;
+  height: 34px;
+  border-radius: 6px;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+  padding: 0;
+  display: block;
+  outline: none;
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.swatch-btn:hover {
+  transform: scale(1.06);
+  border-color: rgba(255, 255, 255, 0.7);
+}
+
+.swatch-btn.active {
+  border-color: #ffffff;
+  box-shadow: 0 0 0 2px #3b82f6, 0 0 10px rgba(59, 130, 246, 0.6);
+  transform: scale(1.08);
+}
+
+/* Ensure the controls container never cuts off or traps children in a scrollbox */
+#outfit-controls.lab-controls-panel {
+  max-height: none !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+
+/* Force the styling panel to always be visible and formatted */
+#outfit-style-panel {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 100% !important;
+  margin-top: 1rem !important;
+}
+
+#outfit-style-panel[hidden] {
+  display: block !important;
+}
+
+.outfit-style-header {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  margin-bottom: 0.5rem;
 }

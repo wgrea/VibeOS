@@ -6,7 +6,7 @@
     <button type="button" class="era-pill" data-era="keyboard">DJ keyboard</button>
   </nav>
 
-  <!-- Track Selector (Shown ONLY on DJ keyboard) — ONE copy only -->
+  <!-- Track Selector (Shown ONLY on DJ keyboard) -->
   <div id="dj-controls" class="lab-controls" hidden>
     <label for="dj-track-select">
       Track:
@@ -14,134 +14,106 @@
     </label>
   </div>
 
-  <!-- ⬇️ OUTFIT MENU IS NOW ABOVE THE VIEWPORT ⬇️ -->
-  <div id="outfit-controls-wrap" class="lab-controls-wrap" hidden>
+  <!-- ⬇️ SIDE-BY-SIDE WORKGRID CONTAINER ⬇️ -->
+  <div class="lab-workspace-grid">
 
-    <!-- Top toggle (thin) -->
-    <button
-      type="button"
-      id="outfit-controls-toggle"
-      class="lab-controls-toggle"
-      aria-expanded="false"
-      aria-controls="outfit-controls"
-    >
-      <span class="toggle-icon" aria-hidden="true">⚙️</span>
-      <span class="toggle-label">Customize Outfit</span>
-      <span class="toggle-chevron" aria-hidden="true">▾</span>
-    </button>
+    <!-- LEFT COLUMN: Outfit Customizer Menu (Always visible when active) -->
+    <div id="outfit-controls-wrap" class="lab-controls-wrap" hidden>
+      <div id="outfit-controls" class="lab-controls lab-controls-panel">
 
-    <div id="outfit-controls" class="lab-controls lab-controls-panel">
+        <div id="outfit-selected-tray" class="outfit-selected-tray" aria-live="polite"></div>
 
-      <div id="outfit-selected-tray" class="outfit-selected-tray" aria-live="polite"></div>
-
-      <div class="pill-row">
-        <button type="button" class="pill-btn active" data-body="boy">Boy</button>
-        <button type="button" class="pill-btn" data-body="girl">Girl</button>
-        <button type="button" class="pill-btn" data-base="catsuit">Catsuit Base</button>
-      </div>
-
-      <div class="pill-row">
-        <button type="button" class="pill-btn" data-onepiece="jumpsuit">Jumpsuit</button>
-        <button type="button" class="pill-btn" data-onepiece="racing-suit">Racing Suit</button>
-        <button type="button" class="pill-btn" data-onepiece="snowsuit">Snowsuit</button>
-        <button type="button" class="pill-btn" data-onepiece="onesie">Onesie</button>
-      </div>
-
-      <div class="pill-row">
-        <button type="button" class="pill-btn" data-top="jacket">Jacket</button>
-        <button type="button" class="pill-btn" data-top="sweatshirt">Sweatshirt</button>
-        <button type="button" class="pill-btn" data-bottom="pants">Pants</button>
-      </div>
-
-      <div id="outfit-variant-row" class="pill-row">
-        <div data-variant-group="jacket" hidden>
-          <button type="button" class="pill-btn active" data-variant="moto">Moto</button>
-          <button type="button" class="pill-btn" data-variant="bomber">Bomber</button>
-          <button type="button" class="pill-btn" data-variant="puffer">Puffer</button>
-          <button type="button" class="pill-btn" data-variant="windbreaker">Windbreaker</button>
-        </div>
-        <div data-variant-group="sweatshirt" hidden>
-          <button type="button" class="pill-btn active" data-variant="hoodie">Hoodie</button>
-          <button type="button" class="pill-btn" data-variant="crewneck">Crewneck</button>
-          <button type="button" class="pill-btn" data-variant="quarter-zip">Quarter-Zip</button>
-        </div>
-        <div data-variant-group="pants" hidden>
-          <button type="button" class="pill-btn active" data-variant="cargo">Cargo</button>
-          <button type="button" class="pill-btn" data-variant="leather-moto">Moto</button>
-          <button type="button" class="pill-btn" data-variant="track">Track</button>
-          <button type="button" class="pill-btn" data-variant="snow">Snow</button>
-        </div>
-      </div>
-
-      <div id="outfit-style-panel" class="outfit-style-panel" hidden>
-        <div class="outfit-style-header">
-          Styling: <strong id="outfit-editing-label">Catsuit Base</strong>
+        <div class="pill-row">
+          <button type="button" class="pill-btn active" data-body="boy">Boy</button>
+          <button type="button" class="pill-btn" data-body="girl">Girl</button>
+          <button type="button" class="pill-btn" data-base="catsuit">Catsuit Base</button>
         </div>
 
         <div class="pill-row">
-          <button type="button" class="pill-btn active" data-fabric="leather">Leather</button>
-          <button type="button" class="pill-btn" data-fabric="latex">Latex</button>
-          <button type="button" class="pill-btn" data-fabric="pvc">PVC</button>
-          <button type="button" class="pill-btn" data-fabric="nylon">Nylon</button>
-          <button type="button" class="pill-btn" data-fabric="fleece">Fleece</button>
-          <button type="button" class="pill-btn" data-fabric="plush">Plush</button>
-          <button type="button" class="pill-btn" data-fabric="denim">Denim</button>
-          <button type="button" class="pill-btn" data-fabric="corduroy">Corduroy</button>
-          <button type="button" class="pill-btn" data-fabric="cotton">Cotton</button>
+          <button type="button" class="pill-btn" data-onepiece="jumpsuit">Jumpsuit</button>
+          <button type="button" class="pill-btn" data-onepiece="racing-suit">Racing Suit</button>
+          <button type="button" class="pill-btn" data-onepiece="snowsuit">Snowsuit</button>
+          <button type="button" class="pill-btn" data-onepiece="onesie">Onesie</button>
         </div>
 
         <div class="pill-row">
-          <button type="button" class="pill-btn active" data-closure="zipper">Zipper</button>
-          <button type="button" class="pill-btn" data-closure="buttons">Buttons</button>
+          <button type="button" class="pill-btn" data-top="jacket">Jacket</button>
+          <button type="button" class="pill-btn" data-top="sweatshirt">Sweatshirt</button>
+          <button type="button" class="pill-btn" data-bottom="pants">Pants</button>
         </div>
 
-        <div class="pill-row">
-          <button type="button" class="pill-btn active" data-palette="none">Single Color</button>
-          <button type="button" class="pill-btn" data-palette="frutigerAero">Frutiger Aero</button>
-          <button type="button" class="pill-btn" data-palette="vaporwave">Vaporwave</button>
-          <button type="button" class="pill-btn" data-palette="darkNeon">Dark Neon</button>
-          <button type="button" class="pill-btn" data-palette="gpCrimson">GP Crimson</button>
+        <div id="outfit-variant-row" class="pill-row">
+          <div data-variant-group="jacket" hidden>
+            <button type="button" class="pill-btn active" data-variant="moto">Moto</button>
+            <button type="button" class="pill-btn" data-variant="bomber">Bomber</button>
+            <button type="button" class="pill-btn" data-variant="puffer">Puffer</button>
+            <button type="button" class="pill-btn" data-variant="windbreaker">Windbreaker</button>
+          </div>
+          <div data-variant-group="sweatshirt" hidden>
+            <button type="button" class="pill-btn active" data-variant="hoodie">Hoodie</button>
+            <button type="button" class="pill-btn" data-variant="crewneck">Crewneck</button>
+            <button type="button" class="pill-btn" data-variant="quarter-zip">Quarter-Zip</button>
+          </div>
+          <div data-variant-group="pants" hidden>
+            <button type="button" class="pill-btn active" data-variant="cargo">Cargo</button>
+            <button type="button" class="pill-btn" data-variant="leather-moto">Moto</button>
+            <button type="button" class="pill-btn" data-variant="track">Track</button>
+            <button type="button" class="pill-btn" data-variant="snow">Snow</button>
+          </div>
         </div>
 
-        <div id="outfit-multicolor-bar" class="outfit-multicolor-bar" hidden>
-          <span class="multicolor-hint">Suit Colors (click swatches to add):</span>
-          <div id="outfit-multicolor-list" class="outfit-multicolor-list"></div>
-          <button type="button" class="pill-btn" id="outfit-multicolor-clear">Reset</button>
+        <div id="outfit-style-panel" class="outfit-style-panel">
+          <div class="outfit-style-header">
+            Styling: <strong id="outfit-editing-label">Catsuit Base</strong>
+          </div>
+
+          <div class="pill-row">
+            <button type="button" class="pill-btn active" data-fabric="leather">Leather</button>
+            <button type="button" class="pill-btn" data-fabric="latex">Latex</button>
+            <button type="button" class="pill-btn" data-fabric="pvc">PVC</button>
+            <button type="button" class="pill-btn" data-fabric="nylon">Nylon</button>
+            <button type="button" class="pill-btn" data-fabric="fleece">Fleece</button>
+            <button type="button" class="pill-btn" data-fabric="plush">Plush</button>
+            <button type="button" class="pill-btn" data-fabric="denim">Denim</button>
+            <button type="button" class="pill-btn" data-fabric="corduroy">Corduroy</button>
+            <button type="button" class="pill-btn" data-fabric="cotton">Cotton</button>
+          </div>
+
+          <div class="pill-row">
+            <button type="button" class="pill-btn active" data-closure="zipper">Zipper</button>
+            <button type="button" class="pill-btn" data-closure="buttons">Buttons</button>
+          </div>
+
+          <div class="pill-row">
+            <button type="button" class="pill-btn active" data-palette="none">Single Color</button>
+            <button type="button" class="pill-btn" data-palette="frutigerAero">Frutiger Aero</button>
+            <button type="button" class="pill-btn" data-palette="vaporwave">Vaporwave</button>
+            <button type="button" class="pill-btn" data-palette="darkNeon">Dark Neon</button>
+            <button type="button" class="pill-btn" data-palette="gpCrimson">GP Crimson</button>
+          </div>
+
+          <div id="outfit-multicolor-bar" class="outfit-multicolor-bar" hidden>
+            <span class="multicolor-hint">Suit Colors (click swatches to add):</span>
+            <div id="outfit-multicolor-list" class="outfit-multicolor-list"></div>
+            <button type="button" class="pill-btn" id="outfit-multicolor-clear">Reset</button>
+          </div>
+
+          <div class="swatch-grid" id="outfit-swatches"></div>
         </div>
 
-        <div class="swatch-grid" id="outfit-swatches"></div>
-
-        <!-- Bottom closer — lives inside the panel so it scrolls with it -->
-        <button
-          type="button"
-          class="lab-controls-toggle lab-controls-toggle--bottom"
-          aria-expanded="false"
-          aria-controls="outfit-controls"
-        >
-          <span class="toggle-chevron" aria-hidden="true">▴</span>
-          <span class="toggle-label">Hide Outfit Menu</span>
-        </button>
       </div>
     </div>
 
-    <!-- ⬇️ NEW: bottom toggle (thin) — same ID won't work, so give it a class -->
-    <button
-      type="button"
-      class="lab-controls-toggle lab-controls-toggle--bottom"
-      aria-expanded="false"
-      aria-controls="outfit-controls"
-    >
-      <span class="toggle-chevron" aria-hidden="true">▴</span>
-      <span class="toggle-label">Hide Outfit Menu</span>
-    </button>
-  </div>
+    <!-- RIGHT COLUMN: Sticky 3D Viewport -->
+    <div class="lab-sticky-viewport-container">
+      <div
+        id="lab-canvas-container"
+        class="three-viewport"
+        style="background: radial-gradient(circle at 50% 30%, #fdf2f8 0%, #f472b6 45%, #831843 100%);"
+      ></div>
+    </div>
 
-  <!-- Live Three.js Viewport -->
-  <div
-    id="lab-canvas-container"
-    class="three-viewport"
-    style="background: radial-gradient(circle at 50% 30%, #fdf2f8 0%, #f472b6 45%, #831843 100%);"
-  ></div>
+  </div> <!-- End of workspace grid -->
 
   <!-- Object-Specific Lore & Description Card -->
   <div id="lab-stage" class="era-display-card">
